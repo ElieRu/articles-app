@@ -1,5 +1,5 @@
 import Form from "./form";
-import Input from "./input";
+import Input from "../inputs/input";
 
 export default function UserFormUpdate () {
     return <div className="d-flex flex-column">

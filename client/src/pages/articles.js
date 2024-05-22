@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import ArticleComponent from "../components/elements/article-component";
+import ArticleComponent from "../components/blocks/article";
 import Column from "../components/elements/column";
 import Form from "../components/elements/form";
-import Input from "../components/elements/input";
-import Search from "../components/elements/input-search";
+import Input from "../components/inputs/input";
+import Search from "../components/inputs/input-search";
 import Paginatiom from "../components/elements/pagination";
 import Row from "../components/elements/row";
-import Selection from "../components/elements/selection";
-import Textarrea from "../components/elements/textarea";
+import Selection from "../components/inputs/selection";
+import Textarrea from "../components/inputs/textarea";
 
 
 import React from 'react'

@@ -1,8 +1,8 @@
 import Column from "../components/elements/column"
 import Paginatiom from "../components/elements/pagination"
 import Row from "../components/elements/row"
-import Search from "../components/elements/input-search"
-import ArticleComponent from "../components/elements/article-component"
+import Search from "../components/inputs/input-search"
+import ArticleComponent from "../components/blocks/article"
 import { useNavigate } from "react-router-dom"
 
 import React from 'react'

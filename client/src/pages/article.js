@@ -1,6 +1,6 @@
-import DescriptionComponent from "../components/elements/description-component";
+import DescriptionComponent from "../components/elements/description";
 import Column from "../components/elements/column";
-import Comment from "../components/elements/comment";
+import Comment from "../components/blocks/comment";
 import Row from "../components/elements/row";
 import Form from "../components/elements/form";
 
