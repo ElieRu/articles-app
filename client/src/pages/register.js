@@ -1,8 +1,13 @@
+import { Link } from "react-router-dom";
 import Form from "../components/elements/form";
 import Input from "../components/elements/input";
 
-export default function ResetPassword () {
-    return <body style={{height: '100%',position: 'absolute',width: '100%'}}>
+
+import React from 'react'
+
+export const Register = () => {
+  return (
+    <body style={{height: '100%',position: 'absolute',width: '100%'}}>
                 <section className="d-flex align-items-center py-5" style={{width: '100%',height: '100%'}}>
                     <div className="container py-5">
                         <div className="row d-flex justify-content-center">
@@ -13,10 +18,19 @@ export default function ResetPassword () {
                                                 <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z"></path>
                                             </svg></div>
                                         <Form method="post" data-bs-theme="light">
-                                            <Input type="password" name="password" placeholder="New password" />
+                                            <Input name="first_name" placeholder="First name" />
+                                            <Input name="last_name" placeholder="Last name" />
+                                            <Input type="email" name="email" placeholder="Email" />
+                                            <Input type="password" name="password" placeholder="Password" />
                                             <Input type="password" name="confirmation_password" placeholder="Confirmation" />
-                                            <div className="mb-3"><button className="btn btn-primary shadow d-block w-100" type="submit">Reset password</button></div>
+                                            <div className="mb-3">
+                                                <button className="btn btn-primary shadow d-block w-100" type="submit">Sign up</button>
+                                            </div>
                                         </Form>
+                                        <div className="mb-2">
+                                            <button className="btn btn-primary link-primary text-bg-light d-block w-100" role="button" href="#">Google</button>
+                                        </div>
+                                        <Link className="link-primary" to="/login">Login</Link>
                                     </div>
                                 </div>
                             </div>
@@ -24,5 +38,7 @@ export default function ResetPassword () {
                     </div>
                 </section>
             </body>
+  )
 }
+
 

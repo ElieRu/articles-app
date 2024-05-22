@@ -4,16 +4,17 @@ import Comment from "../components/elements/comment";
 import Row from "../components/elements/row";
 import Form from "../components/elements/form";
 
-    
-export default function Article () {
 
+import React from 'react'
+
+export const Article = () => {
     let article = {
         title: "title",
         type: 'type',
         description: 'desc'
     }
-
-    return <section className="py-5">
+  return (
+    <section className="py-5">
                 <div className="container">
                     
                     <DescriptionComponent article={article} />
@@ -37,5 +38,8 @@ export default function Article () {
                     </Row>
                 </div>
             </section>
+  )
 }
+
+
 
