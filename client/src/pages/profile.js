@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import ArticleComponent from "../components/elements/article-component";
+import ArticleComponent from "../components/blocks/article";
 import Column from "../components/elements/column";
 import Form from "../components/elements/form";
-import Input from "../components/elements/input";
+import Input from "../components/inputs/input";
 import Row from "../components/elements/row";
 import Statistics from "../components/elements/statistics";
 import UserFormUpdate from "../components/elements/user-form-update";
