@@ -1,13 +1,34 @@
 import { Link } from "react-router-dom";
 import Form from "../components/elements/form";
 import Input from "../components/inputs/input";
+import axios from "axios";
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export const Login = () => {
+
+    const [data, setData] = useState('')
+        
+    useEffect(() => {
+        async function fetchDatas () {
+            try {
+                const response = await fetch('http://localhost:9000/test')
+                const get_data = await response.text()
+                setData(get_data)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchDatas()
+    }, []);
+
+    console.log(data);
+
+
   return (
-    <body style={{height: '100%',position: 'absolute',width: '100%'}}>
+    <div style={{height: '100%',position: 'absolute',width: '100%'}}>
         <section className="d-flex align-items-center py-5" style={{width: '100%',height: '100%'}}>
+            {/* {infors} */}
             <div className="container py-5">
                 <div className="row d-flex justify-content-center">
                     <div className="col-md-6 col-xl-4">
@@ -29,7 +50,7 @@ export const Login = () => {
                 </div>
             </div>
         </section>
-    </body>
+    </div>
   )
 }
 
