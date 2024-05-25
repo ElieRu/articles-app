@@ -27,19 +27,20 @@ app.use(cors())
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.authenticate('session'));
 
-// const url = 'mongodb+srv://ruhamyaelie3:nI2ITxJ2ddkKyZdv@cluster0.42ahfsf.mongodb.net/'
-// const client = new MongoClient(url);
-
-// client.connect(url);
-// const db = client.db('TestApp');
+// app.use(session({
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: false,
+//   store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
+// }));
 
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false,
-  store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
-  // store: new MongoClient(url)
+  cookie: { secure: true }
 }));
 app.use(passport.authenticate('session'));
 
@@ -52,6 +53,8 @@ app.use('/', authRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+
 
 // error handler
 app.use(function(err, req, res, next) {
