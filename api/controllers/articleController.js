@@ -4,8 +4,23 @@ const Article = require("../models/Article")
 module.exports = {
     get: async (req, res, next) => {
         try {
-            const all = await Article.find({})
-            res.send(all);
+            const { search } = req.query;
+            const { sort } = req.query;
+
+            let request = {}
+
+            if (search && sort) {
+                request = { title: search, type: sort }
+            } else {
+                if (search) { 
+                    request = { title: search }
+                } else if (sort) {
+                    request = { type: sort }
+                } else {}
+            }
+
+            res.status(200).send(await Article.find( request ));
+
         } catch (err) {
             console.log(err);
         }
@@ -50,8 +65,6 @@ module.exports = {
             res.status(400).send({ dataDeleted: false });
         }        
     },
-    search: async (req, res, next) => { res.status(201).send("search") },
     pagination: async (req, res, next) => { res.status(201).send("pagination") },
-    sort: async (req, res, next) => { res.status(201).send("sort") },
 }
 

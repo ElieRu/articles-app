@@ -29,7 +29,7 @@ function App() {
       <Routes>
         <Route index element={<Home></Home>} />
         <Route path='/articles' element={<Articles></Articles>} />
-        <Route path='/article' element={<Article></Article>} />
+        <Route path='/articles/:id' element={<Article></Article>} />
         <Route path='/profile' element={<Profile></Profile>} />
         <Route path='/login' element={<Login></Login>} />
         <Route path='/register' element={<Register></Register>} />

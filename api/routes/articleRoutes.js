@@ -10,5 +10,4 @@ router.post('/articles', articleController.create)
 router.put('/articles/:id', articleController.update)
 router.delete('/articles/:id', articleController.delete)
 
-
 module.exports = router;
