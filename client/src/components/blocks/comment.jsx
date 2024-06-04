@@ -1,7 +1,7 @@
 export default function Comment() {
     return <div className="border rounded p-3 mb-3">
                 <div className="d-flex mb-2">
-                    <a className="btn btn-primary d-flex justify-content-center align-items-center" role="button" style={{width: '40px',height: '40px',padding: '0px;'}} href="/profile">RU</a>
+                    <a className="btn btn-primary d-flex justify-content-center align-items-center" role="button" style={{width: '40px',height: '40px',padding: '0px'}} href="/profile">RU</a>
                 </div>
                 <p>Paragraph et je ne cherche rien que la vue que les qnis ui ne veulent rien je je&nbsp;</p><button className="btn btn-primary btn-sm link-body-emphasis border-dark-subtle" type="button" style={{paddingLeft: '20px',paddingRight: '20px',background: 'transparent'}}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em" height="1em" fill="currentColor" style={{marginRight: '10px'}}>
