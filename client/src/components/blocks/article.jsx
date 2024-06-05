@@ -4,7 +4,7 @@ import Column from "../elements/column";
 export default function ArticleComponent ({article, children}) {
     
     return <Column className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                <Link to={`/articles/${article._id}`}>
+                <Link to='1'>
                     {children}
                     <img className="rounded img-fluid shadow w-100 fit-cover" src="assets/img/products/1.jpg" style={{height: '250px'}} />
                 </Link>

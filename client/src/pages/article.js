@@ -6,23 +6,23 @@ import Form from "../components/elements/form";
 
 
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Outlet } from "react-router-dom";
 import FormArticle from "../components/blocks/form-article";
 import axios from "axios";
 
 export const Article = () => {
-    const {id} = useParams()
-    const navigate = useNavigate()
+    // const {id} = useParams()
+    // const navigate = useNavigate()
 
-    const [article, setArticle] = useState({})
+    // const [article, setArticle] = useState({})
 
-    useEffect(() => {
-        axios.get(`http://localhost:9000/articles/${id}`).then((res) => {
-            setArticle(res.data)
-        })
-    }, []);
+    // useEffect(() => {
+    //     axios.get(`http://localhost:9000/articles/${id}`).then((res) => {
+    //         setArticle(res.data)
+    //     })
+    // }, []);
 
-    console.log(article)
+    // console.log(article)
 
     return (<section className="py-5">
             <div className="container">

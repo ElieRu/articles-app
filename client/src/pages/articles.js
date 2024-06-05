@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import ArticleComponent from "../components/blocks/article";
 import Column from "../components/elements/column";
 import Form from "../components/elements/form";
@@ -45,8 +45,13 @@ export const Articles = () => {
                 
                 <Search/>
                 
+                <Link to={'admin'}>admin link</Link>
+
+                <Outlet/>
+
                 <Row>
-                    {articles.map((article, i) => <ArticleComponent key={i} article={article} />)}
+                    {articles.map((article, i) => <Link key={i} to={'3'} >{article.title}</Link>)}
+                    {/* {articles.map((article, i) => <ArticleComponent key={i} article={article} />)} */}
                 </Row>
                 
                 <Paginatiom />

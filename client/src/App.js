@@ -10,6 +10,7 @@ import { Login } from './pages/login';
 import { Register } from './pages/register';
 import { ResetPassword } from './pages/reset-password';
 import { NotFound } from './pages/404';
+import { Admin } from './pages/admin';
 
 function App() {
 
@@ -28,8 +29,9 @@ function App() {
 
       <Routes>
         <Route index element={<Home></Home>} />
-        <Route path='/articles' element={<Articles></Articles>} />
-        <Route path='/articles/:id' element={<Article></Article>} />
+        <Route path='articles' element={<Articles></Articles>} >
+          <Route path=':id' element={<Article></Article>} />
+        </Route>
         <Route path='/profile' element={<Profile></Profile>} />
         <Route path='/login' element={<Login></Login>} />
         <Route path='/register' element={<Register></Register>} />
