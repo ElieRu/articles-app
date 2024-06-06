@@ -13,7 +13,7 @@ const articleSchema = new mongoose.Schema({
         type: String,
         required: true,
         enum: {
-            values: ['expository', 'persuasive', 'narrative', 'descriptive'],
+            values: ['Persuasive', 'Expository', 'Narrative', 'Descriptive'],
             message: "{VALUE} is not supported"
         }
     },

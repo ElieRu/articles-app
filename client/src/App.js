@@ -10,7 +10,6 @@ import { Login } from './pages/login';
 import { Register } from './pages/register';
 import { ResetPassword } from './pages/reset-password';
 import { NotFound } from './pages/404';
-import { Admin } from './pages/admin';
 
 function App() {
 
