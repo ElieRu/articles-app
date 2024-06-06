@@ -40,9 +40,9 @@ module.exports = {
         const articleSaved = new Article(req.body)
         try {
             const tmpSaved = await articleSaved.save()
-            res.status(201).send(tmpSaved)
+            res.status(200).send( await Article.find({}) )
         } catch (e) {
-            res.status(400).send({ dataCreated: false })
+            res.status(400).send(true)
         }
     },
     update: async (req, res, next) => {
@@ -59,7 +59,7 @@ module.exports = {
 
         try {
             const articles = await Article.deleteOne({ _id: id })
-            if (articles) res.status(201).send({ dataDeleted: true });
+            if (articles) res.status(201).send( await Article.find({}) );
             if (!articles) res.status(400).send({ dataDeleted: false });
         } catch (err) {
             res.status(400).send({ dataDeleted: false });
