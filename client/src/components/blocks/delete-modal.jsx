@@ -13,7 +13,7 @@ export default function DeleteModal ({onDelete}) {
                         </div>
                         <div className="modal-footer">
                             <button className="btn btn-light btn-sm bg-transparent border-1" type="button" data-bs-dismiss="modal">Close</button>
-                            <button onClick={onDelete} className="btn btn-primary btn-sm" type="button">Delete</button>
+                            <button data-bs-target='#delete-modal' data-bs-toggle='modal' onClick={onDelete} className="btn btn-primary btn-sm" type="button">Delete</button>
                         </div>
                     </div>
                 </div>

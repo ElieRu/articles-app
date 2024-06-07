@@ -49,7 +49,7 @@ module.exports = {
         const id = req.params.id;
         try {
             const update_article = await Article.findByIdAndUpdate({ _id: id }, req.body)
-            res.status(201).send({ dataUpdated: true })
+            res.status(201).send(await Article.find({}))
         } catch (err) {
             res.status(400).send({ dataUpdated: false })
         }

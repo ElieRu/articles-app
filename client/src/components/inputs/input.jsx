@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 export default function Input ({className = 'form-control',style = null, type="text", name="name", label="null", placeholder="Placeholder", value = null, onChange = null}) {
     
     return <div className="mb-2">
