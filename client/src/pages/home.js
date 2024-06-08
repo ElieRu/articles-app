@@ -1,24 +1,31 @@
-import Column from "../components/elements/column"
 import Paginatiom from "../components/elements/pagination"
 import Row from "../components/elements/row"
 import Search from "../components/inputs/input-search"
 import ArticleComponent from "../components/blocks/article"
-import { useNavigate } from "react-router-dom"
 
-import React from 'react'
+import React, { useState } from 'react'
+import SearchArticle from "../components/inputs/search-article"
+import EmptyArticles from "../components/blocks/empty-articles"
 
 export const Home = () => {
+
+  const [articles, setArticles] = useState([])
+
+  const [search, setSearch] = useState('')
+  const [select, setSelect] = useState('')
+  const onFilter = (value) => {
+    setSelect(value)
+  }
+
   return (
     <section className="py-5">
-        <div className="container py-2">
-            <Search/>
-
+        {articles.length > 0 ? <div className="container py-2">
+          <SearchArticle search={search} onChange={e => setSearch(e.target.value)} onFilter={onFilter} />
             <Row className="row">
-                <ArticleComponent/>
+              {/* <ArticleComponent/> */}
             </Row>
-
-            <Paginatiom/>
-        </div>
+          <Paginatiom/>
+        </div> : <EmptyArticles />}
     </section>
   )
 }

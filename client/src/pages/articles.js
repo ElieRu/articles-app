@@ -11,22 +11,21 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import ArticleWithDropdown from "../components/blocks/article-with-dropdown";
 import DeleteModal from "../components/blocks/delete-modal";
+import EmptyArticles from "../components/blocks/empty-articles";
+import ReactPaginate from 'react-paginate';
+import SearchArticle from "../components/inputs/search-article";
 
 export const Articles = () => {
 
     const navigate = useNavigate()
     const [articles, setArticles] = useState([]);
     let [article, setArticle] = useState('')
-    let [form, setForm] = useState({
-        title: '',
-        type: '',
-        description: ''
-    })
+    let [form, setForm] = useState({ title: '', type: '', description: '' })
 
-    // All articles
+    // All
     useEffect(() => {
         axios.get(`http://localhost:9000/articles`).then((res) => {
-            setArticles(res.data)
+            setArticles(res.data);
         })
     }, []);
 
@@ -57,6 +56,39 @@ export const Articles = () => {
             setArticles(res.data)
         });
     }
+
+    // Update
+    const [action, setAction] = useState(true)
+    const onUpdate = (article) => {
+        setForm(article)
+        setAction(false)
+    }
+
+    // 
+    const [formUpdated, setFormUpdated] = useState(false)
+    const handleUpdate = (e) => {
+        e.preventDefault()
+        axios.put(`http://localhost:9000/articles/${form._id}`, form).then((res) => {
+            setArticles(res.data);
+            form.title = '';
+            form.type = '';
+            form.description = '';
+            setFormUpdated(true)
+        })
+    }
+
+    // search
+    let [search, setSearch] = useState('')
+    let [select, setSelect] = useState('')
+    
+    const onFilter = (value) => {
+        setSelect(value)
+    }
+
+    // pagination
+    const handlePageClick = () => {
+
+    }
     
     return (<section className="py-5">
                 <div className="container">
@@ -65,10 +97,12 @@ export const Articles = () => {
                             <h3 className="fw-bold" style={{marginBottom: '0px'}}>Form</h3>
                             <button onClick={() => navigate(-1)} className="btn btn-primary btn-sm text-bg-light bg-transparent border-light-subtle" role="button">Back</button>
                         </div>
-                        <Form onSubmit={onCreated}>
-                            <Input className="form-control form-control-sm" id='title' type="text" label="Title" placeholder="Title"
-                                value={form.title}
-                                onChange={(e) => setForm({...form, title: e.target.value})} />
+                        <Form onSubmit={ action ? onCreated : handleUpdate }>
+                            <div>
+                                <Input className="form-control form-control-sm" id='title' type="text" label="Title" placeholder="Title"
+                                    value={form.title}
+                                    onChange={(e) => setForm({...form, title: e.target.value})} />
+                            </div>
                                                             
                             <Selection label = "Type" id="type"
                                 value={form.type}
@@ -80,18 +114,49 @@ export const Articles = () => {
                             
                             <div style={{display: formError ? 'block' : 'none'}} class="bg-danger-subtle border rounded p-2 mb-2"><span class="fs-6">Invalid form</span></div>
                             <div style={{display: formCreated ? 'block' : 'none'}} class="bg-primary-subtle border rounded p-2 mb-2"><span class="fs-6">Article created</span></div>
-                            <button className="btn btn-primary btn-sm border rounded" type="submit">Save</button>
+                            <div style={{display: formUpdated ? 'block' : 'none'}} class="bg-success-subtle border rounded p-2 mb-2"><span class="fs-6">Article updated</span></div>
+                            <button className="btn btn-primary btn-sm border rounded" type="submit">{action ? 'Save' : 'Update'}</button>
                         </Form>
                     </div>
-                    <div>                        
-                        <Search/>
+                    {!articles.length == 0 ? <div>
+
+                        <SearchArticle search={search} onChange={e => setSearch(e.target.value)} onFilter={onFilter} />
+
                         <Row>
-                            {articles.map((article, i) => <ArticleWithDropdown key={i} article={article} myDelete={(e) => setArticle(article) } />)}
+                            {articles.filter((article) => {
+                                return search.toLowerCase() === ''
+                                    ? article
+                                    : article.title.toLowerCase().includes(search);
+                            }).filter((article) => {
+                                return select === ''
+                                ? article
+                                : article.type.includes(select);
+                            }).map((article, i) => <ArticleWithDropdown key={i} article={article} onUpdate={onUpdate} myDelete={() => setArticle(article) } />)}
                         </Row>
-                        <Paginatiom />
-                    </div>
+                        
+                        <ReactPaginate
+                            previousLabel="previous"
+                            nextLabel="next"
+                            breakLabel="..."
+                            breakClassName="page-item"
+                            breakLinkClassName="page-link"
+                            pageCount={23}
+                            pageRangeDisplayed={4}
+                            marginPagesDisplayed={2}
+                            // onPageChange={handlePageClick}
+                            containerClassName="pagination justify-content-center"
+                            pageClassName="page-item"
+                            pageLinkClassName="page-link"
+                            previousClassName="page-item"
+                            previousLinkClassName="page-link"
+                            nextClassName="page-item"
+                            nextLinkClassName="page-link"
+                            activeClassName="active"
+                        />
+
+                    </div> : <EmptyArticles/> }
                 </div>
                 <DeleteModal onDelete={onDelete} ></DeleteModal>
             </section>
-        )
+    )
 }

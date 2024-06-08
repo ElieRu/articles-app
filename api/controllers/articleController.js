@@ -4,22 +4,18 @@ const Article = require("../models/Article")
 module.exports = {
     get: async (req, res, next) => {
         try {
-            const { search } = req.query;
-            const { sort } = req.query;
+            const { page } = req.query || 0;
+            const { limit} = req.query;
 
-            let request = {}
+            let startIndex = (page - 1) * limit;
+            let lastIndex = (page) * limit;
 
-            if (search && sort) {
-                request = { title: search, type: sort }
-            } else {
-                if (search) { 
-                    request = { title: search }
-                } else if (sort) {
-                    request = { type: sort }
-                } else {}
-            }
+            // let articles = await Article.find({}).skip(skip).limit(limit);
+            let articles = await Article.find({});
 
-            res.status(200).send(await Article.find( request ));
+            const result = articles.slice(startIndex, lastIndex);
+            
+            res.status(200).send(articles);
 
         } catch (err) {
             console.log(err);
@@ -49,7 +45,7 @@ module.exports = {
         const id = req.params.id;
         try {
             const update_article = await Article.findByIdAndUpdate({ _id: id }, req.body)
-            res.status(201).send({ dataUpdated: true })
+            res.status(201).send(await Article.find({}))
         } catch (err) {
             res.status(400).send({ dataUpdated: false })
         }
