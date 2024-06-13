@@ -5,13 +5,32 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
 var {connection_database} = require("./database/mongoose")
+const { auth } = require('express-openid-connect');
 require("dotenv").config();
+
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  baseURL: 'http://localhost:3000',
+  clientID: 'SQYQpcO11fF5gAIW3U8tzF1DqmD7tfbU',
+  issuerBaseURL: 'https://auth-test-app.uk.auth0.com',
+  secret: process.env.secret
+};
 
 var app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000'
-}))
+  origin: 'http://localhost:3000',
+}));
+
+app.use(auth(config));
+app.get('/', (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
+});
+
+app.get('/log', cors(), (req, res) => {
+  res.redirect('login')
+})
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
