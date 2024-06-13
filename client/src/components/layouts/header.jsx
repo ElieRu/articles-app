@@ -1,8 +1,12 @@
 
-import { NavLink, Link, useNavigate } from "react-router-dom";
+import { NavLink, Link, useNavigate, redirect } from "react-router-dom";
+import { useAuth0 } from '@auth0/auth0-react';
+import LoginButton from "../auth/LoginButton";
+import LogoutButton from "../auth/LogoutButton";
 
 export default function Header() {
-    const goTo = useNavigate()
+    
+    const { isAuthenticated } = useAuth0();    
 
     return <nav className="navbar navbar-expand-md sticky-top navbar-shrink py-3 navbar-light" id="mainNav">
                 <div className="container">
@@ -17,8 +21,10 @@ export default function Header() {
                         <ul className="navbar-nav mx-auto">
                             <li className="nav-item"><NavLink className="nav-link" to="/">Home</NavLink></li>
                             <li className="nav-item"><NavLink className="nav-link" to="/articles">Articles</NavLink></li>
-                            <li className="nav-item"><NavLink className="nav-link" to="/profile">Profile</NavLink></li>
-                        </ul><button onClick={() => goTo('login')} className="btn btn-primary btn-sm link-primary bg-transparent" role="button">Sign up</button>
+                            { isAuthenticated ? <li className="nav-item"><NavLink className="nav-link" to="/profile">Profile</NavLink></li> : '' }
+                            <li className="nav-item"><NavLink className="nav-link" to="/about">About</NavLink></li>
+                        </ul>
+                        { isAuthenticated ? <LogoutButton/> : <LoginButton/> }                        
                     </div>
                 </div>
             </nav>

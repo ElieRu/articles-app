@@ -19,7 +19,7 @@ export const Home = () => {
 
   return (
     <section className="py-5">
-        {articles.length > 0 ? <div className="container py-2">
+      {articles.length > 0 ? <div className="container py-2">
           <SearchArticle search={search} onChange={e => setSearch(e.target.value)} onFilter={onFilter} />
             <Row className="row">
               {/* <ArticleComponent/> */}
