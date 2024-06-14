@@ -3,10 +3,19 @@ import { NavLink, Link, useNavigate, redirect } from "react-router-dom";
 import { useAuth0 } from '@auth0/auth0-react';
 import LoginButton from "../auth/LoginButton";
 import LogoutButton from "../auth/LogoutButton";
+import { useEffect, useState } from "react";
 
 export default function Header() {
     
-    const { isAuthenticated } = useAuth0();    
+    const [myUser, setMyUser] = useState({});
+
+    const { isAuthenticated, user } = useAuth0();
+    // if (isAuthenticated) {
+    //     useEffect(() => {
+    //         setMyUser(user);
+    //     }, []);
+    // } 
+    
 
     return <nav className="navbar navbar-expand-md sticky-top navbar-shrink py-3 navbar-light" id="mainNav">
                 <div className="container">
@@ -24,7 +33,20 @@ export default function Header() {
                             { isAuthenticated ? <li className="nav-item"><NavLink className="nav-link" to="/profile">Profile</NavLink></li> : '' }
                             <li className="nav-item"><NavLink className="nav-link" to="/about">About</NavLink></li>
                         </ul>
-                        { isAuthenticated ? <LogoutButton/> : <LoginButton/> }                        
+                        { isAuthenticated ? <LogoutButton/> : <LoginButton/> }
+                        {/* <div className="dropdown no-arrow">
+                            <a className="nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
+                                <span className="d-none d-lg-inline me-2 text-gray-600 small">{}</span>
+                                <img className="border rounded-circle img-profile" src="" /></a>
+                                <div className="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+                                    <a className="dropdown-item" href="#"><i className="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> Profile</a>
+                                    <a className="dropdown-item" href="#"><i className="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i> Settings</a>
+                                    <a className="dropdown-item" href="#"><i className="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i> Activity log</a>
+                                    <div className="dropdown-divider">
+                                </div>
+                                    <a className="dropdown-item" href="#"><i className="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i> Logout</a>
+                                </div>
+                        </div> */}
                     </div>
                 </div>
             </nav>

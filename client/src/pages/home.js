@@ -3,9 +3,11 @@ import Row from "../components/elements/row"
 import Search from "../components/inputs/input-search"
 import ArticleComponent from "../components/blocks/article"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SearchArticle from "../components/inputs/search-article"
 import EmptyArticles from "../components/blocks/empty-articles"
+
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const Home = () => {
 
