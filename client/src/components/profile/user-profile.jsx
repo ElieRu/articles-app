@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const UserProfile = () => {
+export default function UserProfile () {
   return (
     <div>UserProfile</div>
   )
