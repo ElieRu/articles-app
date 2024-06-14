@@ -1,8 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import ArticleComponent from "../components/blocks/article";
+import { Link, useNavigate, Outlet, NavLink } from "react-router-dom";
 import Column from "../components/elements/column";
-import Form from "../components/elements/form";
-import Input from "../components/inputs/input";
 import Row from "../components/elements/row";
 import Statistics from "../components/elements/statistics";
 import UserFormUpdate from "../components/elements/user-form-update";
@@ -10,6 +7,7 @@ import UserFormUpdate from "../components/elements/user-form-update";
 import React, { useState } from 'react'
 import SearchArticle from "../components/inputs/search-article";
 import EmptyArticles from "../components/blocks/empty-articles";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const Profile = () => {
     
@@ -22,13 +20,20 @@ export const Profile = () => {
     const onFilter = (value) => {
         setSelect(value)
     }
-
+    
     return (
         <section className="py-5">
             <div className="container">
+                {/* {user.email} */}
                 <Row className="row mb-4 mb-lg-5">
                     
                     <Column className="col-md-6 col-lg-4 text-center mx-auto mb-5">
+                        <nav>
+                            <NavLink index to={'home'}>Home</NavLink>
+                            <NavLink to={'library'}>Library</NavLink>
+                            <NavLink to={'followers'}>Followers</NavLink>
+                        </nav>
+                        <Outlet/>
                         <UserFormUpdate/>
                     </Column>
 

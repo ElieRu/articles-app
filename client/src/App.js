@@ -10,6 +10,7 @@ import { Login } from './pages/login';
 import { Register } from './pages/register';
 import { ResetPassword } from './pages/reset-password';
 import { NotFound } from './pages/404';
+import { UserProfile } from './components/profile/user-profile';
 
 function App() {
 
@@ -31,7 +32,9 @@ function App() {
         <Route path='articles' element={<Articles></Articles>} >
           <Route path=':id' element={<Article></Article>} />
         </Route>
-        <Route path='/profile' element={<Profile></Profile>} />
+        <Route path='profile' element={<Profile></Profile>} >
+          <Route path='home' element={<UserProfile />} />
+        </Route>
         <Route path='/login' element={<Login></Login>} />
         <Route path='/register' element={<Register></Register>} />
         <Route path='/forgot-password' element={<ForgotPassword></ForgotPassword>} />
