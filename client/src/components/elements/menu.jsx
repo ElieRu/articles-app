@@ -1,6 +1,7 @@
 import React from "react";
 import LogoutButton from "../auth/LogoutButton";
 import LoginButton from "../auth/LoginButton";
+import DropdownUserInfos from "./dropdown-user-infos";
 
 export default function Menu({ isAuthenticated, user }) {
   return (
@@ -130,38 +131,7 @@ export default function Menu({ isAuthenticated, user }) {
         </div>
         <div>
           <hr />
-          <div class="dropup no-arrow">
-            <a
-              class="dropdown-toggle link-body-emphasis d-flex align-items-center text-decoration-none"
-              aria-expanded="false"
-              data-bs-toggle="dropdown"
-              role="button"
-            >
-              <img
-                style={{ width: "35px", marginRight: "10px" }}
-                className="border rounded-circle img-profile"
-                src={isAuthenticated ? user.picture : "assets/img/profile.png"}
-              />
-              <strong>{isAuthenticated ? user.name : ""}</strong>
-            </a>
-            <div
-                style={{overflow: 'hidden'}}
-              class="dropdown-menu shadow text-small"
-              data-popper-placement="top-start"
-            >
-              <a class="dropdown-item" href="#">
-                New project...
-              </a>
-              <a class="dropdown-item" href="#">
-                Settings
-              </a>
-              <a class="dropdown-item" href="#">
-                Profile
-              </a>
-              <div class="dropdown-divider"></div>
-              {isAuthenticated ? <LogoutButton /> : <LoginButton />}
-            </div>
-          </div>
+          <DropdownUserInfos isAuthenticated={isAuthenticated} user={user} type={'dropup'} />
         </div>
       </div>
     </div>

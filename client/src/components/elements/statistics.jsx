@@ -35,12 +35,12 @@ export default function Statistics () {
                         </Row>
                     </Column>                    
                     <Column className="col-12 mb-3">
-                        <Form>
+                        {/* <Form>
                             <textarea className="form-control form-control mb-2" placeholder="*bio" style={{resize: 'none',height: '130px'}}></textarea>
                             <div className="d-flex justify-content-end">
                                 <button className="btn btn-primary btn-sm link-body-emphasis bg-transparent border rounded" type="submit">Change</button>
                             </div>
-                        </Form>
+                        </Form> */}
                     </Column>
                 </Row>
                 <div className="mb-2" style={{textAlign: 'justify'}}></div>
