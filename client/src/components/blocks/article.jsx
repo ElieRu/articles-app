@@ -16,7 +16,7 @@ export default function ArticleComponent ({article, children}) {
                         <img className="rounded img-fluid shadow w-100 fit-cover" src="assets/img/products/1.jpg" style={{height: '250px'}} />
                         
                     </div>
-                    <Link to={'#'} className="btn btn-primary btn-sm">More</Link>
+                    <Link to={article._id} className="btn btn-primary btn-sm">More</Link>
                 </div>
                 <div className="py-3">
                     <h5 className="fw-bold text-capitalize">{article.title.length > 15 ? article.title.slice(1,15)+'...' : article.title}</h5>

@@ -10,7 +10,7 @@ import { useNavigate, useParams, Outlet } from "react-router-dom";
 import FormArticle from "../components/blocks/form-article";
 import axios from "axios";
 
-export const Article = () => {
+export const ArticleDetails = () => {
     // const {id} = useParams()
     // const navigate = useNavigate()
 
