@@ -3,20 +3,14 @@ import { NavLink, Link, useNavigate, redirect } from "react-router-dom";
 import { useAuth0 } from '@auth0/auth0-react';
 import LoginButton from "../auth/LoginButton";
 import LogoutButton from "../auth/LogoutButton";
+import Menu from "../elements/menu";
 import { useEffect, useState } from "react";
 
 export default function Header() {
     
     const [myUser, setMyUser] = useState({});
-
     const { isAuthenticated, user } = useAuth0();
-    // if (isAuthenticated) {
-    //     useEffect(() => {
-    //         setMyUser(user);
-    //     }, []);
-    // } 
     
-
     return <nav className="navbar navbar-expand-md sticky-top navbar-shrink py-3 navbar-light" id="mainNav">
                 <div className="container">
                     <Link className="navbar-brand d-flex align-items-center" to="/">
@@ -25,7 +19,7 @@ export default function Header() {
                                 <path d="M14 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zM2 14h12a1 1 0 0 0 1-1V5H1v8a1 1 0 0 0 1 1M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1z"></path>
                             </svg></span><span>Articles</span></Link>
                             
-                        <button data-bs-toggle="collapse" className="navbar-toggler" data-bs-target="#navcol-1"><span className="visually-hidden">Toggle navigation</span><span className="navbar-toggler-icon"></span></button>
+                        <button data-bs-toggle="collapse" className="navbar-toggler d-none" data-bs-target="#navcol-1"><span className="visually-hidden">Toggle navigation</span><span className="navbar-toggler-icon"></span></button>
                     <div className="collapse navbar-collapse" id="navcol-1">
                         <ul className="navbar-nav mx-auto">
                             <li className="nav-item"><NavLink className="nav-link" to="/">Home</NavLink></li>
@@ -33,21 +27,24 @@ export default function Header() {
                             { isAuthenticated ? <li className="nav-item"><NavLink className="nav-link" to="/profile">Profile</NavLink></li> : '' }
                             <li className="nav-item"><NavLink className="nav-link" to="/about">About</NavLink></li>
                         </ul>
-                        { isAuthenticated ? <LogoutButton/> : <LoginButton/> }
-                        {/* <div className="dropdown no-arrow">
-                            <a className="nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
-                                <span className="d-none d-lg-inline me-2 text-gray-600 small">{}</span>
-                                <img className="border rounded-circle img-profile" src="" /></a>
-                                <div className="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                                    <a className="dropdown-item" href="#"><i className="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> Profile</a>
-                                    <a className="dropdown-item" href="#"><i className="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i> Settings</a>
-                                    <a className="dropdown-item" href="#"><i className="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i> Activity log</a>
-                                    <div className="dropdown-divider">
-                                </div>
-                                    <a className="dropdown-item" href="#"><i className="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i> Logout</a>
-                                </div>
-                        </div> */}
+                        <div className="dropdown no-arrow">
+                        <a className="nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
+                            <span className="d-lg-inline me-2 text-gray-600 small">{ isAuthenticated ? user.name : '' }</span>
+                            <img style={{width: '35px'}} className="border rounded-circle img-profile" src={ isAuthenticated ? user.picture : 'assets/img/profile.png'} /> </a>
+                            <div style={{overflow: 'hidden'}} className="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+                                <a className="dropdown-item" href="#"> Profile</a>
+                                <a className="dropdown-item" href="#"> Settings</a>
+                                <a className="dropdown-item" href="#"> Activity log</a>
+                                <div className="dropdown-divider">
+                            </div>
+                                { isAuthenticated ? <LogoutButton/> : <LoginButton/> }
+                            </div>
                     </div>
+                    </div>
+                    <button className="btn btn-primary bg-transparent border d-md-none rounded-0 border-0" type="button" data-bs-target="#offcanvas-menu" data-bs-toggle="offcanvas" style={{padding: '7px'}}><svg className="fs-1 text-body-secondary" xmlns="http://www.w3.org/2000/svg" viewBox="-32 0 512 512" width="1em" height="1em" fill="currentColor">
+                        <path d="M448 64c0-17.7-14.3-32-32-32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32zm0 256c0-17.7-14.3-32-32-32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32-14.3 32-32zM0 192c0 17.7 14.3 32 32 32H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H32c-17.7 0-32 14.3-32 32zM448 448c0-17.7-14.3-32-32-32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32-14.3 32-32z"></path>
+                    </svg></button>
                 </div>
+                <Menu isAuthenticated={isAuthenticated} user={user} />
             </nav>
 }

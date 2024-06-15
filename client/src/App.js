@@ -6,7 +6,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import { Home } from './pages/home'
 import Header from './components/layouts/header';
 import Footer from './components/layouts/footer';
-import { Article } from './pages/article';
+import { ArticleDetails } from './pages/article-details.js';
 import { Profile } from './pages/profile';
 import { Articles } from './pages/articles';
 import { ForgotPassword } from './pages/forgot-password';
@@ -36,12 +36,9 @@ function App() {
       <Routes>
         <Route index element={<Home></Home>} />
         <Route path='articles' element={<Articles></Articles>} >
-          <Route path=':id' element={<Article></Article>} />
+          <Route path=':id' element={<ArticleDetails></ArticleDetails>} />
         </Route>
-        <Route path='/profile' element={<Profile></Profile>} >
-          <Route index element={<UserProfile />} />
-          <Route path='home' element={<UserProfile />} />
-        </Route>
+        <Route path='/profile' element={<Profile></Profile>} ></Route>
         <Route path='/login' element={<Login></Login>} />
         <Route path='/register' element={<Register></Register>} />
         <Route path='/forgot-password' element={<ForgotPassword></ForgotPassword>} />
