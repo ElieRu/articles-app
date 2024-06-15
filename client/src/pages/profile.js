@@ -16,18 +16,18 @@ export const Profile = () => {
     const [search, setSearch] = useState('')
     const [select, setSelect] = useState('')
 
-    const {isAuthenticated, user} = useAuth0();
+    const {isLoading, isAuthenticated, user} = useAuth0();
 
     const onFilter = (value) => {
         setSelect(value)
     }
-    
+
     return (
         <section className="py-5">
             <div className="container">
                 <Row className="row mb-4 mb-lg-5">
                     <Column className="col-md-6 col-lg-4 text-center mx-auto mb-5">
-                        <UserFormUpdate/>
+                        <UserFormUpdate isLoading={isLoading} isAuthenticated={isAuthenticated} user={user} />
                     </Column>
 
                     <Column className="col-md-6 col-lg-8 text-center mx-auto">

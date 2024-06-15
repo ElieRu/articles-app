@@ -5,6 +5,7 @@ import LoginButton from "../auth/LoginButton";
 import LogoutButton from "../auth/LogoutButton";
 import Menu from "../elements/menu";
 import { useEffect, useState } from "react";
+import DropdownUserInfos from "../elements/dropdown-user-infos";
 
 export default function Header() {
     
@@ -23,23 +24,11 @@ export default function Header() {
                     <div className="collapse navbar-collapse" id="navcol-1">
                         <ul className="navbar-nav mx-auto">
                             <li className="nav-item"><NavLink className="nav-link" to="/">Home</NavLink></li>
+                            <li className="nav-item"><NavLink className="nav-link" to="/libraries">Libraries</NavLink></li>
                             <li className="nav-item"><NavLink className="nav-link" to="/articles">Articles</NavLink></li>
-                            { isAuthenticated ? <li className="nav-item"><NavLink className="nav-link" to="/profile">Profile</NavLink></li> : '' }
                             <li className="nav-item"><NavLink className="nav-link" to="/about">About</NavLink></li>
                         </ul>
-                        <div className="dropdown no-arrow">
-                        <a className="nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
-                            <span className="d-lg-inline me-2 text-gray-600 small">{ isAuthenticated ? user.name : '' }</span>
-                            <img style={{width: '35px'}} className="border rounded-circle img-profile" src={ isAuthenticated ? user.picture : 'assets/img/profile.png'} /> </a>
-                            <div style={{overflow: 'hidden'}} className="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                                <a className="dropdown-item" href="#"> Profile</a>
-                                <a className="dropdown-item" href="#"> Settings</a>
-                                <a className="dropdown-item" href="#"> Activity log</a>
-                                <div className="dropdown-divider">
-                            </div>
-                                { isAuthenticated ? <LogoutButton/> : <LoginButton/> }
-                            </div>
-                    </div>
+                        <DropdownUserInfos isAuthenticated={isAuthenticated} user={user} type={!isAuthenticated ? 'dropstart' : 'dropdown'} />
                     </div>
                     <button className="btn btn-primary bg-transparent border d-md-none rounded-0 border-0" type="button" data-bs-target="#offcanvas-menu" data-bs-toggle="offcanvas" style={{padding: '7px'}}><svg className="fs-1 text-body-secondary" xmlns="http://www.w3.org/2000/svg" viewBox="-32 0 512 512" width="1em" height="1em" fill="currentColor">
                         <path d="M448 64c0-17.7-14.3-32-32-32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32zm0 256c0-17.7-14.3-32-32-32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32-14.3 32-32zM0 192c0 17.7 14.3 32 32 32H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H32c-17.7 0-32 14.3-32 32zM448 448c0-17.7-14.3-32-32-32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32-14.3 32-32z"></path>
