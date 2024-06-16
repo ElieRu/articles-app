@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Form from "../components/elements/form";
 import Input from "../components/inputs/input";
-import Search from "../components/inputs/input-search";
-import Paginatiom from "../components/elements/pagination";
 import Row from "../components/elements/row";
 import Selection from "../components/inputs/selection";
 import Textarrea from "../components/inputs/textarea";
@@ -11,7 +9,7 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import ArticleWithDropdown from "../components/blocks/article-with-dropdown";
 import DeleteModal from "../components/blocks/delete-modal";
-import EmptyArticles from "../components/blocks/empty-articles";
+import EmptyItems from "../components/blocks/empty-items";
 import ReactPaginate from 'react-paginate';
 import SearchArticle from "../components/inputs/search-article";
 
@@ -21,6 +19,14 @@ export const Articles = () => {
     const [articles, setArticles] = useState([]);
     let [article, setArticle] = useState('')
     let [form, setForm] = useState({ title: '', type: '', description: '' })
+
+    let items = [
+        {label: 'Select a type', value: ''}, 
+        {label: 'Expository', value: 'Expository'}, 
+        {label: 'Persuasive', value: 'Persuasive'}, 
+        {label: 'Narrative', value: 'Narrative'},
+        {label: 'Descriptive', value: 'Descriptive'}
+    ]
 
     // All
     useEffect(() => {
@@ -104,7 +110,7 @@ export const Articles = () => {
                                     onChange={(e) => setForm({...form, title: e.target.value})} />
                             </div>
                                                             
-                            <Selection label = "Type" id="type"
+                            <Selection label = "Type" id="type" items={items}
                                 value={form.type}
                                 onChange={(e) => setForm({...form, type: e.target.value})} />
 
@@ -154,7 +160,7 @@ export const Articles = () => {
                             activeClassName="active"
                         />
 
-                    </div> : <EmptyArticles/> }
+                    </div> : <EmptyItems/> }
                 </div>
                 <DeleteModal onDelete={onDelete} ></DeleteModal>
             </section>
