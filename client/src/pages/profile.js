@@ -6,7 +6,7 @@ import UserFormUpdate from "../components/elements/user-form-update";
 
 import React, { useState } from 'react'
 import SearchArticle from "../components/inputs/search-article";
-import EmptyArticles from "../components/blocks/empty-articles";
+import EmptyItems from "../components/blocks/empty-items";
 import {useAuth0} from "@auth0/auth0-react";
 
 export const Profile = () => {    
@@ -54,7 +54,7 @@ export const Profile = () => {
                             {/* <ArticleComponent/> */}
                         </Column>
                     </Row>
-                </div> : <EmptyArticles />}
+                </div> : <EmptyItems />}
             </div>
         </section>
   )
