@@ -11,9 +11,10 @@ import { Profile } from './pages/profile';
 import { Articles } from './pages/articles';
 import { NotFound } from './pages/404';
 import { Library } from "./pages/library.js";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
-
+  const { isAuthenticate } = useAuth0();
   const location = useLocation();
   const currentPath = location.pathname
   const routeName = currentPath.split('/')[1];
@@ -26,7 +27,7 @@ function App() {
 
   return (
     <div className="App">
-      {!auth_page ? <Header/> : ''}
+      {!auth_page && <Header/>}
 
       <Routes>
         <Route index element={<Home></Home>} />
@@ -35,10 +36,10 @@ function App() {
         </Route>
         <Route path='/profile' element={<Profile />} />
         <Route path='/library' element={<Library />} />
-        <Route path='*' element={<NotFound></NotFound>} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
 
-      {!auth_page ? <Footer/> : ''}
+      {!auth_page && <Footer/> }
     </div>
   );
 }

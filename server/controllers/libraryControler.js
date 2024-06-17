@@ -4,19 +4,8 @@ const Library = require("../models/Library")
 module.exports = {
     get: async (req, res, next) => {
         try {
-            const { page } = req.query || 0;
-            const { limit} = req.query;
-
-            let startIndex = (page - 1) * limit;
-            let lastIndex = (page) * limit;
-
-            // let articles = await Article.find({}).skip(skip).limit(limit);
-            let articles = await Article.find({});
-
-            const result = articles.slice(startIndex, lastIndex);
-            
-            res.status(200).send(articles);
-
+            let libraries = await Library.find({});
+            res.status(200).send(libraries);
         } catch (err) {
             console.log(err);
         }
@@ -36,7 +25,7 @@ module.exports = {
         const librarySaved = new Library(req.body)
         try {
             const tmpSaved = await librarySaved.save()
-            res.status(200).send( await Labraries.find({}) )
+            res.status(200).send( await Library.find({}) )
         } catch (e) {
             res.status(400).send(true)
         }

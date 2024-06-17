@@ -3,12 +3,13 @@
 const express = require("express");
 const router = express.Router();
 const libraryControler = require("../controllers/libraryControler")
+const {addAttrs} = require("../middlewares/libraryMiddlewares")
 
-// router.get('library', libraryControler.get)
-// router.get('library/:id', libraryControler.getId)
-router.post('library', libraryControler.create)
-// router.put('library/:id', libraryControler.update)
-// router.delete('library/:id', libraryControler.delete)
+router.get('/libraries', libraryControler.get)
+// router.get('/:id', libraryControler.getId)
+router.post('/libraries', addAttrs, libraryControler.create)
+// router.put('/:id', libraryControler.update)
+// router.delete('/:id', libraryControler.delete)
 
 
 module.exports = router;
