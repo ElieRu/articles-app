@@ -21,7 +21,7 @@ export const Home = () => {
 
   return (
     <section className="py-5">
-      list all books
+      All ressources
       {articles.length > 0 ? <div className="container py-2">
           <SearchArticle search={search} onChange={e => setSearch(e.target.value)} onFilter={onFilter} />
             <Row className="row">

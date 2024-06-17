@@ -3,28 +3,38 @@ import Input from "../inputs/input";
 import Selection from "../inputs/selection";
 import Form from "./form";
 import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 
-export default function CreateLibrary() {
-    const items = [
-        {label: "Library's Type", value: ''},
-        {label: "Public Library", value: "Public Library"},
-        {label: "Academic Library", value: "Academic Library"},
-        {label: "School Library", value: "School Library"},
-        {label: "Special Collection Library", value: "Special Collection Library"},
-    ];
+export default function CreateLibrary({libraries}) {
+  const {isLoading, user} = useAuth0();
+  const items = [
+      {label: "Library's Type", value: ''},
+      {label: "Public Library", value: "Public Library"},
+      {label: "Academic Library", value: "Academic Library"},
+      {label: "School Library", value: "School Library"},
+      {label: "Special Collection Library", value: "Special Collection Library"},
+  ];
 
-    const [form, setForm] = useState({name: "", type: ""})
+  // const 
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        axios.post(`http://localhost:9000/library`, form)
-        .then((res) => {
-            console.log(res);
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-    }
+  const [form, setForm] = useState({
+    name: "", 
+    type: "",
+    userId: ""
+  })
+
+  const handleSubmit = (e) => {
+      e.preventDefault()
+      setForm({...form, userId: user.sub});
+      axios.post(`http://localhost:9000/libraries`, form)
+      .then((res) => {
+        libraries(res)
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 
   return (
     <div id="create-library" className="modal fade" role="dialog" tabindex="-1">

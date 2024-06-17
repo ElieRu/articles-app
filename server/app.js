@@ -53,7 +53,7 @@ connection_database().catch(err => console.log(err));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/', articleRoutes);
+app.use('/articles', articleRoutes);
 app.use('/', libraryRoutes);
 
 // catch 404 and forward to error handler
