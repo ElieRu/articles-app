@@ -19,9 +19,8 @@ export default function LibrariesItems({library}) {
                         </svg>
                     </button>
                     <div className="dropdown-menu">
-                        <a className="dropdown-item" href="#">First Item</a>
-                        <a className="dropdown-item" href="#">Second Item</a>
-                        <a className="dropdown-item" href="#">Third Item</a>
+                        <Link className="dropdown-item" to="/">Update</Link>
+                        <Link className="dropdown-item" to="/">Delete</Link>
                     </div>
                 </div>
             </div>
