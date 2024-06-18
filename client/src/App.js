@@ -11,6 +11,7 @@ import { Profile } from './pages/profile';
 import { Articles } from './pages/articles';
 import { NotFound } from './pages/404';
 import { Library } from "./pages/library.js";
+import { LibraryDetails } from "./pages/library-details.js";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
@@ -35,7 +36,9 @@ function App() {
           <Route path=':id' element={<ArticleDetails></ArticleDetails>} />
         </Route>
         <Route path='/profile' element={<Profile />} />
-        <Route path='/library' element={<Library />} />
+        <Route path='/library' element={<Library />} >
+          <Route path=':id' element={<LibraryDetails />} />
+        </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
 

@@ -16,7 +16,7 @@ export default function DropdownUserInfos ({isAuthenticated, user, type}) {
         src={isAuthenticated ? user.picture : "assets/img/profile.png"}
       />
       <div>
-        {isAuthenticated && <div><span style={{fontSize: '13px'}}>{user.name}</span></div> }
+        <div><span style={{fontSize: '13px'}}>{isAuthenticated ? user.name : 'Not connected' }</span></div>
         {isAuthenticated && <div style={{marginTop: '-10px'}}><span style={{fontSize: '11px'}}>Library</span></div> }
       </div>
     </a>
@@ -26,8 +26,9 @@ export default function DropdownUserInfos ({isAuthenticated, user, type}) {
       data-popper-placement="top-start"
     >
       {isAuthenticated && <Link to={'profile'} class="dropdown-item">Profile</Link> }
-      {isAuthenticated && <Link to={'library'} class="dropdown-item" href="#">Library</Link> }
-      {isAuthenticated && <Link to={'settings'} class="dropdown-item" href="#">Settings</Link> }
+      {isAuthenticated && <Link to={'library'} class="dropdown-item" >Library</Link> }
+      {isAuthenticated && <Link to={'articles'} class="dropdown-item" >Articles</Link> }
+      {isAuthenticated && <Link to={'settings'} class="dropdown-item" >Settings</Link> }
       {isAuthenticated && <div class="dropdown-divider"></div> }
       {isAuthenticated ? <LogoutButton /> : <LoginButton />}
     </div>

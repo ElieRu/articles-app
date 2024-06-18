@@ -8,6 +8,7 @@ import SearchArticle from "../components/inputs/search-article"
 import EmptyItems from "../components/blocks/empty-items"
 
 import { useAuth0 } from "@auth0/auth0-react";
+import SearchWithDropdown from "../components/inputs/search-article"
 
 export const Home = () => {
 
@@ -21,9 +22,8 @@ export const Home = () => {
 
   return (
     <section className="py-5">
-      All ressources
       {articles.length > 0 ? <div className="container py-2">
-          <SearchArticle search={search} onChange={e => setSearch(e.target.value)} onFilter={onFilter} />
+          <SearchWithDropdown search={search} onChange={e => setSearch(e.target.value)} onFilter={onFilter} />
             <Row className="row">
               {/* <ArticleComponent/> */}
             </Row>

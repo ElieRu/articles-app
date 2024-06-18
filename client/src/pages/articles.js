@@ -12,6 +12,7 @@ import DeleteModal from "../components/blocks/delete-modal";
 import EmptyItems from "../components/blocks/empty-items";
 import ReactPaginate from 'react-paginate';
 import SearchArticle from "../components/inputs/search-article";
+import SearchWithDropdown from "../components/inputs/search-article";
 
 export const Articles = () => {
 
@@ -95,6 +96,12 @@ export const Articles = () => {
     const handlePageClick = () => {
 
     }
+
+    let articles_types = [
+        {label: 'All', value: ''},
+        {label: 'Expository', value: 'Expository'},
+        {label: 'Narrative', value: 'Narrative'}
+    ];
     
     return (<section className="py-5">
                 <div className="container">
@@ -126,7 +133,7 @@ export const Articles = () => {
                     </div>
                     {!articles.length == 0 ? <div>
 
-                        <SearchArticle search={search} onChange={e => setSearch(e.target.value)} onFilter={onFilter} />
+                        <SearchWithDropdown types={articles_types} search={search} onChange={e => setSearch(e.target.value)} onFilter={onFilter} />
 
                         <Row>
                             {articles.filter((article) => {
