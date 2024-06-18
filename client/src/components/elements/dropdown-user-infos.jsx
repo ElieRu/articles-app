@@ -25,7 +25,7 @@ export default function DropdownUserInfos ({isAuthenticated, user, type}) {
       class="dropdown-menu shadow text-small"
       data-popper-placement="top-start"
     >
-      {isAuthenticated && <Link to={'profile'} class="dropdown-item">Profile</Link> }
+      {isAuthenticated && <Link to={'profile'} class="dropdown-item" >Profile</Link> }
       {isAuthenticated && <Link to={'library'} class="dropdown-item" >Library</Link> }
       {isAuthenticated && <Link to={'articles'} class="dropdown-item" >Articles</Link> }
       {isAuthenticated && <Link to={'settings'} class="dropdown-item" >Settings</Link> }
