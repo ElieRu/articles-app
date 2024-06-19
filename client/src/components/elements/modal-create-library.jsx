@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../inputs/input";
 import Selection from "../inputs/selection";
 import Form from "./form";
@@ -7,7 +7,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 export default function CreateLibrary({onUpdateItems, onHideModal}) {
   const {isLoading, user} = useAuth0();
-  let userId = !isLoading ? user.sub : null;
+  const [userId, setUserId] = useState("")
+  
+  // useEffect(() => {
+    // if (!isLoading) {
+    //   setUserId(user.sub)
+    // }
+  // }, []);
+  // alert(userId)
 
   const items = [
       {label: "Library's Type", value: ''},
