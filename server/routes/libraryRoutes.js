@@ -7,7 +7,7 @@ const {addAttrs} = require("../middlewares/libraryMiddlewares")
 
 router.get('/libraries', libraryControler.get)
 // router.get('/:id', libraryControler.getId)
-router.post('/libraries', addAttrs, libraryControler.create)
+router.post('/libraries', libraryControler.create)
 // router.put('/:id', libraryControler.update)
 // router.delete('/:id', libraryControler.delete)
 

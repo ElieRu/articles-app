@@ -4,8 +4,10 @@ import CreateLibrary from '../components/elements/modal-create-library'
 import axios from 'axios';
 import LibrariesItems from '../components/blocks/libraries-items';
 import SearchWithDropdown from '../components/inputs/search-article';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export const Library = () => {
+  // const { isAuthenticated, user} = useAuth0()
   const [libraries, setLibraries] = useState([]);
   useEffect(() => {
     axios.get(`http://localhost:9000/libraries`).then((res) => {
@@ -28,8 +30,8 @@ export const Library = () => {
   }
 
   const btnHideRef = useRef(null)
-  const onHideModal = (v) => {
-    if (v) {
+  const onHideModal = (validation) => {
+    if (validation) {
       btnHideRef.current?.click();
     }
   }
@@ -50,7 +52,7 @@ export const Library = () => {
         {!libraries.length > 0 && <EmptyItems src={'assets/img/empty-library.png'} msg={"You don't have any library."} >
             <button ref={btnHideRef} data-bs-target="#create-library" data-bs-toggle="modal" style={{marginTop: '20px'}} className='btn btn-primary btn-sm'>Create a new library</button>
         </EmptyItems>}
-      <CreateLibrary onHideModal={(v) => onHideModal(v)} onUpdateItems={ (libraries) => setLibraries(libraries) } />
+      <CreateLibrary onHideModal={(validation) => onHideModal(validation)} onUpdateItems={ (libraries) => setLibraries(libraries) } />
     </section>
   )
 }

@@ -7,6 +7,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 export default function CreateLibrary({onUpdateItems, onHideModal}) {
   const {isLoading, user} = useAuth0();
+  let userId = !isLoading ? user.sub : null;
+
   const items = [
       {label: "Library's Type", value: ''},
       {label: "Public Library", value: "Public Library"},
@@ -25,7 +27,7 @@ export default function CreateLibrary({onUpdateItems, onHideModal}) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setForm({...form, userId: user.sub});
+    setForm({...form, userId: userId});
     axios.post(`http://localhost:9000/libraries`, form)
     .then((res) => {
       setForm({
@@ -37,6 +39,7 @@ export default function CreateLibrary({onUpdateItems, onHideModal}) {
       onHideModal(true)
     })
     .catch((err) => {
+      console.log(err);
       setValidation(true)
       onHideModal(false)
     })
