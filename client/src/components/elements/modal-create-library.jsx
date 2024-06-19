@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../inputs/input";
 import Selection from "../inputs/selection";
 import Form from "./form";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 
-export default function CreateLibrary({libraries}) {
+export default function CreateLibrary({onUpdateItems, onHideModal}) {
   const {isLoading, user} = useAuth0();
+  const [userId, setUserId] = useState("")
+  
+  // useEffect(() => {
+    // if (!isLoading) {
+    //   setUserId(user.sub)
+    // }
+  // }, []);
+  // alert(userId)
+
   const items = [
       {label: "Library's Type", value: ''},
       {label: "Public Library", value: "Public Library"},
@@ -15,25 +24,32 @@ export default function CreateLibrary({libraries}) {
       {label: "Special Collection Library", value: "Special Collection Library"},
   ];
 
-  // const 
-
   const [form, setForm] = useState({
     name: "", 
     type: "",
     userId: ""
   })
 
+  const [validation, setValidation] = useState(false)
+
   const handleSubmit = (e) => {
-      e.preventDefault()
-      setForm({...form, userId: user.sub});
-      axios.post(`http://localhost:9000/libraries`, form)
-      .then((res) => {
-        libraries(res)
-        console.log(res);
+    e.preventDefault()
+    setForm({...form, userId: userId});
+    axios.post(`http://localhost:9000/libraries`, form)
+    .then((res) => {
+      setForm({
+        name: "",
+        type: ""
       })
-      .catch((err) => {
-        console.log(err);
-      })
+      onUpdateItems(res.data)
+      setValidation(false)
+      onHideModal(true)
+    })
+    .catch((err) => {
+      console.log(err);
+      setValidation(true)
+      onHideModal(false)
+    })
   }
 
   return (
@@ -53,6 +69,7 @@ export default function CreateLibrary({libraries}) {
             <Form onSubmit={handleSubmit}>
               <Input label="Library's name" value={form.name} onChange={(e) => setForm({...form, name: e.target.value})} placeholder="Library's name" />
               <Selection label="Type" value={form.type} onChange={(e) => setForm({...form, type: e.target.value})} items={items} />
+              <div style={{display: validation ? 'block' : 'none'}} class="bg-danger-subtle border rounded p-2 mb-2"><span class="fs-6">Invalid form</span></div>
               <button type="submit" className="btn btn-primary btn-sm">Save</button>
             </Form>
           </div>

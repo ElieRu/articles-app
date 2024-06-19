@@ -23,12 +23,14 @@ const librarySchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true,
-        default: "Your description",
+        required: false,
         min: 4,
         max: 100
     },
-    // user_id: {}
+    userId: {
+        type: String,
+        required: true,
+    }
 })
 
 const Library = mongoose.model('Library', librarySchema);

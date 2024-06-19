@@ -23,6 +23,7 @@ module.exports = {
     },
     create: async (req, res, next) => {
         const librarySaved = new Library(req.body)
+        console.log(req.body);
         try {
             const tmpSaved = await librarySaved.save()
             res.status(200).send( await Library.find({}) )
