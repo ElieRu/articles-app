@@ -13,6 +13,9 @@ import { NotFound } from './pages/404';
 import { Library } from "./pages/library.js";
 import { LibraryDetails } from "./pages/library-details.js";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Ressources } from "./pages/ressources.js";
+import { Followers } from "./pages/followers.js";
+import { Managment } from "./pages/managment.js";
 
 function App() {
   const { isAuthenticate } = useAuth0();
@@ -32,12 +35,16 @@ function App() {
 
       <Routes>
         <Route index element={<Home></Home>} />
-        <Route path='articles' element={<Articles></Articles>} >
-          <Route path=':id' element={<ArticleDetails></ArticleDetails>} />
-        </Route>
+        <Route path='articles' element={<Articles></Articles>} />
+        <Route path='articles/:id' element={<ArticleDetails />} />
+        
         <Route path='/profile' element={<Profile />} />
-        <Route path='/library' element={<Library />} >
-          <Route path=':id' element={<LibraryDetails />} />
+        <Route path='/library' element={<Library />} />
+        <Route path='/library/:id' element={<LibraryDetails />} >
+          <Route index element={<Ressources/>}></Route>
+          <Route path="ressources" element={<Ressources/>}></Route>
+          <Route path="followers" element={<Followers/>}></Route>
+          <Route path="managment" element={<Managment/>}></Route>
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>

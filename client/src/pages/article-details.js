@@ -11,23 +11,24 @@ import FormArticle from "../components/blocks/form-article";
 import axios from "axios";
 
 export const ArticleDetails = () => {
-    // const {id} = useParams()
-    // const navigate = useNavigate()
+    const {id} = useParams()
+    const navigate = useNavigate()
 
-    // const [article, setArticle] = useState({})
+    const [article, setArticle] = useState({})
 
-    // useEffect(() => {
-    //     axios.get(`http://localhost:9000/articles/${id}`).then((res) => {
-    //         setArticle(res.data)
-    //     })
-    // }, []);
+    useEffect(() => {
+        axios.get(`http://localhost:9000/articles/${id}`).then((res) => {
+            setArticle(res.data)
+        })
+    }, []);
 
     // console.log(article)
 
     return (<section className="py-5">
             <div className="container">
-                {/* <DescriptionComponent article={article} /> */}
-                {/* <FormArticle navigate={() => {navigate(-1)}} article={article} /> */}
+                <FormArticle navigate={() => {navigate(-1)}} article={article} />
+                <DescriptionComponent article={article} />
+                
                 <Row className="row flex-column-reverse flex-md-row">
                     <Column className="col-12 col-md-8">
                         <h3 className="fw-bold">Comments (12)</h3>
