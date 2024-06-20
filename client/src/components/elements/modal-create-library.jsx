@@ -6,16 +6,7 @@ import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function CreateLibrary({onUpdateItems, onHideModal}) {
-  const {isLoading, user} = useAuth0();
-  const [userId, setUserId] = useState("")
   
-  // useEffect(() => {
-    // if (!isLoading) {
-    //   setUserId(user.sub)
-    // }
-  // }, []);
-  // alert(userId)
-
   const items = [
       {label: "Library's Type", value: ''},
       {label: "Public Library", value: "Public Library"},
@@ -31,10 +22,22 @@ export default function CreateLibrary({onUpdateItems, onHideModal}) {
   })
 
   const [validation, setValidation] = useState(false)
-
+  
+  // const { isLoading, user } = useAuth0()
+  // const [userId, setUserId] = useState('') 
+  
   const handleSubmit = (e) => {
     e.preventDefault()
-    setForm({...form, userId: userId});
+    
+    // if (!isLoading) {
+    //   // setUserId(user.sub)
+    //   console.log('.bad');
+    // } else {
+    //   console.log('.good');
+    //   // alert(user.sub)
+    // }
+
+    setForm({...form, userId: 'userId'});
     axios.post(`http://localhost:9000/libraries`, form)
     .then((res) => {
       setForm({
