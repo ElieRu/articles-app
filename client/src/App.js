@@ -20,19 +20,10 @@ import { Managment } from "./pages/managment.js";
 function App() {
   const { isAuthenticate } = useAuth0();
   const location = useLocation();
-  const currentPath = location.pathname
-  const routeName = currentPath.split('/')[1];
-  
-  let auth_page = 
-    routeName == 'forgot-password' ? true : 
-    routeName == 'login' ? true : 
-    routeName == 'reset-password' ? true : 
-    routeName == 'register' ? true : false;
 
   return (
     <div className="App">
-      {!auth_page && <Header/>}
-
+      <Header/>
       <Routes>
         <Route index element={<Home></Home>} />
         <Route path='articles' element={<Articles></Articles>} />
@@ -48,8 +39,7 @@ function App() {
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
-
-      {!auth_page && <Footer/> }
+      <Footer/>
     </div>
   );
 }

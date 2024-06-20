@@ -1,10 +1,8 @@
 
 import { NavLink, Link, useNavigate, redirect } from "react-router-dom";
 import { useAuth0 } from '@auth0/auth0-react';
-import LoginButton from "../auth/LoginButton";
-import LogoutButton from "../auth/LogoutButton";
 import Menu from "../elements/menu";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DropdownUserInfos from "../elements/dropdown-user-infos";
 
 export default function Header() {
