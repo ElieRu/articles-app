@@ -36,13 +36,10 @@ export const Library = () => {
     if (validation) {
       btnHideRef.current?.click();
     }
-  }
-
-  
+  } 
 
   return (
-    <section className="py-5">
-      
+    <section className="py-5">      
       <div className='container'>
         {libraries.length > 0 && <SearchWithDropdown types={libraries_types} search={search} onChange={e => setSearch(e.target.value)} onFilter={onFilter} >
           <button ref={btnHideRef} data-bs-target="#create-library" data-bs-toggle="modal" className='btn btn-primary' style={{marginLeft: "10px", width: '46px',height: '46px',padding: '0px'}}>
