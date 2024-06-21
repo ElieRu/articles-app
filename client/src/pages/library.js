@@ -18,7 +18,7 @@ export const Library = () => {
   }, []);
   
   let libraries_types = [
-    {label: "Library's Type", value: ''},
+    {label: "Get all", value: ''},
     {label: "Public Library", value: "Public Library"},
     {label: "Academic Library", value: "Academic Library"},
     {label: "School Library", value: "School Library"},
@@ -48,7 +48,15 @@ export const Library = () => {
             </svg>
           </button>
           </SearchWithDropdown>}
-          {libraries.map((library, i) => (<LibrariesItems library={library} key={i}></LibrariesItems>))}
+          {libraries.filter((library) => {
+            return search.toLowerCase() === ''
+              ? library
+              : library.name.toLowerCase().includes(search);
+          }).filter((library) => {
+            return select === ''
+                ? library
+                : library.type.includes(select);
+          }).map((library, i) => (<LibrariesItems library={library} key={i}></LibrariesItems>))}
         </div>
 
         {!libraries.length > 0 && <EmptyItems src={'assets/img/empty-library.png'} msg={"You don't have any library."} >
