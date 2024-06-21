@@ -15,44 +15,40 @@ export default function CreateLibrary({onUpdateItems, onHideModal}) {
       {label: "Special Collection Library", value: "Special Collection Library"},
   ];
 
-  const [form, setForm] = useState({
-    name: "", 
-    type: "",
-    userId: ""
-  })
-
+  const [form, setForm] = useState({name: "", type: ""})
   const [validation, setValidation] = useState(false)
-  
-  // const { isLoading, user } = useAuth0()
-  // const [userId, setUserId] = useState('') 
-  
+  const { isLoading, user } = useAuth0()
+  const [userId, setUserId] = useState('')
+
+  // if (!isLoading) {
+    // setUserId(user);
+  // }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    
-    // if (!isLoading) {
-    //   // setUserId(user.sub)
-    //   console.log('.bad');
-    // } else {
-    //   console.log('.good');
-    //   // alert(user.sub)
-    // }
 
-    setForm({...form, userId: 'userId'});
-    axios.post(`http://localhost:9000/libraries`, form)
-    .then((res) => {
-      setForm({
-        name: "",
-        type: ""
+    // alert(form.userId)
+    // if (isAuthenticated) {
+      // alert(user.sub)
+      axios.post(`http://localhost:9000/libraries`, {...form, userId: user.sub})
+      .then((res) => {
+        setForm({
+          name: "",
+          type: ""
+        })
+        onUpdateItems(res.data)
+        setValidation(false)
+        onHideModal(true)
       })
-      onUpdateItems(res.data)
-      setValidation(false)
-      onHideModal(true)
-    })
-    .catch((err) => {
-      console.log(err);
-      setValidation(true)
-      onHideModal(false)
-    })
+      .catch((err) => {
+        console.log(err);
+        setValidation(true)
+        onHideModal(false)
+      })
+    // } else {
+    //   // console.log('.good');
+    //   alert("null")
+    // }    
   }
 
   return (
