@@ -131,11 +131,8 @@ export const Articles = () => {
                         </Form>
                     </div>
                     {!articles.length == 0 ? <div>
-
                         <SearchWithDropdown search={search} types={items} onChange={e => setSearch(e.target.value)} onFilter={onFilter} >
-                            
                         </SearchWithDropdown>
-
                         <Row>
                             {articles.filter((article) => {
                                 return search.toLowerCase() === ''
@@ -143,8 +140,8 @@ export const Articles = () => {
                                     : article.title.toLowerCase().includes(search);
                             }).filter((article) => {
                                 return select === ''
-                                ? article
-                                : article.type.includes(select);
+                                    ? article
+                                    : article.type.includes(select);
                             }).map((article, i) => <ArticleWithDropdown key={i} article={article} onUpdate={onUpdate} myDelete={() => setArticle(article) } />)}
                         </Row>
                         
