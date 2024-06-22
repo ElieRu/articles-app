@@ -1,13 +1,11 @@
 import Paginatiom from "../components/elements/pagination"
 import Row from "../components/elements/row"
-import Search from "../components/inputs/input-search"
-import ArticleComponent from "../components/blocks/article"
 
 import React, { useContext, useState } from 'react'
 import EmptyItems from "../components/blocks/empty-items"
 
 import SearchWithDropdown from "../components/inputs/search-article"
-import { ThemeContext } from "../utils/ThemeContext"
+import { ThemeContext, useTheme } from "../utils/ThemeContext"
 
 export const Home = () => {
 
@@ -20,8 +18,8 @@ export const Home = () => {
   }
 
   function ThemeSwither () {
-    const {toggleTheme} = useContext(ThemeContext)
-    return <button onClick={toggleTheme}>Change the theme</button>
+    const {toggleTheme} = useTheme()
+    return <button className="btn btn-primary btn-sm" onClick={toggleTheme}>Theme</button>
   }
 
   return (
