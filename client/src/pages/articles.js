@@ -102,7 +102,7 @@ export const Articles = () => {
         {label: 'Narrative', value: 'Narrative'}
     ];
     
-    return (<section className="py-5">
+    return (<section className="py-4">
                 <div className="container">
                     <div className="mb-5">
                         <div className="d-flex justify-content-between align-items-center mb-3">

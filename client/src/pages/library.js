@@ -15,7 +15,7 @@ export const Library = () => {
   
   useEffect(() => {
     // setTimeout(() => {
-      alert(user.sub)
+      // alert(user.sub)
       axios.get(`http://localhost:9000/libraries`, {
         params: {userId: user.sub}
       }).then((res) => {
@@ -46,8 +46,7 @@ export const Library = () => {
   } 
 
   return (
-    <section className="py-5">
-      {loading ? "load" : "not load"}
+    <section className="py-4">
       <div className='container'>
           {libraries.length > 0 && <SearchWithDropdown types={libraries_types} search={search} onChange={e => setSearch(e.target.value)} onFilter={onFilter} >
             <button ref={btnHideRef} data-bs-target="#create-library" data-bs-toggle="modal" className='btn btn-primary' style={{marginLeft: "10px", width: '46px',height: '46px',padding: '0px'}}>
