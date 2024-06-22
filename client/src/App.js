@@ -24,21 +24,20 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <Routes>
-        <Route index element={<Home></Home>} />
-        <Route path='articles' element={<Articles></Articles>} />
-        <Route path='articles/:id' element={<ArticleDetails />} />
-        
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/library' element={<Library />} />
-        <Route path='/library/:id' element={<LibraryDetails />} >
-          <Route index element={<Ressources/>}></Route>
-          <Route path="ressources" element={<Ressources/>}></Route>
-          <Route path="followers" element={<Followers/>}></Route>
-          <Route path="managment" element={<Managment/>}></Route>
-        </Route>
-        <Route path='*' element={<NotFound />} />
-      </Routes>
+        <Routes>
+          <Route index element={<Home></Home>} />
+          <Route path='articles' element={<Articles></Articles>} />
+          <Route path='articles/:id' element={<ArticleDetails />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/library' element={<Library />} />
+          <Route path='/library/:id' element={<LibraryDetails />} >
+            <Route index element={<Ressources/>}></Route>
+            <Route path="ressources" element={<Ressources/>}></Route>
+            <Route path="followers" element={<Followers/>}></Route>
+            <Route path="managment" element={<Managment/>}></Route>
+          </Route>
+          <Route path='*' element={<NotFound />} />
+        </Routes>
       <Footer/>
     </div>
   );

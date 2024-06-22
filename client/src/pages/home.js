@@ -3,12 +3,11 @@ import Row from "../components/elements/row"
 import Search from "../components/inputs/input-search"
 import ArticleComponent from "../components/blocks/article"
 
-import React, { useEffect, useState } from 'react'
-import SearchArticle from "../components/inputs/search-article"
+import React, { useContext, useState } from 'react'
 import EmptyItems from "../components/blocks/empty-items"
 
-import { useAuth0 } from "@auth0/auth0-react";
 import SearchWithDropdown from "../components/inputs/search-article"
+import { ThemeContext } from "../utils/ThemeContext"
 
 export const Home = () => {
 
@@ -20,8 +19,14 @@ export const Home = () => {
     setSelect(value)
   }
 
+  function ThemeSwither () {
+    const {toggleTheme} = useContext(ThemeContext)
+    return <button onClick={toggleTheme}>Change the theme</button>
+  }
+
   return (
     <section className="py-5">
+      <ThemeSwither />
       {articles.length > 0 ? <div className="container py-2">
           <SearchWithDropdown search={search} onChange={e => setSearch(e.target.value)} onFilter={onFilter} />
             <Row className="row">
