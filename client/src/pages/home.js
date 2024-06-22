@@ -17,14 +17,8 @@ export const Home = () => {
     setSelect(value)
   }
 
-  function ThemeSwither () {
-    const {toggleTheme} = useTheme()
-    return <button className="btn btn-primary btn-sm" onClick={toggleTheme}>Theme</button>
-  }
-
   return (
     <section className="py-5">
-      <ThemeSwither />
       {articles.length > 0 ? <div className="container py-2">
           <SearchWithDropdown search={search} onChange={e => setSearch(e.target.value)} onFilter={onFilter} />
             <Row className="row">
