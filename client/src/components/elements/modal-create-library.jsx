@@ -20,35 +20,23 @@ export default function CreateLibrary({onUpdateItems, onHideModal}) {
   const { isLoading, user } = useAuth0()
   const [userId, setUserId] = useState('')
 
-  // if (!isLoading) {
-    // setUserId(user);
-  // }
-
   const handleSubmit = (e) => {
     e.preventDefault()
-
-    // alert(form.userId)
-    // if (isAuthenticated) {
-      // alert(user.sub)
-      axios.post(`http://localhost:9000/libraries`, {...form, userId: user.sub})
-      .then((res) => {
-        setForm({
-          name: "",
-          type: ""
-        })
-        onUpdateItems(res.data)
-        setValidation(false)
-        onHideModal(true)
+    axios.post(`http://localhost:9000/libraries`, {...form, userId: user?.sub})
+    .then((res) => {
+      setForm({
+        name: "",
+        type: ""
       })
-      .catch((err) => {
-        console.log(err);
-        setValidation(true)
-        onHideModal(false)
-      })
-    // } else {
-    //   // console.log('.good');
-    //   alert("null")
-    // }    
+      onUpdateItems(res.data)
+      setValidation(false)
+      onHideModal(true)
+    })
+    .catch((err) => {
+      console.log(err);
+      setValidation(true)
+      onHideModal(false)
+    })
   }
 
   return (

@@ -7,7 +7,6 @@ export default function SearchWithDropdown ({search, children=null, types, onCha
                 <div class="col-md-8 d-none d-md-block"></div>
                 <div class="col-md-4 mb-2">
                     <div class="border rounded d-flex p-1">
-                        {/* <Search className="border-0 shadow-none form-control" value={search} border={false} shadow={false} onChange={e => setSearch(e.target.value)} />  */}
                         <Search className="border-0 shadow-none form-control" value={search} border={false} shadow={false} onChange={onChange} /> 
                         <div class="dropdown d-flex">
                             <button class="btn btn-primary d-flex justify-content-center align-items-center" aria-expanded="false" data-bs-toggle="dropdown" type="button" style={{width: '46px',height: '46px',padding: '0px'}}>

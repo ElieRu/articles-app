@@ -3,6 +3,9 @@ import Row from "../components/elements/row"
 import React, { useState } from 'react'
 import EmptyItems from "../components/blocks/empty-items"
 import SearchWithDropdown from "../components/inputs/search-article"
+import { useUser } from "../utils/userContext"
+
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const Home = () => {
   const [articles, setArticles] = useState([])
@@ -12,8 +15,13 @@ export const Home = () => {
     setSelect(value)
   }
 
+  // const {user} = useUser()
+  const {isLoading, user} = useAuth0()
+
   return (
     <section className="py-5">
+      {/* {user ==true ? "loading..." : user.name} */}
+      {isLoading ? 'Loading...' : user.name}
       {articles.length > 0 ? <div className="container py-2">
           <SearchWithDropdown search={search} onChange={e => setSearch(e.target.value)} onFilter={onFilter} />
             <Row className="row">
