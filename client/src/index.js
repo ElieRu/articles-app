@@ -19,11 +19,9 @@ root.render(
   >
     <React.StrictMode>
       <BrowserRouter>
-        <UserContextProvider>
-          {/* <ThemeContextProvider> */}
-            <App />
-          {/* </ThemeContextProvider> */}
-        </UserContextProvider>
+        <ThemeContextProvider>
+          <App />
+        </ThemeContextProvider>
       </BrowserRouter>
     </React.StrictMode>
   </Auth0Provider>
