@@ -3,17 +3,15 @@ import { createContext, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 
-const bien = () => {
+export const GetUser = () => {
     // const {isLoading, isAuthenticated, user} = useAuth0();
-    return "bien"
+    return 'user'
 }
 
-// let g = Bien()
-
-export const UserContext = createContext(bien())
-export function UserContextProvider ({v, children}) {
-    // const UserContext = createContext(bien())
-    return <UserContext.Provider>
-        {children}
-    </UserContext.Provider>
-}
+// export const UserContext = createContext(bien())
+// export function UserContextProvider ({v, children}) {
+//     // const UserContext = createContext(bien())
+//     return <UserContext.Provider>
+//         {children}
+//     </UserContext.Provider>
+// }

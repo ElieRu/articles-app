@@ -1,16 +1,11 @@
 import Paginatiom from "../components/elements/pagination"
 import Row from "../components/elements/row"
-
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import EmptyItems from "../components/blocks/empty-items"
-
 import SearchWithDropdown from "../components/inputs/search-article"
-import { ThemeContext, useTheme } from "../utils/ThemeContext"
 
 export const Home = () => {
-
   const [articles, setArticles] = useState([])
-
   const [search, setSearch] = useState('')
   const [select, setSelect] = useState('')
   const onFilter = (value) => {
