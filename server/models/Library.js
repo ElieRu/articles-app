@@ -18,8 +18,14 @@ const librarySchema = new mongoose.Schema({
         }
     },
     logo: {
-        type: Date,
-        required: false
+        type: String,
+        required: false,
+        default: "assets/img/library.jpg"
+    },
+    background: {
+        type: String,
+        required: false,
+        default: "assets/img/default-background-img.jpeg"
     },
     description: {
         type: String,

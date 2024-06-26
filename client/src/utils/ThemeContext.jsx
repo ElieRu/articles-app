@@ -22,9 +22,7 @@ export function ThemeContextProvider ({children}) {
         setTheme(theme === 'light' ? 'dark' : 'light')
     }
 
-    return <>
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    return <ThemeContext.Provider value={{ theme, toggleTheme }}>
             {children}
         </ThemeContext.Provider>
-    </>
 }

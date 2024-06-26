@@ -4,6 +4,7 @@ import Selection from "../inputs/selection";
 import Form from "./form";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateLibrary({onUpdateItems, onHideModal}) {
   
@@ -19,36 +20,26 @@ export default function CreateLibrary({onUpdateItems, onHideModal}) {
   const [validation, setValidation] = useState(false)
   const { isLoading, user } = useAuth0()
   const [userId, setUserId] = useState('')
-
-  // if (!isLoading) {
-    // setUserId(user);
-  // }
+  const goTo = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
-    // alert(form.userId)
-    // if (isAuthenticated) {
-      // alert(user.sub)
-      axios.post(`http://localhost:9000/libraries`, {...form, userId: user.sub})
-      .then((res) => {
-        setForm({
-          name: "",
-          type: ""
-        })
-        onUpdateItems(res.data)
-        setValidation(false)
-        onHideModal(true)
+    axios.post(`http://localhost:9000/libraries`, {...form, userId: user?.sub})
+    .then((res) => {
+      setForm({
+        name: "",
+        type: ""
       })
-      .catch((err) => {
-        console.log(err);
-        setValidation(true)
-        onHideModal(false)
-      })
-    // } else {
-    //   // console.log('.good');
-    //   alert("null")
-    // }    
+      onUpdateItems(res.data)
+      setValidation(false)
+      onHideModal(true)
+      goTo(res.data._id)
+    })
+    .catch((err) => {
+      console.log(err);
+      setValidation(true)
+      onHideModal(false)
+    })
   }
 
   return (

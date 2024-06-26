@@ -1,18 +1,27 @@
 
 const Library = require("../models/Library")
 
-async function addAttrs (req, res, next) {
-    // console.log(req.body)
+function get_hash_uri() {
+    const length = 50
+    const hash_str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; // Character set
+    let result = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * hash_str.length);
+      result += hash_str[randomIndex];
+    }
+    return result;
+  }
+
+async function hash_uri (req, res, next) {
     const formLibrary = {
         ...req.body,
-        src_logo: "put-it",
-        description: "Your description"
+        uri: get_hash_uri()
     }
     req.body = formLibrary;
-    console.log(req.body);
     next();
 }
 
 module.exports = {
-    addAttrs
+    hash_uri
 };
+

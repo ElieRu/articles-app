@@ -1,16 +1,16 @@
 import Form from "./form";
 import Input from "../inputs/input";
+import { useAuth0 } from "@auth0/auth0-react";
 
-export default function UserFormUpdate ({isLoading, user}) {
+export default function UserFormUpdate () {
+    const { user, isLoading} = useAuth0();
     
     return <div className="d-flex flex-column">
                 <div className="d-flex justify-content-center">
                     <div class="d-flex justify-content-center border align-items-center" style={{position: 'relative', borderRadius: '100%', width: '130px',height: '130px',marginTop: '20px',marginBottom: '20px'}}>
-                        {!isLoading && <img class="rounded-circle border-0 shadow" style={{width: '130px',height: '130px'}} src={user.picture} />}
-                        {/* src="assets/img/profile.png" */}
-                        {isLoading && <div style={{position: 'absolute', top: '43%'}}>
-                        <span class="spinner-border spinner-border-sm" role="status"></span>
-                        </div> }
+                        {isLoading ? <div style={{position: 'absolute', top: '43%'}}>
+                            <span class="spinner-border spinner-border-sm" role="status"></span>
+                        </div> : <img class="rounded-circle border-0 shadow" style={{width: '130px',height: '130px'}} src={user?.picture} /> }
                     </div>
                 </div>
                 <div>
