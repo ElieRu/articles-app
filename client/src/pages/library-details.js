@@ -1,16 +1,16 @@
 import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
 
 export const LibraryDetails = () => {
   return (<section className="py-5">
             <div className="container">
-              <div>
+              <nav>
                 <ul>
-                  <li><Link to={'ressources'}>Ressources</Link></li>
-                  <li><Link to={'followers'} href='#'>Followers</Link></li>
-                  <li><Link to={'managment'} href='#'>Managment</Link></li>
+                  <li className="nav-link"><NavLink className="nav-link" to={'ressources'}>Ressources</NavLink></li>
+                  <li className="nav-link"><NavLink className="nav-link" to={'followers'}>Followers</NavLink></li>
+                  <li className="nav-link"><NavLink className="nav-link" to={'managment'}>Managment</NavLink></li>
                 </ul>
-              </div>
+              </nav>
               <Outlet/>
             </div>
           </section>

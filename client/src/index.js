@@ -5,7 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { ThemeContextProvider } from './utils/ThemeContext';
-import { UserContextProvider } from './utils/userContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

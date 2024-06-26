@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import LoginButton from "../auth/LoginButton";
 import LogoutButton from "../auth/LogoutButton";
-
-export default function DropdownUserInfos ({isAuthenticated, user, type}) {
+import { useAuth0 } from "@auth0/auth0-react";
+export default function DropdownUserInfos () {
+  const {isAuthenticated, user, type} = useAuth0()
+  
     return <div class={type}>
     <a
       class="link-body-emphasis d-flex align-items-center text-decoration-none"

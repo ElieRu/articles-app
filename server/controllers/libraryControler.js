@@ -3,9 +3,10 @@ const Library = require("../models/Library")
 
 module.exports = {
     get: async (req, res, next) => {
-        // console.log(req.query)
+        const get_user_libraries = req.query
         try {
-            let libraries = await Library.find(req.query);
+            let libraries = await Library.find(
+                get_user_libraries ? get_user_libraries : {});
             res.status(200).send(libraries);
         } catch (err) {
             console.log(err);
@@ -23,13 +24,16 @@ module.exports = {
         }
     },
     create: async (req, res, next) => {
-        const librarySaved = new Library(req.body)
+        const library = new Library(req.body)
         // console.log(req.body);
         try {
-            const tmpSaved = await librarySaved.save()
-            res.status(200).send( await Library.find({
+            const tmpSaved = await library.save()
+            
+            const library_reated = await Library.find({
                 userId: req.body.userId
-            }) )
+            })
+            const library_id = library_reated.slice(-1)[0]._id
+            res.status(200).send(await Library.findById({ _id: library_id }))
         } catch (e) {
             res.status(400).send(true)
         }

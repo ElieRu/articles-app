@@ -4,6 +4,7 @@ import Selection from "../inputs/selection";
 import Form from "./form";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateLibrary({onUpdateItems, onHideModal}) {
   
@@ -19,6 +20,7 @@ export default function CreateLibrary({onUpdateItems, onHideModal}) {
   const [validation, setValidation] = useState(false)
   const { isLoading, user } = useAuth0()
   const [userId, setUserId] = useState('')
+  const goTo = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -31,6 +33,7 @@ export default function CreateLibrary({onUpdateItems, onHideModal}) {
       onUpdateItems(res.data)
       setValidation(false)
       onHideModal(true)
+      goTo(res.data._id)
     })
     .catch((err) => {
       console.log(err);
