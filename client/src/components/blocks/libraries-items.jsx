@@ -11,7 +11,7 @@ export default function LibrariesItems({btnFollow, library}) {
             <div className="row gy-2 flex-column">
                 <div className="col">
                     <div className="row">
-                        <div className="col">
+                        <div className="col-8">
                             <div className="d-flex align-items-center">
                                 <Link to={library._id} style={{marginRight: '10px'}}>
                                 <img src={library.logo} className="rounded-circle border-0" width="50px" height="50px" /></Link>
@@ -21,7 +21,7 @@ export default function LibrariesItems({btnFollow, library}) {
                                 </div>
                             </div>
                         </div>
-                        {btnFollow && <div className="col d-flex justify-content-end">
+                        {btnFollow && <div className="col-4 d-flex justify-content-end">
                             <button onClick={newFollow} className="btn btn-primary link-body-emphasis border-white-subtle border-light-subtle bg-transparent btn-sm" type="button">Follow</button>
                         </div>}
                     </div>

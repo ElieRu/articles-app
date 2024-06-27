@@ -15,7 +15,7 @@ import { LibraryDetails } from "./pages/library-details.js";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Ressources } from "./pages/ressources.js";
 import { Followers } from "./pages/followers.js";
-import { Managment } from "./pages/managment.js";
+import { AboutLibrary, Managment } from "./pages/about-library.js";
 import { About } from "./pages/about.js";
 import { Libraries } from "./pages/libraries.js";
 
@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <section className="py-4">
+      <section className="py-5">
         <div className="container">
           <Routes>
             <Route index element={<Home></Home>} />
@@ -38,7 +38,7 @@ function App() {
               <Route index element={<Ressources />}></Route>
               <Route path="ressources" element={<Ressources />}></Route>
               <Route path="followers" element={<Followers />}></Route>
-              <Route path="managment" element={<Managment />}></Route>
+              <Route path="about" element={<AboutLibrary />}></Route>
             </Route>
             <Route path="/libraries" element={<Libraries />} />
             <Route path="/about" element={<About />} />

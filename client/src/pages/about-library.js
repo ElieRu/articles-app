@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Managment = () => {
+export const AboutLibrary = () => {
   return (
     <div>
       Managment
