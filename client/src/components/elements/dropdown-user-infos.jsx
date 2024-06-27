@@ -2,9 +2,21 @@ import { Link } from "react-router-dom";
 import LoginButton from "../auth/LoginButton";
 import LogoutButton from "../auth/LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 export default function DropdownUserInfos () {
   const {isAuthenticated, user, type} = useAuth0()
-  
+  // Must delete the duplication of this function...
+  const [libraries, setLibraries] = useState([])
+  useEffect(() => {
+      axios.get(`http://localhost:9000/libraries`, {
+        params: {userId: user?.sub}
+      }).then((res) => {
+        setLibraries(res.data)
+      })
+  }, []);
+
     return <div class={type}>
     <a
       class="link-body-emphasis d-flex align-items-center text-decoration-none"
@@ -28,7 +40,9 @@ export default function DropdownUserInfos () {
       data-popper-placement="top-start"
     >
       {isAuthenticated && <Link to={'profile'} class="dropdown-item" >Profile</Link> }
-      {isAuthenticated && <Link to={'library'} class="dropdown-item" >Library</Link> }
+      {isAuthenticated & libraries.length > 0 ? <Link to={'library'} class="dropdown-item" >
+        {libraries.length > 1 ? 'Libraries' : 'Library'}
+      </Link> : ''}
       {isAuthenticated && <Link to={'articles'} class="dropdown-item" >Articles</Link> }
       {isAuthenticated && <Link to={'settings'} class="dropdown-item" >Settings</Link> }
       {isAuthenticated && <div class="dropdown-divider"></div> }

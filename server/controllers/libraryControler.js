@@ -6,7 +6,7 @@ module.exports = {
         const get_user_libraries = req.query
         try {
             let libraries = await Library.find(
-                get_user_libraries ? get_user_libraries : {});
+                get_user_libraries ? get_user_libraries : {}).limit(15);
             res.status(200).send(libraries);
         } catch (err) {
             console.log(err);
@@ -14,13 +14,12 @@ module.exports = {
     },
     getId: async (req, res, next) => {
         const id = req.params.id
-        
         try {
-            const article = await Article.findById( { _id: id} );
-            if (article) res.send( article );
-            if (!article) res.send({ getData: false });
+            const library = await Library.findById( { _id: id} );
+            if (library) res.send( library );
+            if (!library) res.send({ getData: false });
         } catch (error) {
-            res.send({ getData: false });
+            res.send({ getData: false }); 
         }
     },
     create: async (req, res, next) => {

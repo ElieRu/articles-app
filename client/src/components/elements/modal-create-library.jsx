@@ -18,9 +18,10 @@ export default function CreateLibrary({onUpdateItems, onHideModal}) {
 
   const [form, setForm] = useState({name: "", type: ""})
   const [validation, setValidation] = useState(false)
-  const { isLoading, user } = useAuth0()
+  const { user } = useAuth0()
   const [userId, setUserId] = useState('')
   const goTo = useNavigate()
+  const {loginWithRedirect} = useAuth0()
 
   const handleSubmit = (e) => {
     e.preventDefault()

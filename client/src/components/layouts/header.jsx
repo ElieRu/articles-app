@@ -2,15 +2,13 @@
 import { NavLink, Link, useNavigate, redirect } from "react-router-dom";
 import { useAuth0 } from '@auth0/auth0-react';
 import Menu from "../elements/menu";
-import { useState } from "react";
 import DropdownUserInfos from "../elements/dropdown-user-infos";
 import { useTheme } from "../../utils/ThemeContext";
 
-export default function Header() {
-    
-    const [myUser, setMyUser] = useState({});
-    const { isAuthenticated, user } = useAuth0();
 
+export default function Header() {
+    const { isAuthenticated, user } = useAuth0();
+    
     function ThemeSwither () {
         const {toggleTheme} = useTheme()
         return <button className="btn btn-primary btn-sm" onClick={toggleTheme}>TM</button>
@@ -34,7 +32,7 @@ export default function Header() {
                         </ul>
                         <DropdownUserInfos isAuthenticated={isAuthenticated} user={user} type={!isAuthenticated ? 'dropstart' : 'dropdown'} />
                     </div>
-                    
+
                     {/* <div> */}
                         {/* <ThemeSwither /> */}
                         <button className="btn btn-primary bg-transparent border d-md-none rounded-0 border-0" type="button" data-bs-target="#offcanvas-menu" data-bs-toggle="offcanvas" style={{padding: '7px'}}>
