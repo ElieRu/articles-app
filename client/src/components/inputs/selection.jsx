@@ -1,5 +1,6 @@
 export default function Selection({label = 'label', items, id = null, value=null, onChange}) {
-
+    // The form of the items values...
+    // const items = [ {}, {} ]
     return <div className="mb-2">
             <label className="form-label" htmlFor={id} style={{fontSize: '13px', marginLeft: '10px'}} >{label}</label>
             <select className="form-select form-select-sm" id={id} value={value} style={{height: '44px'}} onChange={onChange}>
