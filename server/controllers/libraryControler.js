@@ -22,6 +22,10 @@ module.exports = {
             res.send({ getData: false }); 
         }
     },
+    getRole: async (req, res, next) => {
+        // const {userId} = req.params.userId
+        console.log("userId")
+    },
     create: async (req, res, next) => {
         const library = new Library(req.body)
         // console.log(req.body);

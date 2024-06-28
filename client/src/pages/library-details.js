@@ -11,6 +11,10 @@ export const LibraryDetails = () => {
     })
   }, []);
 
+  useEffect(() => {
+    axios.get(`http://localhost:9000/libraries/role`).then((res) => {})
+  }, []);
+
   return (<>
             {/* {library.name} */}
             <ProfileLibrary library={library} />
