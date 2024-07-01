@@ -7,18 +7,25 @@ import { RessourcesItems } from '../components/elements/ressources-items'
 import { DeleteRessource } from '../components/elements/modal-delete-ressource'
 import { useAuth0 } from '@auth0/auth0-react'
 
-export const Ressources = () => {
+export const Ressources = ({tex}) => {
   const {id} = useParams()
   const {user} = useAuth0()
-  const [ressources, setRessources] = useState([])
+  // const [ressources, setRessources] = useState([])
   const [role, setRole] = useState(false)
   
+  useEffect(() => {
+    axios.get(`http://localhost:9000/role`, {
+      params: { userId: user?.sub, libraryId: id }
+    }).then((res) => {
+      setRole(res.data)
+    })
+  }, [role]); 
 
   // useEffect(() => {
   //   axios.get(`http://localhost:9000/ressources/${id}`).then((res) => {
   //     // setRessources(res.data)
   //   })
-  // }, [ressources]);
+  // }, []);
   return (
     <div>
       <EmptyItems src={'../assets/img/empty.png'}>
