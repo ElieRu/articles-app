@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Form from './form'
 import Input from '../inputs/input'
 import Selection from '../inputs/selection'
@@ -17,83 +17,89 @@ export const ModalRessource = () => {
     ]
 
     const language = [
-        {label: 'Select the book\'s langauge', value: ''},
+        {label: 'Select the book\'s language', value: ''},
         {label: 'Egnlish', value: 'Egnlish'},
         {label: 'French', value: 'French'},
         {label: 'Other', value: 'Other'},
     ]
 
     const [form, setForm] = useState({
-        title: "",
-        author: "",
-        volume: "",
-        gender: "",
-        editor: "",
-        language: "",
-        resume: "",
+        title: "Meeet John Black",
+        author: "Elie",
+        volume: 90,
+        gender: "Fiction",
+        editor: "John Black",
+        language: "English",
+        resume: ".........",
         book_cover: "",
-        url: "",
+        url: "https://gemini.google.com/app/5d5368d12e02be38",
         libraryId: id,
         userId: user?.sub
     })
 
+    const [ressources, setRessources] = useState([])
+
+    // const closeBtn = useRef(null)
     const handleSubmit = (e) => {
         e.preventDefault ()
-        // axios.post(`http://localhost/ressources`, form).then((res) => {
-            
-        // })
+        axios.post(`http://localhost:9000/ressources`, form).then((res) => {
+            setRessources(res.data)
+            // closeBtn.current.click()
+        })
     }
+
   return (
     <>
-    <div id="modal-ressource" className="modal fade" role="dialog" tabindex="-1">
-        <div className="modal-dialog modal-lg modal-fullscreen-xl-down" role="document">
-            <div className="modal-content">
-                <div className="modal-header border-0">
-                    <h4 className="modal-title">Create New Ressource</h4><button className="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
-                </div>
-                <div className="modal-body">
-                    <Form method="post" onSubmit={handleSubmit}>
-                        <div className="row">
-                            <div className="col-12 col-md-6">
-                                <div className='my-2'>
-                                    <Input label='Title' id={'title'} placeholder='Title' value={form.title} onChange={e => setForm({...form, title: e.target.value})} />
+        <div id="modal-ressource" className="modal fade" role="dialog" tabindex="-1">
+            <div className="modal-dialog modal-lg modal-fullscreen-xl-down" role="document">
+                <div className="modal-content">
+                    <div className="modal-header border-0">
+                        <h4 className="modal-title">Create New Ressource</h4>
+                        <button className="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div className="modal-body">
+                        <Form method="post" onSubmit={handleSubmit}>                        
+                            <div className="row">
+                                <div className="col-12 col-md-6">
+                                    <div className='my-2'>
+                                        <Input label='Title' id={'title'} placeholder='Title' value={form.title} onChange={e => setForm({...form, title: e.target.value})} />
+                                    </div>
+                                    <div className='my-2'>
+                                        <Input label='Author' id={'author'} placeholder='Author' value={form.author} onChange={e => setForm({...form, author: e.target.value})} />
+                                    </div>
+                                    <div className='my-2'>
+                                        <Input label='Volume' id={'volume'} placeholder='Volume' type='number' min={1} value={form.volume} onChange={e => setForm({...form, volume: e.target.value})} />
+                                    </div>
+                                    <div className='my-2'>
+                                        <Selection id={'gender'} label='Gender' items={gender} value={form.gender} onChange={e => setForm({...form, gender: e.target.value})} />
+                                    </div>
                                 </div>
-                                <div className='my-2'>
-                                    <Input label='Author' id={'author'} placeholder='Author' value={form.author} onChange={e => setForm({...form, author: e.target.value})} />
-                                </div>
-                                <div className='my-2'>
-                                    <Input label='Volume' id={'volume'} placeholder='Volume' type='number' min={1} value={form.volume} onChange={e => setForm({...form, volume: e.target.value})} />
-                                </div>
-                                <div className='my-2'>
-                                    <Selection id={'gender'} label='Gender' items={gender} value={form.gender} onChange={e => setForm({...form, gender: e.target.value})} />
+                                <div className="col-12 col-md-6">
+                                    <div className='my-2'>
+                                        <Input label='Editor' id={'editor'} placeholder='Editor (Optional)' value={form.editor} onChange={e => setForm({...form, editor: e.target.value})} />
+                                    </div>
+                                    <div className='my-2'>
+                                        <Selection label='Language' id={'language'} items={language} value={form.language} onChange={e => setForm({...form, language: e.target.value})} />
+                                    </div>
+                                    <div className='my-2'>
+                                        <Input label='Book Cover' id={'cover_book'} placeholder='Book Cover (Optional)' type='file' value={form.book_cover} onChange={e => setForm({...form, book_cover: e.target.value})} />
+                                    </div>
+                                    <div className='my-2'>
+                                        <Input label='Url' id={'url'} placeholder='Url (Optional)' type='url' value={form.url} onChange={e => setForm({...form, url: e.target.value})} />
+                                    </div>
                                 </div>
                             </div>
-                            <div className="col-12 col-md-6">
-                                <div className='my-2'>
-                                    <Input label='Editor' id={'editor'} placeholder='Editor (Optional)' value={form.editor} onChange={e => setForm({...form, editor: e.target.value})} />
-                                </div>
-                                <div className='my-2'>
-                                    <Selection label='Language' id={'language'} items={language} value={form.language} onChange={e => setForm({...form, language: e.target.value})} />
-                                </div>
-                                <div className='my-2'>
-                                    <Input label='Book Cover' id={'cover_book'} placeholder='Book Cover (Optional)' type='file' value={form.book_cover} onChange={e => setForm({...form, book_cover: e.target.value})} />
-                                </div>
-                                <div className='my-2'>
-                                    <Input label='Url' id={'url'} placeholder='Url (Optional)' type='url' value={form.url} onChange={e => setForm({...form, url: e.target.value})} />
-                                </div>
+                            <div>
+                                <Textarrea id='resume' label='Resume' placeholder='Resume' value={form.resume} onChange={e => setForm({...form, resume: e.target.value})}></Textarrea>
                             </div>
-                        </div>
-                        <div>
-                            <Textarrea id='resume' label='Resume' placeholder='Resume' value={form.resume} onChange={e => setForm({...form, resume: e.target.value})}></Textarrea>
-                        </div>
-                        <div className="d-flex justify-content-center">
-                            <button className="btn btn-primary" type="submit">Submit</button>
-                        </div>
-                    </Form>
+                            <div className="d-flex justify-content-center">
+                                <button className="btn btn-primary" type="submit">Submit</button>
+                            </div>
+                        </Form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </>
   )
 }

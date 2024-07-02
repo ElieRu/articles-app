@@ -19,13 +19,14 @@ export const Ressources = ({tex}) => {
     }).then((res) => {
       setRole(res.data)
     })
-  }, [role]); 
+  }, []); 
 
   // useEffect(() => {
   //   axios.get(`http://localhost:9000/ressources/${id}`).then((res) => {
-  //     // setRessources(res.data)
+  //     setRessources(res.data)
   //   })
   // }, []);
+
   return (
     <div>
       <EmptyItems src={'../assets/img/empty.png'}>
