@@ -6,14 +6,14 @@ const ressourceSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        min: 4,
-        max: 50
+        minLength: 4,
+        maxLength: 50
     },
     author: {
         type: String,
         required: true,
-        min: 4,
-        max: 50
+        minLength: 4,
+        maxLength: 50
     },
     published: {},
     volume: {
@@ -23,13 +23,13 @@ const ressourceSchema = new mongoose.Schema({
     gender: {
         type: String,
         required: true,
-        enum: ["Fiction", "Non-Fiction", "Romance", "Mystèry"]
+        enum: ["Fiction", "Non-Fiction", "Romance", "Mystery"]
     },
     editor: {
         type: String,
         required: false,
-        min: 4,
-        max: 50
+        // minLength: 4,
+        // maxLength: 50
     },
     language: {
         type: String,
@@ -39,8 +39,8 @@ const ressourceSchema = new mongoose.Schema({
     resume: {
         type: String,
         required: true,
-        min: 4,
-        max: 200
+        minLength: 4,
+        maxLength: 200
     },
     book_cover: {
         type: String,
@@ -49,8 +49,8 @@ const ressourceSchema = new mongoose.Schema({
     url: {
         type: String,
         required: false,
-        min: 4,
-        max: 200
+        // minLength: 4,
+        // maxLength: 200
     },
     userId: {
         type: String,
