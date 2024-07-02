@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 
-export const ModalRessource = () => {
+export const ModalRessource = ({onUpdate}) => {
     const {id} = useParams()
     const {user} = useAuth0()
     const gender = [
@@ -20,7 +20,7 @@ export const ModalRessource = () => {
 
     const language = [
         {label: 'Select the book\'s language', value: ''},
-        {label: 'Egnlish', value: 'Egnlish'},
+        {label: 'English', value: 'English'},
         {label: 'French', value: 'French'},
         {label: 'Other', value: 'Other'},
     ]
@@ -46,11 +46,22 @@ export const ModalRessource = () => {
     const handleSubmit = (e) => {
         e.preventDefault ()
         axios.post(`http://localhost:9000/ressources`, form).then((res) => {
-            setRessources(res.data)
             if (res.data.errors) {
-                console.log(res.data.errors)
+                // console.log(res.data.errors)
                 setErrMsg(res.data.errors)
             } else {
+                setForm({
+                    title: "",
+                    author: "",
+                    volume: "",
+                    gender: "",
+                    editor: "",
+                    language: "",
+                    resume: "",
+                    book_cover: "",
+                    url: ""
+                })
+                onUpdate(res.data)
                 closeBtn.current.click()
             }
         }).catch((err) => {

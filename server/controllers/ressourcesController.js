@@ -16,9 +16,10 @@ module.exports = {
         const ressource = new Ressource(req.body)
         try {
             const save_essource = await ressource.save()
-            res.status(200).send(await Ressource.find({}))
-            // .where("userId", userId)
+            res.status(200).send(await Ressource.find({})
             .where("libraryId", libraryId)
+            .where("userId", userId)
+        )
         } catch (error) {
             res.send(error)
         }

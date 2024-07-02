@@ -7,7 +7,7 @@ import { RessourcesItems } from '../components/elements/ressources-items'
 import { DeleteRessource } from '../components/elements/modal-delete-ressource'
 import { useAuth0 } from '@auth0/auth0-react'
 
-export const Ressources = ({tex}) => {
+export const Ressources = () => {
   const {id} = useParams()
   const {user} = useAuth0()
   const [ressources, setRessources] = useState([])
@@ -34,7 +34,7 @@ export const Ressources = ({tex}) => {
       {ressources.length == 0 && <EmptyItems src={'../assets/img/empty.png'}>
         {role && <button className="btn btn-primary my-3 bg-transparent text-body border border-color-dark-subtle" type="button" data-bs-target="#modal-ressource" data-bs-toggle="modal">Create new ressource</button>}
       </EmptyItems>}
-      <ModalRessource />
+      <ModalRessource onUpdate={(ressources) => setRessources(ressources)} />
       {ressources.length > 0 && <RessourcesItems role={role} ressources={ressources} />}
       {/* <DeleteRessource /> */}
     </div>
