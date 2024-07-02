@@ -23,8 +23,15 @@ module.exports = {
         }
     },
     getRole: async (req, res, next) => {
-        // const {userId} = req.params.userId
-        console.log("userId")
+        const {userId, libraryId} = req.query
+        let getUserId = ""
+
+        const library = await Library.find({})
+            .where("_id", libraryId)
+            .where("userId", userId)
+        
+        if (library.length === 1) res.status(200).send(true)
+        if (library.length === 0) res.status(200).send(false)
     },
     create: async (req, res, next) => {
         const library = new Library(req.body)

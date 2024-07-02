@@ -36,6 +36,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var articleRoutes = require('./routes/articleRoutes');
 var libraryRoutes = require('./routes/libraryRoutes');
+var ressourcesRoutes = require('./routes/ressourcesRoutes');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -54,6 +55,7 @@ connection_database().catch(err => console.log(err));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/articles', articleRoutes);
+app.use('/', ressourcesRoutes);
 app.use('/', libraryRoutes);
 
 // catch 404 and forward to error handler
