@@ -26,9 +26,10 @@ module.exports = {
     },
     delete: async (req, res, next) => {
         const {id} = req.params
+        const {libraryId} = req.query
         try {
             const ressourceDeleted = await Ressource.deleteOne({ _id: id})
-            // res.status(200).send(await Ressource.find({}))
+            res.status(200).send(await Ressource.find({}).where('libraryId', libraryId))
         } catch (error) {
             
         }

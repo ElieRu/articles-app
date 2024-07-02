@@ -36,8 +36,7 @@ export const Ressources = () => {
       </EmptyItems>}
       <ModalRessource onUpdate={(ressources) => setRessources(ressources)} />
       {/* {ressources.length > 0 && <DeleteRessource/>} */}
-      {ressources.length > 0 && <RessourcesItems role={role} ressources={ressources} />}
-      {/* <DeleteRessource /> */}
+      {ressources.length > 0 && <RessourcesItems role={role} ressources={ressources} onDelete={(ressources) => setRessources(ressources)} />}      {/* <DeleteRessource /> */}
     </div>
   )
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import SearchWithDropdown from '../inputs/search-article'
 import { DeleteRessource } from './modal-delete-ressource'
 
-export const RessourcesItems = ({role, ressources}) => {
+export const RessourcesItems = ({role, ressources, onDelete}) => {
     const ressources_genders = [
         {label: "Select Gender", value: ""},
         {label: "Fiction", value: "Fiction"},
@@ -62,7 +62,7 @@ export const RessourcesItems = ({role, ressources}) => {
                 </div>
             </div>)}
         </div>
-        <DeleteRessource ressourceId={ressourceId} />
+        <DeleteRessource onDelete={onDelete} ressourceId={ressourceId} />
     </>
     )
 }
