@@ -13,6 +13,11 @@ export const RessourcesItems = ({role, ressources}) => {
     const [search, setSearch] = useState('')
     const onFilter = () => {}
 
+    const [ressourceId, setRressourceId] = useState('')
+    const handleDelete = (id) => {
+        setRressourceId(id)
+    }
+
     return (<>
         <SearchWithDropdown types={ressources_genders} search={search} onChange={e => setSearch(e.target.value)} onFilter={onFilter} >
             {role && <button data-bs-target="#modal-ressource" data-bs-toggle="modal" className='btn btn-primary' style={{marginLeft: "10px", width: '46px',height: '46px',padding: '0px'}}>
@@ -30,7 +35,7 @@ export const RessourcesItems = ({role, ressources}) => {
                                 <div className="col-8">
                                     <div className="d-flex align-items-center">
                                         <div>
-                                            <div style={{marginBottom: '-2px'}}><span style={{fontSize: '14px',fontWeight: 'bold'}}>{ressource.title}</span></div>
+                                            <div style={{marginBottom: '-2px'}} className='text-capitalize'><span style={{fontSize: '14px',fontWeight: 'bold'}}>{ressource.title}</span></div>
                                             <div><span style={{fontSize: '11px'}}>{ressource.gender}</span></div>
                                         </div>
                                     </div>
@@ -44,7 +49,7 @@ export const RessourcesItems = ({role, ressources}) => {
                                         </button>
                                         <div className="dropdown-menu" style={{overflow: 'hidden'}}>
                                             <a className="dropdown-item" data-bs-target="#modal-ressource" data-bs-toggle="modal" style={{cursor: 'pointer'}}>Update</a>
-                                            <a className="dropdown-item" data-bs-target="#modal-delete-ressource" data-bs-toggle="modal" style={{cursor: 'pointer'}}>Delete</a>
+                                            <a className="dropdown-item" onClick={() => handleDelete(ressource._id)} data-bs-target="#modal-delete-ressource" data-bs-toggle="modal" style={{cursor: 'pointer'}}>Delete</a>
                                         </div>
                                     </div>}
                                 </div>
@@ -57,6 +62,7 @@ export const RessourcesItems = ({role, ressources}) => {
                 </div>
             </div>)}
         </div>
+        <DeleteRessource ressourceId={ressourceId} />
     </>
     )
 }

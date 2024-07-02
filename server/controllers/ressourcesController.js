@@ -23,5 +23,14 @@ module.exports = {
         } catch (error) {
             res.send(error)
         }
+    },
+    delete: async (req, res, next) => {
+        const {id} = req.params
+        try {
+            const ressourceDeleted = await Ressource.deleteOne({ _id: id})
+            // res.status(200).send(await Ressource.find({}))
+        } catch (error) {
+            
+        }
     }
 }

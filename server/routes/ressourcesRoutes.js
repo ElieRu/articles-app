@@ -9,7 +9,7 @@ router.get('/ressources', ressourcesController.get);
 // router.get('/:id', ressourcesController.getId);
 router.post('/ressources', ressourcesController.create);
 // router.put('/:id', ressourcesController.update);
-// router.delete('/:id', ressourcesController.delete);
+router.delete('/ressources/:id', ressourcesController.delete);
 
 
 module.exports = router;

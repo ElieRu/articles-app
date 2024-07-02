@@ -35,6 +35,7 @@ export const Ressources = () => {
         {role && <button className="btn btn-primary my-3 bg-transparent text-body border border-color-dark-subtle" type="button" data-bs-target="#modal-ressource" data-bs-toggle="modal">Create new ressource</button>}
       </EmptyItems>}
       <ModalRessource onUpdate={(ressources) => setRessources(ressources)} />
+      {/* {ressources.length > 0 && <DeleteRessource/>} */}
       {ressources.length > 0 && <RessourcesItems role={role} ressources={ressources} />}
       {/* <DeleteRessource /> */}
     </div>
