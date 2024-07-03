@@ -63,7 +63,6 @@ export const ModalRessource = ({switchBtn, formUpdate, updateItems}) => {
         e.preventDefault ()
         axios.post(`http://localhost:9000/ressources`, form).then((res) => {
             if (res.data.errors) {
-                // console.log(res.data.errors)
                 setErrMsg(res.data.errors)
             } else {
                 setForm({
@@ -88,9 +87,14 @@ export const ModalRessource = ({switchBtn, formUpdate, updateItems}) => {
     const handleUpdate = (e) => {
         e.preventDefault()
         axios.put(`http://localhost:9000/ressources/${formUpdate._id}`, form).then((res) => {
-            updateItems(res.data)
-            closeBtn.current.click()
-        })
+            if (res.data.errors) {
+                setErrMsg(res.data.errors)
+            } else {
+                updateItems(res.data)
+                closeBtn.current.click()
+            }
+            // Must valid the form...
+        }).catch((err) => {})
     }
 
     const handleClose = () => {

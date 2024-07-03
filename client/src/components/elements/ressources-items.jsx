@@ -56,7 +56,8 @@ export const RessourcesItems = ({role, ressources, onDelete, onUpdate}) => {
                             </div>
                         </div>
                         <div className="col border-0">
-                            <div className="border rounded border-0" style={{height: '200px',overflow: 'hidden'}}><img src="default-cover.webp" width="100%" height="100%" data-bs-target="#modal-overview-ressource" data-bs-toggle="modal" style={{cursor: 'pointer'}} /></div>
+                            <div className="border rounded border-0" style={{height: '200px',overflow: 'hidden'}}>
+                                <img src="../../assets/img/default-cover.webp" width="100%" height="100%" data-bs-target="#modal-overview-ressource" data-bs-toggle="modal" style={{cursor: 'pointer'}} /></div>
                         </div>
                     </div>
                 </div>

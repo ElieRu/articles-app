@@ -15,7 +15,7 @@ export default function DropdownUserInfos () {
       }).then((res) => {
         setLibraries(res.data)
       })
-  }, []);
+  }, [user]);
 
     return <div class={type}>
     <a
