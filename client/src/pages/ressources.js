@@ -19,7 +19,7 @@ export const Ressources = () => {
     }).then((res) => {
       setRole(res.data)
     })
-  }, []); 
+  }, [user, id]); 
 
   useEffect(() => {
     axios.get(`http://localhost:9000/ressources`, {
@@ -27,16 +27,29 @@ export const Ressources = () => {
     }).then((res) => {
       setRessources(res.data)
     })
-  }, []);
+  }, [id]);
+
+  const [formUpdate, setFormUpdate] = useState({})
+  const [switchBtn, setSwitchBtn] = useState(false)
+
+  const onUpdate = (get_switch, ressource) => {
+    setSwitchBtn(get_switch)
+    setFormUpdate(ressource)
+  }
+
+  const [selection, setSelection] = useState('')
+  const onFilter = (value) => {
+    setSelection(value)
+  }
 
   return (
     <div>
       {ressources.length == 0 && <EmptyItems src={'../assets/img/empty.png'}>
         {role && <button className="btn btn-primary my-3 bg-transparent text-body border border-color-dark-subtle" type="button" data-bs-target="#modal-ressource" data-bs-toggle="modal">Create new ressource</button>}
       </EmptyItems>}
-      <ModalRessource onUpdate={(ressources) => setRessources(ressources)} />
+      <ModalRessource switchBtn={switchBtn} formUpdate={formUpdate} updateItems={(ressources) => setRessources(ressources)} />
       {/* {ressources.length > 0 && <DeleteRessource/>} */}
-      {ressources.length > 0 && <RessourcesItems role={role} ressources={ressources} onDelete={(ressources) => setRessources(ressources)} />}      {/* <DeleteRessource /> */}
+      {ressources.length > 0 && <RessourcesItems selection={selection} onFilter={onFilter} onUpdate={onUpdate} role={role} ressources={ressources} onDelete={(ressources) => setRessources(ressources)} />}      {/* <DeleteRessource /> */}
     </div>
   )
 }
