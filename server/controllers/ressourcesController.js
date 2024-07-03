@@ -24,6 +24,9 @@ module.exports = {
             res.send(error)
         }
     },
+    update: async(req, res, next) => {
+        console.log(req.body)
+    },
     delete: async (req, res, next) => {
         const {id} = req.params
         const {libraryId} = req.query

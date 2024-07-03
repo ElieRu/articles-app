@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import SearchWithDropdown from '../inputs/search-article'
 import { DeleteRessource } from './modal-delete-ressource'
 
-export const RessourcesItems = ({role, ressources, onDelete}) => {
+export const RessourcesItems = ({role, ressources, onDelete, onUpdate}) => {
     const ressources_genders = [
         {label: "Select Gender", value: ""},
         {label: "Fiction", value: "Fiction"},
@@ -48,7 +48,7 @@ export const RessourcesItems = ({role, ressources, onDelete}) => {
                                         </svg>
                                         </button>
                                         <div className="dropdown-menu" style={{overflow: 'hidden'}}>
-                                            <a className="dropdown-item" data-bs-target="#modal-ressource" data-bs-toggle="modal" style={{cursor: 'pointer'}}>Update</a>
+                                            <a className="dropdown-item" onClick={() => onUpdate(true, ressource)} data-bs-target="#modal-ressource" data-bs-toggle="modal" style={{cursor: 'pointer'}}>Update</a>
                                             <a className="dropdown-item" onClick={() => handleDelete(ressource._id)} data-bs-target="#modal-delete-ressource" data-bs-toggle="modal" style={{cursor: 'pointer'}}>Delete</a>
                                         </div>
                                     </div>}

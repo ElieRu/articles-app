@@ -29,14 +29,20 @@ export const Ressources = () => {
     })
   }, []);
 
+  const [formUpdate, setFormUpdate] = useState({})
+  const [tex, setTex] = useState(false)
+  const odUpdate = (tex, ressource) => {
+    setTex(tex)
+    setFormUpdate(ressource)
+  }
   return (
     <div>
       {ressources.length == 0 && <EmptyItems src={'../assets/img/empty.png'}>
         {role && <button className="btn btn-primary my-3 bg-transparent text-body border border-color-dark-subtle" type="button" data-bs-target="#modal-ressource" data-bs-toggle="modal">Create new ressource</button>}
       </EmptyItems>}
-      <ModalRessource onUpdate={(ressources) => setRessources(ressources)} />
+      <ModalRessource callUpdate={tex} formUpdate={formUpdate} updateItems={(ressources) => setRessources(ressources)} />
       {/* {ressources.length > 0 && <DeleteRessource/>} */}
-      {ressources.length > 0 && <RessourcesItems role={role} ressources={ressources} onDelete={(ressources) => setRessources(ressources)} />}      {/* <DeleteRessource /> */}
+      {ressources.length > 0 && <RessourcesItems onUpdate={odUpdate} role={role} ressources={ressources} onDelete={(ressources) => setRessources(ressources)} />}      {/* <DeleteRessource /> */}
     </div>
   )
 }

@@ -8,7 +8,7 @@ const ressourcesController = require("../controllers/ressourcesController")
 router.get('/ressources', ressourcesController.get);
 // router.get('/:id', ressourcesController.getId);
 router.post('/ressources', ressourcesController.create);
-// router.put('/:id', ressourcesController.update);
+router.put('/ressources/:id', ressourcesController.update);
 router.delete('/ressources/:id', ressourcesController.delete);
 
 
