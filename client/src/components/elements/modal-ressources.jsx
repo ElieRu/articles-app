@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 
-export const ModalRessource = ({callUpdate, formUpdate, updateItems}) => {
+export const ModalRessource = ({switchBtn, formUpdate, updateItems}) => {
     const {id} = useParams()
     const {user} = useAuth0()
     const gender = [
@@ -38,22 +38,25 @@ export const ModalRessource = ({callUpdate, formUpdate, updateItems}) => {
         libraryId: id,
         userId: user?.sub
     })
-    const [swithBtn, setSwithBtn] = useState(callUpdate)
-
-    // useEffect(() => {
-    //     if (formUpdate._id) {
-    //         setForm(formUpdate)
-    //         setSwithBtn(true)
-    //     } 
-    // }, [formUpdate, swithBtn]);    
-
-    // alert(callUpdate)
+    // const [tex, setTex] = useState(switchBtn)
     useEffect(() => {
-        if (formUpdate._id) {
+        if (switchBtn) {
             setForm(formUpdate)
-            setSwithBtn(true)
-        } 
-    }, [callUpdate, formUpdate, swithBtn]);
+            // setSwithBtn(true)
+        } else {
+            setForm({
+                title: "",
+                author: "",
+                volume: "",
+                gender: "",
+                editor: "",
+                language: "",
+                resume: "",
+                book_cover: "",
+                url: "",
+            })
+        }
+    }, [switchBtn, formUpdate]);
 
     const [errMsg, setErrMsg] = useState({})
     const closeBtn = useRef(null)
@@ -103,7 +106,6 @@ export const ModalRessource = ({callUpdate, formUpdate, updateItems}) => {
             book_cover: "",
             url: "",
         })
-        setSwithBtn(false)
     }
 
     return (
@@ -116,7 +118,7 @@ export const ModalRessource = ({callUpdate, formUpdate, updateItems}) => {
                             <button ref={closeBtn} onClick={handleClose} className="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                         </div>
                         <div className="modal-body">
-                            <Form method="post" onSubmit={swithBtn ? handleUpdate : handleSubmit}>
+                            <Form method="post" onSubmit={switchBtn ? handleUpdate : handleSubmit}>
                                 <div className="row">
                                     <div className="col-12 col-md-6">
                                         <div className='my-2'>
@@ -158,9 +160,9 @@ export const ModalRessource = ({callUpdate, formUpdate, updateItems}) => {
                                 <div>
                                     <Textarrea id='resume' label='Resume' placeholder='Resume' value={form.resume} onChange={e => setForm({...form, resume: e.target.value})}></Textarrea>
                                     {errMsg.resume && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.resume.message}</span></div>}
-                                    </div>
+                                </div>
                                 <div className="d-flex justify-content-center">
-                                    <button className="btn btn-primary" type="submit">{!swithBtn ? 'Submit' : 'Update'}</button>
+                                    <button className="btn btn-primary" type="submit">{!switchBtn ? 'Submit' : 'Update'}</button>
                                 </div>
                             </Form>
                         </div>
