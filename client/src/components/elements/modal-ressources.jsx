@@ -38,11 +38,10 @@ export const ModalRessource = ({switchBtn, formUpdate, updateItems}) => {
         libraryId: id,
         userId: user?.sub
     })
-    // const [tex, setTex] = useState(switchBtn)
+    
     useEffect(() => {
         if (switchBtn) {
             setForm(formUpdate)
-            // setSwithBtn(true)
         } else {
             setForm({
                 title: "",
@@ -89,7 +88,8 @@ export const ModalRessource = ({switchBtn, formUpdate, updateItems}) => {
     const handleUpdate = (e) => {
         e.preventDefault()
         axios.put(`http://localhost:9000/ressources/${formUpdate._id}`, form).then((res) => {
-
+            updateItems(res.data)
+            closeBtn.current.click()
         })
     }
 

@@ -30,19 +30,18 @@ export const Ressources = () => {
   }, []);
 
   const [formUpdate, setFormUpdate] = useState({})
-  const [bin, setBin] = useState(false)
+  const [switchBtn, setSwitchBtn] = useState(false)
 
-  const onUpdate = (tex, ressource) => {
-    setBin(tex)
+  const onUpdate = (get_switch, ressource) => {
+    setSwitchBtn(get_switch)
     setFormUpdate(ressource)
-    // alert(tex)
   }
   return (
     <div>
       {ressources.length == 0 && <EmptyItems src={'../assets/img/empty.png'}>
         {role && <button className="btn btn-primary my-3 bg-transparent text-body border border-color-dark-subtle" type="button" data-bs-target="#modal-ressource" data-bs-toggle="modal">Create new ressource</button>}
       </EmptyItems>}
-      <ModalRessource switchBtn={bin} formUpdate={formUpdate} updateItems={(ressources) => setRessources(ressources)} />
+      <ModalRessource switchBtn={switchBtn} formUpdate={formUpdate} updateItems={(ressources) => setRessources(ressources)} />
       {/* {ressources.length > 0 && <DeleteRessource/>} */}
       {ressources.length > 0 && <RessourcesItems onUpdate={onUpdate} role={role} ressources={ressources} onDelete={(ressources) => setRessources(ressources)} />}      {/* <DeleteRessource /> */}
     </div>

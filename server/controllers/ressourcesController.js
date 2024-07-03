@@ -25,7 +25,22 @@ module.exports = {
         }
     },
     update: async(req, res, next) => {
-        console.log(req.body)
+        const form_ressource = req.body
+        const ressourceId = req.params.id
+        const libraryId = form_ressource.libraryId
+        try {
+            const ressource = await Ressource.updateOne({
+                _id: ressourceId
+            }, form_ressource)
+            
+            res.status(200).send(await Ressource.find({})
+            .where("libraryId", libraryId)
+        )
+        } catch (error) {
+            
+        }
+        
+        
     },
     delete: async (req, res, next) => {
         const {id} = req.params
