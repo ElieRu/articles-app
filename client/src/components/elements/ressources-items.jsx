@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import SearchWithDropdown from '../inputs/search-article'
 import { DeleteRessource } from './modal-delete-ressource'
 
-export const RessourcesItems = ({role, ressources, onDelete, onUpdate}) => {
+export const RessourcesItems = ({role, ressources, onFilter, selection, onDelete, onUpdate}) => {
     const ressources_genders = [
         {label: "Select Gender", value: ""},
         {label: "Fiction", value: "Fiction"},
@@ -11,8 +11,7 @@ export const RessourcesItems = ({role, ressources, onDelete, onUpdate}) => {
         {label: "Mystery", value: "Mystery"},
     ]
     const [search, setSearch] = useState('')
-    const onFilter = () => {}
-
+    
     const [ressourceId, setRressourceId] = useState('')
     const handleDelete = (id) => {
         setRressourceId(id)
@@ -27,7 +26,15 @@ export const RessourcesItems = ({role, ressources, onDelete, onUpdate}) => {
             </button>}
         </SearchWithDropdown>
         <div className="row gy-3">
-            {ressources.map((ressource, i) => <div className="col-6 col-md-4 col-lg-3" key={i}>
+            {ressources.filter((ressource) => {
+                return search.toLowerCase() === ''
+                    ? ressource
+                    : ressource.title.toLowerCase().includes(search);
+            }).filter((ressource) => {
+                return selection.toLowerCase() === ''
+                    ? ressource
+                    : ressource.gender.toLowerCase().includes(selection)
+            }).map((ressource, i) => <div className="col-6 col-md-4 col-lg-3" key={i}>
                 <div className="border rounded p-2">
                     <div className="row gy-2 flex-column">
                         <div className="col">

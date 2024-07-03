@@ -19,7 +19,7 @@ export const Ressources = () => {
     }).then((res) => {
       setRole(res.data)
     })
-  }, []); 
+  }, [user, id]); 
 
   useEffect(() => {
     axios.get(`http://localhost:9000/ressources`, {
@@ -27,7 +27,7 @@ export const Ressources = () => {
     }).then((res) => {
       setRessources(res.data)
     })
-  }, []);
+  }, [id]);
 
   const [formUpdate, setFormUpdate] = useState({})
   const [switchBtn, setSwitchBtn] = useState(false)
@@ -36,6 +36,12 @@ export const Ressources = () => {
     setSwitchBtn(get_switch)
     setFormUpdate(ressource)
   }
+
+  const [selection, setSelection] = useState('')
+  const onFilter = (value) => {
+    setSelection(value)
+  }
+
   return (
     <div>
       {ressources.length == 0 && <EmptyItems src={'../assets/img/empty.png'}>
@@ -43,7 +49,7 @@ export const Ressources = () => {
       </EmptyItems>}
       <ModalRessource switchBtn={switchBtn} formUpdate={formUpdate} updateItems={(ressources) => setRessources(ressources)} />
       {/* {ressources.length > 0 && <DeleteRessource/>} */}
-      {ressources.length > 0 && <RessourcesItems onUpdate={onUpdate} role={role} ressources={ressources} onDelete={(ressources) => setRessources(ressources)} />}      {/* <DeleteRessource /> */}
+      {ressources.length > 0 && <RessourcesItems selection={selection} onFilter={onFilter} onUpdate={onUpdate} role={role} ressources={ressources} onDelete={(ressources) => setRessources(ressources)} />}      {/* <DeleteRessource /> */}
     </div>
   )
 }
