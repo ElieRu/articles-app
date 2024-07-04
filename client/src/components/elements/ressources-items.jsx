@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import SearchWithDropdown from '../inputs/search-article'
 import { DeleteRessource } from './modal-delete-ressource'
+import { Link } from 'react-router-dom'
 
 export const RessourcesItems = ({role, ressources, onFilter, selection, onDelete, onUpdate}) => {
     const ressources_genders = [
@@ -64,7 +65,11 @@ export const RessourcesItems = ({role, ressources, onFilter, selection, onDelete
                         </div>
                         <div className="col border-0">
                             <div className="border rounded border-0" style={{height: '200px',overflow: 'hidden'}}>
-                                <img src="../../assets/img/default-cover.webp" width="100%" height="100%" data-bs-target="#modal-overview-ressource" data-bs-toggle="modal" style={{cursor: 'pointer'}} /></div>
+                                <Link to="ressource-description">
+                                    <img src="../../assets/img/default-cover.webp" width="100%" height="100%" style={{cursor: 'pointer'}} />
+                                </Link>
+                            </div>
+                                {/* data-bs-target="#modal-overview-ressource" data-bs-toggle="modal" */}
                         </div>
                     </div>
                 </div>
