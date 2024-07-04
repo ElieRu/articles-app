@@ -65,7 +65,7 @@ export const RessourcesItems = ({role, ressources, onFilter, selection, onDelete
                         </div>
                         <div className="col border-0">
                             <div className="border rounded border-0" style={{height: '200px',overflow: 'hidden'}}>
-                                <Link to="ressource-description">
+                                <Link to="ressource">
                                     <img src="../../assets/img/default-cover.webp" width="100%" height="100%" style={{cursor: 'pointer'}} />
                                 </Link>
                             </div>

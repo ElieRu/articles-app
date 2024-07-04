@@ -35,11 +35,11 @@ export default function Header() {
 
                     {/* <div> */}
                         {/* <ThemeSwither /> */}
-                        <button className="btn btn-primary bg-transparent border d-md-none rounded-0 border-0" type="button" data-bs-target="#offcanvas-menu" data-bs-toggle="offcanvas" style={{padding: '7px'}}>
+                        {/* <button className="btn btn-primary bg-transparent border d-md-none rounded-0 border-0" type="button" data-bs-target="#offcanvas-menu" data-bs-toggle="offcanvas" style={{padding: '7px'}}>
                             <svg className="fs-1 text-body-secondary" xmlns="http://www.w3.org/2000/svg" viewBox="-32 0 512 512" width="1em" height="1em" fill="currentColor">
                                 <path d="M448 64c0-17.7-14.3-32-32-32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32zm0 256c0-17.7-14.3-32-32-32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32-14.3 32-32zM0 192c0 17.7 14.3 32 32 32H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H32c-17.7 0-32 14.3-32 32zM448 448c0-17.7-14.3-32-32-32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32-14.3 32-32z"></path>
                             </svg>
-                        </button>
+                        </button> */}
                     {/* </div> */}
                 </div>
                 <Menu isAuthenticated={isAuthenticated} user={user} />
