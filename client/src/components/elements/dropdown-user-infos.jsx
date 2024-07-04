@@ -40,9 +40,7 @@ export default function DropdownUserInfos () {
       data-popper-placement="top-start"
     >
       {isAuthenticated && <Link to={'profile'} class="dropdown-item" >Profile</Link> }
-      {isAuthenticated & libraries.length > 0 ? <Link to={'library'} class="dropdown-item" >
-        {libraries.length > 1 ? 'Libraries' : 'Library'}
-      </Link> : ''}
+      {isAuthenticated && <Link to={'library'} class="dropdown-item" >My libraries</Link>}
       {isAuthenticated && <Link to={'articles'} class="dropdown-item" >Articles</Link> }
       {isAuthenticated && <Link to={'settings'} class="dropdown-item" >Settings</Link> }
       {isAuthenticated && <div class="dropdown-divider"></div> }

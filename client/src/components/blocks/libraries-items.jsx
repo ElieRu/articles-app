@@ -13,7 +13,7 @@ export default function LibrariesItems({btnFollow, library}) {
                     <div className="row">
                         <div className="col-8">
                             <div className="d-flex align-items-center">
-                                <Link to={library._id} style={{marginRight: '10px'}}>
+                                <Link to={`/libraries/${library._id}`} style={{marginRight: '10px'}}>
                                 <img src={library.logo} className="rounded-circle border-0" width="50px" height="50px" /></Link>
                                 <div>
                                     <div style={{marginBottom: '-10px'}}><span className="text-capitalize" style={{fontSize: '14px', fontWeight: 'bold'}}>{library.name.length > 12 ? `${library.name.slice(0,12)}...` : library.name}</span></div>

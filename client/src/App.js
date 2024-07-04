@@ -18,6 +18,7 @@ import { Followers } from "./pages/followers.js";
 import { AboutLibrary, Managment } from "./pages/about-library.js";
 import { About } from "./pages/about.js";
 import { Libraries } from "./pages/libraries.js";
+import { Ressource } from "./pages/ressource-description.js";
 
 function App() {
   const { isAuthenticate } = useAuth0();
@@ -32,15 +33,16 @@ function App() {
             <Route index element={<Home></Home>} />
             <Route path="articles" element={<Articles></Articles>} />
             <Route path="articles/:id" element={<ArticleDetails />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/library" element={<Library />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="library" element={<Library />} />
+            <Route path="libraries" element={<Libraries />} />
             <Route path="libraries/:id" element={<LibraryDetails />}>
               <Route index element={<Ressources />}></Route>
               <Route path="ressources" element={<Ressources />}></Route>
               <Route path="followers" element={<Followers />}></Route>
               <Route path="about" element={<AboutLibrary />}></Route>
             </Route>
-            <Route path="/libraries" element={<Libraries />} />
+            <Route path="libraries/:id/ressource" element={<Ressource/>}></Route>
             <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
