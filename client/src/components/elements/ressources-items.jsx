@@ -39,7 +39,7 @@ export const RessourcesItems = ({role, ressources, onFilter, selection, onDelete
                 <div className="border rounded p-2">
                     <div className="row gy-2 flex-column">
                         <div className="col">
-                            <div className="row align-items-center">
+                            <div className="row">
                                 <div className="col-8">
                                     <div className="d-flex align-items-center">
                                         <div>

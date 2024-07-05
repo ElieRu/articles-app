@@ -76,18 +76,18 @@ export const ModalRessource = ({switchBtn, formUpdate, updateItems}) => {
         })
     }
 
-    const handleUpdate = (e) => {
-        e.preventDefault()
-        axios.put(`http://localhost:9000/ressources/${formUpdate._id}`, form).then((res) => {
-            if (res.data.errors) {
-                setErrMsg(res.data.errors)
-            } else {
-                updateItems(res.data)
-                closeBtn.current.click()
-            }
-            // Must valid the form...
-        }).catch((err) => {})
-    }
+    // const handleUpdate = (e) => {
+    //     e.preventDefault()
+    //     axios.put(`http://localhost:9000/ressources/${formUpdate._id}`, form).then((res) => {
+    //         if (res.data.errors) {
+    //             setErrMsg(res.data.errors)
+    //         } else {
+    //             updateItems(res.data)
+    //             closeBtn.current.click()
+    //         }
+    //         // Must valid the form...
+    //     }).catch((err) => {})
+    // }
 
     const handleClose = () => {
         setErrMsg('')
@@ -110,7 +110,7 @@ export const ModalRessource = ({switchBtn, formUpdate, updateItems}) => {
                             <button ref={closeBtn} onClick={handleClose} className="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                         </div>
                         <div className="modal-body">
-                            <Form method="post" onSubmit={switchBtn ? handleUpdate : handleSubmit}>
+                            <Form method="post" onSubmit={handleSubmit}>
                                 <div className='my-2'>
                                     <Input label='Title' id={'title'} placeholder='Title' value={form.title} onChange={e => setForm({...form, title: e.target.value})} />
                                     {errMsg.title && <div style={{marginTop: '0px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.title.message}</span></div>}
@@ -131,8 +131,8 @@ export const ModalRessource = ({switchBtn, formUpdate, updateItems}) => {
                                     <Textarrea id='resume' label='Resume' placeholder='Resume' value={form.resume} onChange={e => setForm({...form, resume: e.target.value})}></Textarrea>
                                     {errMsg.resume && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.resume.message}</span></div>}
                                 </div>                                
-                                <div className="d-flex justify-content-center">
-                                    <button className="btn btn-primary" type="submit">{!switchBtn ? 'Submit' : 'Update'}</button>
+                                <div className="d-flex justify-content-start">
+                                    <button className="btn btn-primary" type="submit">New Reassource</button>
                                 </div>
                             </Form>
                         </div>

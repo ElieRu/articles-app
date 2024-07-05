@@ -5,11 +5,15 @@ import axios from 'axios';
 import LibrariesItems from '../components/blocks/libraries-items';
 import SearchWithDropdown from '../components/inputs/search-article';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Loading from '../components/blocks/loading';
 
-export const Libraries = () => {
+const Libraries = () => {
   const { user } = useAuth0()
   const [libraries, setLibraries] = useState([]);
+  const [load, setLoad] = useState(true)
+  const [showEmpt, setShowEmpt] = useState(false)
+  const [showItems, setShowItems] = useState(false)
   
   useEffect(() => {
     axios.get(`http://localhost:9000/libraries`, {
@@ -18,9 +22,17 @@ export const Libraries = () => {
         userId: user?.sub}
       })
     .then((res) => {
-      setLibraries(res.data)
+      setTimeout(() => {
+        setLoad(false)
+        if (res.data.length > 0) {
+          setShowItems(true)
+          setLibraries(res.data)
+        } else {
+          setShowEmpt(true)
+        }
+      }, 1000);      
     })
-  }, [user]);
+  }, [user, setLibraries]);
     
   let libraries_types = [
     {label: "Get all", value: ''},
@@ -35,8 +47,7 @@ export const Libraries = () => {
   const onFilter = (value) => {
     setSelect(value)
   }
-
-  const [load, setLoad] = useState('none')
+  
   const nextPage = (e) => {
     e.preventDefault();
     setLoad('inline-block')
@@ -45,37 +56,37 @@ export const Libraries = () => {
     }, 1000);
   }
 
-  return (<div>
-          {libraries.length > 0 ? 
-          <div>
+  let goBack = useNavigate(-1)
+
+  return (<>
+          {load && <Loading/>}          
+          {showItems && <div>
             <SearchWithDropdown types={libraries_types} search={search} onChange={e => setSearch(e.target.value)} onFilter={onFilter} >
             </SearchWithDropdown> 
-          <div class="row gy-3">
-            {libraries.filter((library) => {
-              return search.toLowerCase() === ''
-                ? library
-                : library.name.toLowerCase().includes(search);
-              }).filter((library) => {
-                return select === ''
+            <div class="row gy-3">
+              {libraries.filter((library) => {
+                return search.toLowerCase() === ''
                   ? library
-                  : library.type.includes(select);
-              }).map((library, i) => (<LibrariesItems btnFollow={true} library={library} key={i}></LibrariesItems>))}
-              
-              {libraries.length && <div className='mt-5 d-flex justify-content-center'>
-                <Link onClick={nextPage} className='btn btn-primary'>
-                  <span>See more</span>
-                  <span style={{marginLeft: '10px', display: load}} class="spinner-border spinner-border-sm" role="status"></span>
-                </Link>
-              </div>}
-
+                  : library.name.toLowerCase().includes(search);
+                }).filter((library) => {
+                  return select === ''
+                    ? library
+                    : library.type.includes(select);
+                }).map((library, i) => (<LibrariesItems btnFollow={true} library={library} key={i}></LibrariesItems>))}
+                {/* {libraries.length && <div className='mt-5 d-flex justify-content-center'>
+                  <Link onClick={nextPage} className='btn btn-primary'>
+                    <span>See more</span>
+                    <span style={{marginLeft: '10px', display: load}} class="spinner-border spinner-border-sm" role="status"></span>
+                  </Link>
+                </div>} */}
             </div>
-          </div> : 
-          <div>
-            <EmptyItems src={'assets/img/empty-library.png'} msg={"You don't have any library."} >
-              {/* <button disabled={isLoading ? true : false} ref={btnHideRef} data-bs-target="#create-library" data-bs-toggle="modal" style={{marginTop: '20px'}} className='btn btn-primary btn-sm'>Create a new library</button> */}
-            </EmptyItems>
-          </div>}
-          {/* <CreateLibrary onUpdateItems={ (libraries) => setLibraries(libraries) } /> */}
-      </div>
+          </div> }
+          {showEmpt && <EmptyItems src={'assets/img/empty-library.png'} msg={"You don't have any library."} >
+            {/* <button disabled={isLoading ? true : false} ref={btnHideRef} data-bs-target="#create-library" data-bs-toggle="modal" style={{marginTop: '20px'}} className='btn btn-primary btn-sm'>Create a new library</button> */}
+          </EmptyItems>}
+      </>
     )
   }
+
+
+  export default Libraries

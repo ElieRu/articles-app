@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { ModalRessource } from '../components/elements/modal-ressources'
 import EmptyItems from '../components/blocks/empty-items'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { RessourcesItems } from '../components/elements/ressources-items'
 import { DeleteRessource } from '../components/elements/modal-delete-ressource'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -42,10 +42,13 @@ export const Ressources = () => {
     setSelection(value)
   }
 
+  let goBack = useNavigate(-1)
+
   return (
     <div>
       {ressources.length == 0 && <EmptyItems src={'../assets/img/empty.png'}>
         {role && <button className="btn btn-primary my-3 bg-transparent text-body border border-color-dark-subtle" type="button" data-bs-target="#modal-ressource" data-bs-toggle="modal">Create new ressource</button>}
+        {!role && <button style={{marginTop: '10px'}} className='btn btn-body border' onClick={() => goBack(-1)}>Return back</button>}
       </EmptyItems>}
       <ModalRessource switchBtn={switchBtn} formUpdate={formUpdate} updateItems={(ressources) => setRessources(ressources)} />
       {/* {ressources.length > 0 && <DeleteRessource/>} */}

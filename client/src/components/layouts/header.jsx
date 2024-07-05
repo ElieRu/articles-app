@@ -28,6 +28,8 @@ export default function Header() {
                         <ul className="navbar-nav mx-auto">
                             <li className="nav-item"><NavLink className="nav-link" to="/">Home</NavLink></li>
                             <li className="nav-item"><NavLink className="nav-link" to="/libraries">Libraries</NavLink></li>
+                            <li className="nav-item"><NavLink className="nav-link" to="/Notices">Notices</NavLink></li>
+                            <li className="nav-item"><NavLink className="nav-link" to="/Profile">Profile</NavLink></li>
                             <li className="nav-item"><NavLink className="nav-link" to="/about">About</NavLink></li>
                         </ul>
                         <DropdownUserInfos isAuthenticated={isAuthenticated} user={user} type={!isAuthenticated ? 'dropstart' : 'dropdown'} />

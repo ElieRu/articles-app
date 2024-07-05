@@ -26,7 +26,7 @@ export const DeleteRessource = ({ressourceId, onDelete}) => {
                         <p>Would you like to delete this resource ?</p>
                     </div>
                     <div className="modal-footer border-0">
-                        <button className="btn btn-body btn-sm bg-body border-1" type="button" data-bs-dismiss="modal">Close</button>
+                        <button className="btn btn-body btn-sm border" type="button" data-bs-dismiss="modal">Close</button>
                         <button onClick={handleDelete} className="btn btn-primary btn-sm" type="button">Delete</button>
                     </div>
                 </div>

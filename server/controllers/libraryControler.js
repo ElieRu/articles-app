@@ -3,13 +3,12 @@ const Library = require("../models/Library")
 
 module.exports = {
     get: async (req, res, next) => {
-        // const get_user_libraries = req.query
         const {all_libraries, userId} = req.query
         console.log(userId)
         try {
             let libraries = await Library.find(
                 all_libraries ? {'userId' : { $ne: userId }} : 
-                {'userId' : { $eq: userId }}).limit(15);
+                {'userId' : { $eq: userId }}).limit(12);
             res.status(200).send(libraries);
         } catch (err) {
             console.log(err);
