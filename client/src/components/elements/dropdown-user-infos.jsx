@@ -41,7 +41,7 @@ export default function DropdownUserInfos () {
     >
       {isAuthenticated && <Link to={'profile'} class="dropdown-item" >Profile</Link> }
       {isAuthenticated && <Link to={'library'} class="dropdown-item" >My libraries</Link>}
-      {isAuthenticated && <Link to={'articles'} class="dropdown-item" >Articles</Link> }
+      {isAuthenticated && <Link to={'articles'} class="dropdown-item" >My articles</Link> }
       {isAuthenticated && <Link to={'settings'} class="dropdown-item" >Settings</Link> }
       {isAuthenticated && <div class="dropdown-divider"></div> }
       {isAuthenticated ? <LogoutButton /> : <LoginButton />}

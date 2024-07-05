@@ -2,6 +2,7 @@ import "./assets/bootstrap/css/bootstrap.min.css";
 import "./assets/bootstrap/js/bootstrap.min.js";
 import "./assets/js/bold-and-bright.js";
 
+import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Home } from "./pages/home";
 import Header from "./components/layouts/header";
@@ -16,9 +17,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Ressources } from "./pages/ressources.js";
 import { Followers } from "./pages/followers.js";
 import { AboutLibrary, Managment } from "./pages/about-library.js";
-import { About } from "./pages/about.js";
-import { Libraries } from "./pages/libraries.js";
+// import { About } from "./pages/about.js";
+// import { Libraries } from "./pages/libraries.js";
 import { Ressource } from "./pages/ressource-description.js";
+const About = React.lazy(() => import('./pages/about'))
+const Libraries = React.lazy(() => import('./pages/libraries'))
 
 function App() {
   const { isAuthenticate } = useAuth0();
@@ -35,7 +38,13 @@ function App() {
             <Route path="articles/:id" element={<ArticleDetails />} />
             <Route path="profile" element={<Profile />} />
             <Route path="library" element={<Library />} />
-            <Route path="libraries" element={<Libraries />} />
+            
+            <Route path="libraries" element={
+              <React.Suspense fallback="Loading...">
+                <Libraries />
+              </React.Suspense>
+            } />
+
             <Route path="libraries/:id" element={<LibraryDetails />}>
               <Route index element={<Ressources />}></Route>
               <Route path="ressources" element={<Ressources />}></Route>
@@ -43,7 +52,11 @@ function App() {
               <Route path="about" element={<AboutLibrary />}></Route>
             </Route>
             <Route path="libraries/:id/ressource" element={<Ressource/>}></Route>
-            <Route path="/about" element={<About />} />
+            <Route path="about" element={
+              <React.Suspense fallback="loading...">
+                <About />
+              </React.Suspense>
+            } />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
