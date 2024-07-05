@@ -3,7 +3,7 @@ import Form from '../components/elements/form'
 import Input from '../components/inputs/input'
 import Selection from '../components/inputs/selection'
 import Textarrea from '../components/inputs/textarea'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import axios from 'axios'
 
@@ -26,6 +26,8 @@ export const Ressource = () => {
   const {id} = useParams()
   const {user} = useAuth0()
   const [role, setRole] = useState(false)
+  const [query_values] = useSearchParams()
+//   alert(typeof query_values)
   
   useEffect(() => {
     axios.get(`http://localhost:9000/role`, {
@@ -36,68 +38,73 @@ export const Ressource = () => {
   }, [role, user, id]); 
 
   const [form, setForm] = useState({
-    title: "",
-    author: "",
-    gender: "",
-    language: "",
-    resume: "",
+    title: query_values.get('title'),
+    author: query_values.get('author'),
+    volume: query_values.get('volume'),
+    gender: query_values.get('gender'),
+    editor: query_values.get('editor'),
+    language: query_values.get('language'),
+    url: query_values.get('url'),
+    resume: query_values.get('resume'),
     libraryId: id,
     userId: user?.sub
   })
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    alert("cann me!")
+    alert(form.title)
   }
 
   return (
     <div>
-      <div className="row">
-          <div className="col-12 col-md-6">
-              <div className="border rounded border-0" style={{overflow: 'hidden',height: '400px'}}><img src="default-cover.webp" width="100%" height="100%" /></div>
+      <div className="row" style={{overflow: 'hidden'}}>
+          <div className="col-12 col-md-4">
+              <div className="border rounded border-0" style={{overflow: 'hidden',height: '400px'}}>
+                    <img src="../../assets/img/default-cover.webp" width="100%" height="100%" />
+                </div>
           </div>
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md-8">
               <div className="row">
                   <div className="col-12 col-sm-6">
                       <div className="mb-2">
                           <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Title</span></div>
-                          <div><span>Text</span></div>
+                          <div><span className=' text-capitalize'>{query_values.get('title')}</span></div>
                       </div>
                       <div className="mb-2">
                           <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Author</span></div>
-                          <div><span>Text</span></div>
+                          <div><span className='text-capitalize'>{query_values.get('author')}</span></div>
                       </div>
                       <div className="mb-2">
                           <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Published</span></div>
-                          <div><span>Text</span></div>
+                          <div><span>Not Defined</span></div>
                       </div>
                       <div className="mb-2">
                           <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Volume</span></div>
-                          <div><span>Text</span></div>
+                          <div><span>{query_values.get('volume')} {query_values.get('volume') > 1 ? 'pages' : 'pages'}</span></div>
                       </div>
                   </div>
                   <div className="col-12 col-sm-6">
                       <div className="mb-2">
                           <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Gender</span></div>
-                          <div><span>Text</span></div>
+                          <div><span>{query_values.get('gender')}</span></div>
                       </div>
                       <div className="mb-2">
-                          <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Editor</span></div>
-                          <div><span>Text</span></div>
+                          <div><span className="text-dark-emphasis text-capitalize" style={{fontSize: '12px'}}>Editor</span></div>
+                          <div><span className='text-capitalize'>{query_values.get('editor') ? query_values.get('editor') : 'not defined'}</span></div>
                       </div>
                       <div className="mb-2">
                           <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Language</span></div>
-                          <div><span>Text</span></div>
+                          <div><span>{query_values.get('language')}</span></div>
                       </div>
                       <div className="mb-2">
                           <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Url</span></div>
-                          <div><span>Text</span></div>
+                          <div><span className='text-lowercase'>{query_values.get('url') ? query_values.get('url') : 'Not Defined'}</span></div>
                       </div>
                   </div>
                   <div className="col-12">
                       <div className="mb-2">
                           <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Resume</span></div>
-                          <div><span>Text</span></div>
+                          <div><span className='text-capitalize'>{query_values.get('resume')}</span></div>
                       </div>
                   </div>
                   <div className="col">
@@ -111,6 +118,7 @@ export const Ressource = () => {
           </div>
       </div>
       {role && <Form method="post" onSubmit={handleUpdate}>
+        <div style={{marginTop: '30px', marginBottom: '30px'}}><h1>Update Ressource</h1></div>
         <div className="row">
             <div className="col-12 col-md-6">
                 <div className='my-2'>
@@ -153,8 +161,8 @@ export const Ressource = () => {
             <Textarrea id='resume' label='Resume' placeholder='Resume' value={form.resume} onChange={e => setForm({...form, resume: e.target.value})}></Textarrea>
             {/* {errMsg.resume && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.resume.message}</span></div>} */}
         </div>
-        <div className="d-flex justify-content-center">
-          <button className="btn btn-primary" type="submit">Update</button>
+        <div className="d-flex justify-content-start">
+          <button className="btn btn-primary" type="submit">Update Ressource</button>
         </div>
       </Form>}
     </div>
