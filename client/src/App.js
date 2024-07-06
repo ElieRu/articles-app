@@ -14,12 +14,12 @@ import { NotFound } from "./pages/404";
 import { Library } from "./pages/library.js";
 import { LibraryDetails } from "./pages/library-details.js";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Ressources } from "./pages/ressources.js";
+import { Resources } from "./pages/resources.js";
 import { Followers } from "./pages/followers.js";
 import { AboutLibrary, Managment } from "./pages/about-library.js";
 // import { About } from "./pages/about.js";
 // import { Libraries } from "./pages/libraries.js";
-import { Ressource } from "./pages/ressource-description.js";
+import { Resource } from "./pages/resource-description.js";
 const About = React.lazy(() => import('./pages/about'))
 const Libraries = React.lazy(() => import('./pages/libraries'))
 
@@ -37,7 +37,7 @@ function App() {
             <Route path="articles" element={<Articles></Articles>} />
             <Route path="articles/:id" element={<ArticleDetails />} />
             <Route path="profile" element={<Profile />} />
-            <Route path="library" element={<Library />} />
+            <Route path="my-libraries" element={<Library />} />
             
             <Route path="libraries" element={
               <React.Suspense fallback="Loading...">
@@ -46,12 +46,12 @@ function App() {
             } />
 
             <Route path="libraries/:id" element={<LibraryDetails />}>
-              <Route index element={<Ressources />}></Route>
-              <Route path="ressources" element={<Ressources />}></Route>
+              <Route index element={<Resources />}></Route>
+              <Route path="resources" element={<Resources />}></Route>
               <Route path="followers" element={<Followers />}></Route>
               <Route path="about" element={<AboutLibrary />}></Route>
             </Route>
-            <Route path="libraries/:id/ressource" element={<Ressource/>}></Route>
+            <Route path="libraries/:id/resource" element={<Resource/>}></Route>
             <Route path="about" element={
               <React.Suspense fallback="loading...">
                 <About />

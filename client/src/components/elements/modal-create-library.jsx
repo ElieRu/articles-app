@@ -6,7 +6,7 @@ import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 
-export default function CreateLibrary({onUpdateItems}) {
+export default function CreateLibrary({onUpdateItems, onHideModal}) {
   
   const items = [
       {label: "Library's Type", value: ''},
@@ -33,13 +33,13 @@ export default function CreateLibrary({onUpdateItems}) {
       })
       onUpdateItems(res.data)
       setValidation(false)
-      // onHideModal(true)
-      goTo(res.data._id)
+      onHideModal(true)
+      goTo(`/libraries/${res.data._id}`)
     })
     .catch((err) => {
       console.log(err);
       setValidation(true)
-      // onHideModal(false)
+      onHideModal(false)
     })
   }
 

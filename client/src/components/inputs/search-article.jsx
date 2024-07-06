@@ -15,7 +15,7 @@ export default function SearchWithDropdown ({search, children=null, types, onCha
                                 </svg>
                             </button>
                             <div>{children}</div>
-                            <div class="dropdown-menu">
+                            <div class="dropdown-menu" style={{overflow: 'hidden'}}>
                                 {types.map((type, i) => <button key={i} class="dropdown-item" onClick={() => onFilter(type.value)}>{type.label}</button>)}
                             </div>
                         </div>

@@ -1,22 +1,22 @@
 
-const Ressource = require("../models/Ressource")
+const Resource = require("../models/Resource")
 
 module.exports = {
     get: async (req, res, next) => {
         const {id} = req.query
         try {
-            const ressources = await Ressource.find({}).where('libraryId', id)
-            res.status(200).send(ressources)
+            const resources = await Resource.find({}).where('libraryId', id)
+            res.status(200).send(resources)
         } catch (error) {
             res.status(200).send(error)
         }
     },
     create: async (req, res, next) => {
         const {userId, libraryId} = req.body
-        const ressource = new Ressource(req.body)
+        const resource = new Resource(req.body)
         try {
-            const save_essource = await ressource.save()
-            res.status(200).send(await Ressource.find({})
+            const save_esource = await resource.save()
+            res.status(200).send(await Resource.find({})
             .where("libraryId", libraryId)
             .where("userId", userId)
         )
@@ -25,20 +25,20 @@ module.exports = {
         }
     },
     update: async(req, res, next) => {
-        const form_ressource = req.body
-        const ressourceId = req.params.id
-        const libraryId = form_ressource.libraryId
-        // const ress = new Ressource(req.body)
+        const form_resource = req.body
+        const resourceId = req.params.id
+        const libraryId = form_resource.libraryId
+        // const ress = new Resource(req.body)
         // console.log(ress)
         try {
-            const ressource = await Ressource.findOneAndUpdate({
-                _id: ressourceId
-            }, form_ressource, {
+            const resource = await Resource.findOneAndUpdate({
+                _id: resourceId
+            }, form_resource, {
                 new: true,
                 runValidators: true
             })
             
-            res.status(200).send(await Ressource.find({})
+            res.status(200).send(await Resource.find({})
             .where("libraryId", libraryId)
         )} catch (error) {
             res.status(200).send(error)
@@ -48,8 +48,8 @@ module.exports = {
         const {id} = req.params
         const {libraryId} = req.query
         try {
-            const ressourceDeleted = await Ressource.deleteOne({ _id: id})
-            res.status(200).send(await Ressource.find({}).where('libraryId', libraryId))
+            const resourceDeleted = await Resource.deleteOne({ _id: id})
+            res.status(200).send(await Resource.find({}).where('libraryId', libraryId))
         } catch (error) {
             
         }

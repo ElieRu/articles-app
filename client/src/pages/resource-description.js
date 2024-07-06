@@ -7,7 +7,7 @@ import { Navigate, useNavigate, useParams, useSearchParams } from 'react-router-
 import { useAuth0 } from '@auth0/auth0-react'
 import axios from 'axios'
 
-export const Ressource = () => {
+export const Resource = () => {
   const gender = [
     {label: 'Select the book\'s gender', value: ''},
     {label: 'Fiction', value: 'Fiction'},
@@ -129,7 +129,7 @@ export const Ressource = () => {
           </div>
         </div>
         {role && <Form method="post" onSubmit={handleUpdate}>
-        <div style={{marginTop: '40px', marginBottom: '20px'}}><h1>Update Ressource</h1></div>
+        <div style={{marginTop: '40px', marginBottom: '20px'}}><h1>Update Resource</h1></div>
         <div className="row">
             <div className="col-12 col-md-6">
                 <div className='my-2'>
@@ -173,7 +173,7 @@ export const Ressource = () => {
             {/* {errMsg.resume && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.resume.message}</span></div>} */}
         </div>
         <div className="d-flex justify-content-start">
-          <button className="btn btn-primary" type="submit">Update Ressource</button>
+          <button className="btn btn-primary" type="submit">Update Resource</button>
         </div>
         </Form>}
         <div style={{marginTop: '30px', marginBottom: '30px'}}>

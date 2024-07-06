@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function DropdownUserInfos () {
-  const {isAuthenticated, user, type} = useAuth0()
+  const {isAuthenticated, user} = useAuth0()
   // Must delete the duplication of this function...
   const [libraries, setLibraries] = useState([])
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function DropdownUserInfos () {
       })
   }, [user]);
 
-    return <div class={type}>
+    return <div class="dropdown d-none d-md-block">
     <a
       class="link-body-emphasis d-flex align-items-center text-decoration-none"
       aria-expanded="false"
@@ -34,13 +34,11 @@ export default function DropdownUserInfos () {
         {isAuthenticated && <div style={{marginTop: '-10px'}}><span style={{fontSize: '11px'}}>Library</span></div> }
       </div>
     </a>
-    <div
-        style={{overflow: 'hidden'}}
-      class="dropdown-menu shadow text-small"
-      data-popper-placement="top-start"
+    <div style={{overflow: 'hidden'}} class="dropdown-menu shadow text-small"
+      // data-popper-placement="top-start"
     >
       {isAuthenticated && <Link to={'profile'} class="dropdown-item" >Profile</Link> }
-      {isAuthenticated && <Link to={'library'} class="dropdown-item" >My libraries</Link>}
+      {isAuthenticated && <Link to={'my-libraries'} class="dropdown-item" >My libraries</Link>}
       {isAuthenticated && <Link to={'articles'} class="dropdown-item" >My articles</Link> }
       {isAuthenticated && <Link to={'settings'} class="dropdown-item" >Settings</Link> }
       {isAuthenticated && <div class="dropdown-divider"></div> }
