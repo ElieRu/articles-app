@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 
 // Schema allow us to call functions
 // or middlewares *before and *after requests...
-const ressourceSchema = new mongoose.Schema({
+const resourceSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -33,8 +33,8 @@ const ressourceSchema = new mongoose.Schema({
     },
     language: {
         type: String,
-        required: false,
-        enum: ["English", "French", "other"]
+        required: true,
+        enum: ["English", "French", "Other"]
     },
     resume: {
         type: String,
@@ -62,6 +62,6 @@ const ressourceSchema = new mongoose.Schema({
     }
 })
 
-const Ressource = mongoose.model('Ressource', ressourceSchema);
+const Resource = mongoose.model('Resource', resourceSchema);
 
-module.exports = Ressource;
+module.exports = Resource;

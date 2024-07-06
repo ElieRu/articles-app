@@ -24,14 +24,14 @@ export const ProfileLibrary = ({library}) => {
                         <div className="col-12 col-md-8 col-lg-6">
                             <div className="row">
                                 <div className="col-4 d-flex justify-content-center" style={{paddingRight: '0px',paddingLeft: '0px'}}>
-                                    <Link to={'ressources'} className="btn btn-primary btn-sm" type="button" style={{width: '100%',paddingRight: '0px',paddingLeft: '0px'}}>Ressources</Link></div>
+                                    <Link to={'resources'} className="btn btn-primary btn-sm" type="button" style={{width: '100%',paddingRight: '0px',paddingLeft: '0px'}}>Resources</Link></div>
                                 <div className="col-4 d-flex justify-content-center" style={{paddingRight: '0px',paddingLeft: '0px'}}>
                                     <Link to={'followers'} className="btn btn-primary btn-sm fw-normal link-body-emphasis bg-transparent border-0" type="button" style={{width: '100%',paddingRight: '0px',paddingLeft: '0px'}}>Followers</Link></div>
                                 <div className="col-4 d-flex justify-content-center" style={{paddingRight: '0px',paddingLeft: '0px'}}>
                                     <Link to={'about'} className="btn btn-primary btn-sm fw-normal link-body-emphasis bg-transparent border-0" type="button" style={{width: '100%',paddingRight: '0px',paddingLeft: '0px'}}>About</Link></div>
                             </div>
                             {/* <ul className="navbar-nav mx-auto">
-                                <li className="nav-item"><NavLink className="nav-link" to="ressources">Ressources</NavLink></li>
+                                <li className="nav-item"><NavLink className="nav-link" to="resources">Resources</NavLink></li>
                                 <li className="nav-item"><NavLink className="nav-link" to="followers">Followers</NavLink></li>
                                 <li className="nav-item"><NavLink className="nav-link" to="about">About</NavLink></li>
                             </ul> */}

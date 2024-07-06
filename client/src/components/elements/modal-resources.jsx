@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 
-export const ModalRessource = ({switchBtn, formUpdate, updateItems}) => {
+export const ModalResource = ({formUpdate, updateItems}) => {
     const {id} = useParams()
     const {user} = useAuth0()
     const gender = [
@@ -34,30 +34,12 @@ export const ModalRessource = ({switchBtn, formUpdate, updateItems}) => {
         libraryId: id,
         userId: user?.sub
     })
-    
-    useEffect(() => {
-        if (switchBtn) {
-            setForm(formUpdate)
-        } else {
-            setForm({
-                title: "",
-                author: "",
-                volume: "",
-                gender: "",
-                editor: "",
-                language: "",
-                resume: "",
-                book_cover: "",
-                url: "",
-            })
-        }
-    }, [switchBtn, formUpdate]);
 
     const [errMsg, setErrMsg] = useState({})
     const closeBtn = useRef(null)
     const handleSubmit = (e) => {
         e.preventDefault ()
-        axios.post(`http://localhost:9000/ressources`, form).then((res) => {
+        axios.post(`http://localhost:9000/resources`, form).then((res) => {
             if (res.data.errors) {
                 setErrMsg(res.data.errors)
             } else {
@@ -78,7 +60,7 @@ export const ModalRessource = ({switchBtn, formUpdate, updateItems}) => {
 
     // const handleUpdate = (e) => {
     //     e.preventDefault()
-    //     axios.put(`http://localhost:9000/ressources/${formUpdate._id}`, form).then((res) => {
+    //     axios.put(`http://localhost:9000/resources/${formUpdate._id}`, form).then((res) => {
     //         if (res.data.errors) {
     //             setErrMsg(res.data.errors)
     //         } else {
@@ -102,11 +84,11 @@ export const ModalRessource = ({switchBtn, formUpdate, updateItems}) => {
 
     return (
         <>
-            <div id="modal-ressource" className="modal fade" role="dialog" tabindex="-1">
+            <div id="modal-resource" className="modal fade" role="dialog" tabindex="-1">
                 <div className="modal-dialog modal-md modal-fullscreen-sm-down" role="document">
                     <div className="modal-content">
                         <div className="modal-header border-0">
-                            <h4 className="modal-title">Create New Ressource</h4>
+                            <h4 className="modal-title">Create New Resource</h4>
                             <button ref={closeBtn} onClick={handleClose} className="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                         </div>
                         <div className="modal-body">
@@ -132,7 +114,7 @@ export const ModalRessource = ({switchBtn, formUpdate, updateItems}) => {
                                     {errMsg.resume && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.resume.message}</span></div>}
                                 </div>                                
                                 <div className="d-flex justify-content-start">
-                                    <button className="btn btn-primary" type="submit">New Reassource</button>
+                                    <button className="btn btn-primary" type="submit">New Resource</button>
                                 </div>
                             </Form>
                         </div>
