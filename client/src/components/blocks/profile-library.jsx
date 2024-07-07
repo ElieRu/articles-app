@@ -24,17 +24,12 @@ export const ProfileLibrary = ({library}) => {
                         <div className="col-12 col-md-8 col-lg-6">
                             <div className="row">
                                 <div className="col-4 d-flex justify-content-center" style={{paddingRight: '0px',paddingLeft: '0px'}}>
-                                    <Link to={'resources'} className="btn btn-primary btn-sm" type="button" style={{width: '100%',paddingRight: '0px',paddingLeft: '0px'}}>Resources</Link></div>
+                                    <NavLink to={'resources'} className={({isActive}) => isActive ? "btn btn-primary btn-sm" : "btn btn-primary btn-sm fw-normal link-body-emphasis bg-transparent border-0"} type="button" style={{width: '100%',paddingRight: '0px',paddingLeft: '0px'}}>Resources</NavLink></div>
                                 <div className="col-4 d-flex justify-content-center" style={{paddingRight: '0px',paddingLeft: '0px'}}>
-                                    <Link to={'followers'} className="btn btn-primary btn-sm fw-normal link-body-emphasis bg-transparent border-0" type="button" style={{width: '100%',paddingRight: '0px',paddingLeft: '0px'}}>Followers</Link></div>
+                                    <NavLink to={'followers'} className={({isActive}) => isActive ? "btn btn-primary btn-sm" : "btn btn-primary btn-sm fw-normal link-body-emphasis bg-transparent border-0"} type="button" style={{width: '100%',paddingRight: '0px',paddingLeft: '0px'}}>Followers</NavLink></div>
                                 <div className="col-4 d-flex justify-content-center" style={{paddingRight: '0px',paddingLeft: '0px'}}>
-                                    <Link to={'about'} className="btn btn-primary btn-sm fw-normal link-body-emphasis bg-transparent border-0" type="button" style={{width: '100%',paddingRight: '0px',paddingLeft: '0px'}}>About</Link></div>
+                                    <NavLink to={'about'} className={({isActive}) => isActive ? "btn btn-primary btn-sm" : "btn btn-primary btn-sm fw-normal link-body-emphasis bg-transparent border-0"} type="button" style={{width: '100%',paddingRight: '0px',paddingLeft: '0px'}}>About</NavLink></div>
                             </div>
-                            {/* <ul className="navbar-nav mx-auto">
-                                <li className="nav-item"><NavLink className="nav-link" to="resources">Resources</NavLink></li>
-                                <li className="nav-item"><NavLink className="nav-link" to="followers">Followers</NavLink></li>
-                                <li className="nav-item"><NavLink className="nav-link" to="about">About</NavLink></li>
-                            </ul> */}
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import SearchWithDropdown from '../inputs/search-article'
 import { DeleteResource } from './modal-delete-resource'
-import { Link } from 'react-router-dom'
+import { Link, NavLink, Outlet, useParams } from 'react-router-dom'
 
 export const ResourcesItems = ({role, resources, onFilter, selection, onDelete, onUpdate}) => {
     const resources_genders = [
@@ -12,6 +12,7 @@ export const ResourcesItems = ({role, resources, onFilter, selection, onDelete, 
         {label: "Mystery", value: "Mystery"},
     ]
     const [search, setSearch] = useState('')
+    const libraryId = useParams().id
     
     const [resourceId, setRresourceId] = useState('')
     const handleDelete = (id) => {
@@ -69,7 +70,7 @@ export const ResourcesItems = ({role, resources, onFilter, selection, onDelete, 
                         </div>
                         <div className="col border-0">
                             <div className="border rounded border-0" style={{height: '200px',overflow: 'hidden'}}>
-                                <Link to={`resource?resourceId=${resource._id}&title=${resource.title}&author=${resource.author}&volume=${resource.volume}&gender=${resource.gender}&editor=${resource.editor}&language=${resource.language}&url=${resource.url}&resume=${resource.resume}`}>
+                                <Link to={`/libraries/${libraryId}/resource?resourceId=${resource._id}&title=${resource.title}&author=${resource.author}&volume=${resource.volume}&gender=${resource.gender}&editor=${resource.editor}&language=${resource.language}&url=${resource.url}&resume=${resource.resume}`}>
                                     <img src="../../assets/img/default-cover.webp" width="100%" height="100%" style={{cursor: 'pointer'}} />
                                 </Link>
                             </div>

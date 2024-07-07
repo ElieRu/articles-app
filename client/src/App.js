@@ -51,6 +51,7 @@ function App() {
               <Route path="followers" element={<Followers />}></Route>
               <Route path="about" element={<AboutLibrary />}></Route>
             </Route>
+
             <Route path="libraries/:id/resource" element={<Resource/>}></Route>
             <Route path="about" element={
               <React.Suspense fallback="loading...">
