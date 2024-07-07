@@ -9,5 +9,12 @@ module.exports = {
             const save_follower = await follower.save()
             res.status(200).send(true)
         } catch (error) { }
+    },
+    library_followers: async(req, res, next) => {
+        const libraryId = req.params.id
+        const followers = await Follower.find({
+            libraryId: libraryId
+        })
+        res.status(200).send(followers)
     }
 }
