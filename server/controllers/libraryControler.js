@@ -4,7 +4,6 @@ const Library = require("../models/Library")
 module.exports = {
     get: async (req, res, next) => {
         const {all_libraries, userId} = req.query
-        console.log(userId)
         try {
             let libraries = await Library.find(
                 all_libraries ? {'userId' : { $ne: userId }} : 

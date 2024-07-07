@@ -1,9 +1,41 @@
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect, useState } from "react";
+
 
 export default function LibrariesItems({btnFollow, library}) {
+    const { user } = useAuth0();
+    const [follower, setFollower] = useState({
+        libraryId: "",
+        user_picture: '',
+        user_name: '',
+        userId: ''
+    })
 
-    const newFollow = () => {
-        alert("add")
+    useEffect(() => {
+        setFollower({
+            libraryId: "",
+            user_picture: user?.picture,
+            user_name: user?.name,
+            userId: user?.sub
+        })
+    }, [user]);
+
+    const [reflesh, setReflesh] = useState(false)
+
+    const newFollow = (libraryId) => {
+        follower.libraryId = libraryId
+        setReflesh(true)
+        axios.post(`http://localhost:9000/followers`, follower).then((res) => {
+            if (res.data) {
+                setTimeout(() => {
+                    setReflesh(false)
+                }, 1000);
+            } else {
+                setReflesh(false)
+            }
+        })
     }
 
     return <div className="col-12 col-md-6 col-lg-4">
@@ -22,7 +54,9 @@ export default function LibrariesItems({btnFollow, library}) {
                             </div>
                         </div>
                         {btnFollow && <div className="col-4 d-flex justify-content-end">
-                            <button onClick={newFollow} className="btn btn-primary link-body-emphasis border-white-subtle border-light-subtle bg-transparent btn-sm" type="button">Follow</button>
+                            <button onClick={() => newFollow(library._id)} className="btn btn-primary link-body-emphasis border-white-subtle border-light-subtle bg-transparent btn-sm" type="button">
+                                <span className="d-flex align-items-center">Follow{reflesh && <span style={{marginLeft: '5px'}} className="spinner-border spinner-border-sm" role="status"></span>}</span>
+                            </button>
                         </div>}
                     </div>
                 </div>
