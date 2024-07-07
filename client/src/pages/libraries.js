@@ -20,8 +20,7 @@ const Libraries = () => {
       params: {
         all_libraries: true,
         userId: user?.sub}
-      })
-    .then((res) => {
+      }).then((res) => {
       setTimeout(() => {
         setLoad(false)
         if (res.data.length > 0) {

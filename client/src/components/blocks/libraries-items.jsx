@@ -54,7 +54,7 @@ export default function LibrariesItems({btnFollow, library}) {
                             </div>
                         </div>
                         {btnFollow && <div className="col-4 d-flex justify-content-end">
-                            <button onClick={() => newFollow(library._id)} className="btn btn-primary link-body-emphasis border-white-subtle border-light-subtle bg-transparent btn-sm" type="button">
+                            <button disabled={reflesh} onClick={() => newFollow(library._id)} className="btn btn-primary link-body-emphasis border-white-subtle border-light-subtle bg-transparent btn-sm" type="button">
                                 <span className="d-flex align-items-center">Follow{reflesh && <span style={{marginLeft: '5px'}} className="spinner-border spinner-border-sm" role="status"></span>}</span>
                             </button>
                         </div>}
