@@ -1,13 +1,34 @@
 
 const Library = require("../models/Library")
+const Follower = require("../models/Follower")
 
 module.exports = {
     get: async (req, res, next) => {
         const {all_libraries, userId} = req.query
+
+        const getting = all_libraries ? { $ne: userId } : { $eq: userId }
+
+        const agg = [
+            {
+              '$lookup': {
+                'from': 'followers', 
+                'localField': 'userId', 
+                'foreignField': 'userId', 
+                'as': 'followers'
+              }
+            },
+            {
+                '$match': {
+                    'followers.userId': getting
+                }
+            }
+          ];
+
         try {
-            let libraries = await Library.find(
-                all_libraries ? {'userId' : { $ne: userId }} : 
-                {'userId' : { $eq: userId }}).limit(12);
+            let libraries = await Library.aggregate(agg);
+                
+
+                console.log(libraries)
             res.status(200).send(libraries);
         } catch (err) {
             console.log(err);

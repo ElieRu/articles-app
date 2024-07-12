@@ -17,7 +17,7 @@ export const Home = () => {
 
   return (
     <section className="py-5">
-      Contents : Articles, Resources and Some Libraries
+      {/* Contents : Articles, Resources and Some Libraries */}
       {articles.length > 0 ? <div className="container py-2">
           <SearchWithDropdown search={search} onChange={e => setSearch(e.target.value)} onFilter={onFilter} />
             <Row className="row">
