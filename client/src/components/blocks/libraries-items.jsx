@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 
 export default function LibrariesItems({btnFollow, library}) {
-    const { user } = useAuth0();
+    const { isAuthenticated, user } = useAuth0();
     const [follower, setFollower] = useState({
         libraryId: "",
         user_picture: '',

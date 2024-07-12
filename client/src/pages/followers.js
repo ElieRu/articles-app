@@ -8,6 +8,7 @@ export const Followers = () => {
   useEffect(() => {
     axios.get(`http://localhost:9000/followers/${id}`).then((res) => {
       setFollowers(res.data)
+      console.log(res.data)
     })
   }, [id]);
 

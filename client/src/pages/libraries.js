@@ -26,6 +26,7 @@ const Libraries = () => {
         if (res.data.length > 0) {
           setShowItems(true)
           setLibraries(res.data)
+          console.log(res.data)
         } else {
           setShowEmpt(true)
         }
