@@ -26,13 +26,28 @@ const Libraries = () => {
         if (res.data.length > 0) {
           setShowItems(true)
           setLibraries(res.data)
-          console.log(res.data)
         } else {
           setShowEmpt(true)
         }
       }, 1000);      
     })
   }, [user, setLibraries]);
+
+  const updateItems = () => {
+    axios.get(`http://localhost:9000/libraries`, {
+      params: {
+        all_libraries: true,
+        userId: user?.sub}
+      }).then((res) => {
+        setLoad(false)
+        if (res.data.length > 0) {
+          setShowItems(true)
+          setLibraries(res.data)
+        } else {
+          setShowEmpt(true)
+        }
+    })
+  }
     
   let libraries_types = [
     {label: "Get all", value: ''},
@@ -72,7 +87,7 @@ const Libraries = () => {
                   return select === ''
                     ? library
                     : library.type.includes(select);
-                }).map((library, i) => (<LibrariesItems btnFollow={true} library={library} key={i}></LibrariesItems>))}
+                }).map((library, i) => (<LibrariesItems updateItems={updateItems} btnFollow={true} library={library} key={i}></LibrariesItems>))}
                 {/* {libraries.length && <div className='mt-5 d-flex justify-content-center'>
                   <Link onClick={nextPage} className='btn btn-primary'>
                     <span>See more</span>

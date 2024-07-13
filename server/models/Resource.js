@@ -57,7 +57,7 @@ const resourceSchema = new mongoose.Schema({
         required: true
     },
     libraryId: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     }
 })
