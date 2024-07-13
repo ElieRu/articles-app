@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 
 
-export default function LibrariesItems({btnFollow, library}) {
+export default function LibrariesItems({btnFollow, updateItems, library}) {
     const { isAuthenticated, user } = useAuth0();
     const [follower, setFollower] = useState({
         libraryId: "",
@@ -30,6 +30,7 @@ export default function LibrariesItems({btnFollow, library}) {
         axios.post(`http://localhost:9000/followers`, follower).then((res) => {
             if (res.data) {
                 setTimeout(() => {
+                    updateItems()
                     setReflesh(false)
                 }, 1000);
             } else {
@@ -54,15 +55,18 @@ export default function LibrariesItems({btnFollow, library}) {
                             </div>
                         </div>
                         {btnFollow && <div className="col-4 d-flex justify-content-end">
-                            <button disabled={reflesh} onClick={() => newFollow(library._id)} className="btn btn-primary link-body-emphasis border-white-subtle border-light-subtle bg-transparent btn-sm" type="button">
-                                <span className="d-flex align-items-center">Follow{reflesh && <span style={{marginLeft: '5px'}} className="spinner-border spinner-border-sm" role="status"></span>}</span>
+                            <button disabled={library.following || reflesh ? true : false} onClick={() => newFollow(library._id)} className="btn btn-primary link-body-emphasis border-white-subtle border-light-subtle bg-transparent btn-sm" type="button">
+                                <span className="d-flex align-items-center">{library.following ? 'Following' : 'Follow'}{reflesh && <span style={{marginLeft: '5px'}} className="spinner-border spinner-border-sm" role="status"></span>}</span>
                             </button>
                         </div>}
                     </div>
                 </div>
                 <div className="col">
-                    <div className="bg-primary-subtle border rounded border-0" style={{height: '150px', overflow: 'hidden'}}>
+                    <div className="bg-primary-subtle border rounded border-0" style={{position: 'relative', height: '150px', overflow: 'hidden'}}>
                         {/* <img src={library.background} width="100%" height="100%" /> */}
+                        <div style={{position: 'absolute', bottom: '20px', right: '25px'}}>
+                            <span style={{fontSize: '11px'}}>{library.followers.length} Follower{library.followers.length > 1 ? 's' : ''}</span>
+                        </div>
                     </div>
                 </div>
             </div>

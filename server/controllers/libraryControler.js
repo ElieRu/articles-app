@@ -12,23 +12,25 @@ module.exports = {
             {
               '$lookup': {
                 'from': 'followers', 
-                'localField': 'userId', 
-                'foreignField': 'userId', 
+                'localField': '_id', 
+                'foreignField': 'libraryId', 
                 'as': 'followers'
               }
-            },
-            {
-                '$match': {
-                    'followers.userId': getting
-                }
             }
           ];
 
         try {
             let libraries = await Library.aggregate(agg);
-                
 
-                console.log(libraries)
+            for (let i=0; i<libraries.length; i++) {
+                let followers = libraries[i].followers;
+                for (let j=0; j<followers.length; j++) {
+                    if (followers[j].userId == userId) {
+                        libraries[i].following = true
+                    }
+                }
+            }
+            // console.log(libraries)
             res.status(200).send(libraries);
         } catch (err) {
             console.log(err);

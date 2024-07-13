@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 
 const FollowerSchema = new mongoose.Schema({
     libraryId: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         require: true
     },
     user_picture: {
