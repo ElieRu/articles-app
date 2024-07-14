@@ -24,7 +24,7 @@ export const Home = () => {
               {/* <ArticleComponent/> */}
             </Row>
           <Paginatiom/>
-        </div> : <EmptyItems src={'assets/img/empty.png'} />}
+        </div> : <EmptyItems src={'/assets/img/empty.png'} />}
     </section>
   )
 }

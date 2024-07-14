@@ -46,7 +46,7 @@ export const Resources = () => {
 
   return (
     <div>
-      {resources.length == 0 && <EmptyItems src={'../assets/img/empty.png'}>
+      {resources.length == 0 && <EmptyItems src={'/assets/img/empty.png'}>
         {role && <button className="btn btn-primary my-3 bg-transparent text-body border border-color-dark-subtle" type="button" data-bs-target="#modal-resource" data-bs-toggle="modal">Create new resource</button>}
         {!role && <button style={{marginTop: '10px'}} className='btn btn-body border' onClick={() => goBack(-1)}>Return back</button>}
       </EmptyItems>}

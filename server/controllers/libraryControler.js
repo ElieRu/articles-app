@@ -16,6 +16,11 @@ module.exports = {
                 'foreignField': 'libraryId', 
                 'as': 'followers'
               }
+            },
+            {
+                '$match': {
+                    'userId': getting
+                }
             }
           ];
 

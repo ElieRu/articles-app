@@ -13,6 +13,10 @@ const FollowerSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    user_email: {
+        type: String,
+        require: true
+    },
     userId: {
         type: String,
         require: true
