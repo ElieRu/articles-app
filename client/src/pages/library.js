@@ -65,7 +65,7 @@ export const Library = () => {
           </div>
         </div> : 
         <div>
-          <EmptyItems src={'assets/img/empty-library.png'} msg={"You don't have any library."} >
+          <EmptyItems src={'/assets/img/empty-library.png'} msg={"You don't have any library."} >
             <button disabled={isLoading ? true : false} ref={btnHideRef} data-bs-target="#create-library" data-bs-toggle="modal" style={{marginTop: '20px'}} className='btn btn-primary btn-sm'>Create a new library</button>
           </EmptyItems>
         </div>}

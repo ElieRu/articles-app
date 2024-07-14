@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
@@ -10,6 +10,7 @@ export default function LibrariesItems({btnFollow, updateItems, library}) {
         libraryId: "",
         user_picture: '',
         user_name: '',
+        user_email: '',
         userId: ''
     })
 
@@ -18,11 +19,17 @@ export default function LibrariesItems({btnFollow, updateItems, library}) {
             libraryId: "",
             user_picture: user?.picture,
             user_name: user?.name,
+            user_email: user?.email,
             userId: user?.sub
         })
     }, [user]);
 
     const [reflesh, setReflesh] = useState(false)
+    
+    const { loginWithRedirect } = useAuth0();
+    const redirectLogin = () => {
+        loginWithRedirect()
+    }
 
     const newFollow = (libraryId) => {
         follower.libraryId = libraryId
@@ -55,7 +62,7 @@ export default function LibrariesItems({btnFollow, updateItems, library}) {
                             </div>
                         </div>
                         {btnFollow && <div className="col-4 d-flex justify-content-end">
-                            <button disabled={library.following || reflesh ? true : false} onClick={() => newFollow(library._id)} className="btn btn-primary link-body-emphasis border-white-subtle border-light-subtle bg-transparent btn-sm" type="button">
+                            <button disabled={library.following || reflesh ? true : false} onClick={isAuthenticated ? () => newFollow(library._id) : () => redirectLogin() } className="btn btn-primary link-body-emphasis border-white-subtle border-light-subtle bg-transparent btn-sm" type="button">
                                 <span className="d-flex align-items-center">{library.following ? 'Following' : 'Follow'}{reflesh && <span style={{marginLeft: '5px'}} className="spinner-border spinner-border-sm" role="status"></span>}</span>
                             </button>
                         </div>}

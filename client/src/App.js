@@ -53,11 +53,13 @@ function App() {
             </Route>
 
             <Route path="libraries/:id/resource" element={<Resource/>}></Route>
+
             <Route path="about" element={
               <React.Suspense fallback="loading...">
                 <About />
               </React.Suspense>
             } />
+            
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
