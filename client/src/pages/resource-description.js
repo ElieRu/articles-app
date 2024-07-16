@@ -26,8 +26,7 @@ export const Resource = () => {
   const {id} = useParams()
   const {user} = useAuth0()
   const [role, setRole] = useState(false)
-  const [query_values] = useSearchParams()
-//   alert(typeof query_values)
+  const [query] = useSearchParams()
   
   useEffect(() => {
     axios.get(`http://localhost:9000/role`, {
@@ -38,34 +37,43 @@ export const Resource = () => {
   }, [role, user, id]); 
 
   const [form, setForm] = useState({
-    title: query_values.get('title'),
-    author: query_values.get('author'),
-    volume: query_values.get('volume'),
-    gender: query_values.get('gender'),
-    editor: query_values.get('editor'),
-    language: query_values.get('language'),
-    url: query_values.get('url'),
-    resume: query_values.get('resume'),
+    title: query.get('title'),
+    author: query.get('author'),
+    volume: query.get('volume') == 'undefined' ? '' : parseInt(query.get('volume')),
+    gender: query.get('gender'),
+    editor: query.get('editor') == 'undefined' ? '' : query.get('editor'),
+    language: query.get('language'),
+    url: query.get('url') == 'undefined' ? '' : query.get('url'),
+    resume: query.get('resume'),
     libraryId: id,
     userId: user?.sub
   })
 
+  const [errMsg, setErrMsg] = useState({})
+  const [load, setLoad] = useState(false)
   const handleUpdate = (e) => {
     e.preventDefault();
-    alert(form.title)
+    setLoad(true)
+    axios.put(`http://localhost:9000/resources/${query.get('resourceId')}`, form).then((res) => {
+        setTimeout(() => {
+            setLoad(false)
+            if (res.data.errors) {
+                setErrMsg(res.data.errors)
+            } else {
+                setForm(res.data)
+                setErrMsg({})
+            }
+        }, 1000);
+        
+    })
   }
-
-  let goBack = useNavigate(-1)
 
   return (
     <div>
-        <div className='d-flex justify-content-end' style={{marginBottom: '30px'}}>
-            <button className='btn btn-body border' onClick={() => goBack(-1)}>Back</button>
-        </div>
         <div className="row" style={{overflow: 'hidden'}}>
           <div className="col-12 col-md-4">
               <div className="border rounded border-0" style={{overflow: 'hidden',height: '400px'}}>
-                    <img src="../../assets/img/default-cover.webp" width="100%" height="100%" />
+                    <img src="/assets/img/default-cover.webp" width="100%" height="100%" />
                 </div>
           </div>
           <div className="col-12 col-md-8">
@@ -73,43 +81,44 @@ export const Resource = () => {
                   <div className="col-12 col-sm-6">
                       <div className="mb-2">
                           <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Title</span></div>
-                          <div><span className=' text-capitalize'>{query_values.get('title')}</span></div>
+                          <div><span className=' text-capitalize'>{query.get('title') ? query.get('title') : 'Not Defined'}</span></div>
                       </div>
                       <div className="mb-2">
                           <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Author</span></div>
-                          <div><span className='text-capitalize'>{query_values.get('author')}</span></div>
+                          <div><span className='text-capitalize'>{query.get('author') ? query.get('author') : 'Not Defined'}</span></div>
                       </div>
                       <div className="mb-2">
                           <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Published</span></div>
-                          <div><span>Not Defined</span></div>
+                          <div><span>{query.get('published') ? query.get('published') : 'Not Defined'}</span></div>
                       </div>
                       <div className="mb-2">
                           <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Volume</span></div>
-                          <div><span>{query_values.get('volume')} {query_values.get('volume') > 1 ? 'pages' : 'pages'}</span></div>
+                          <div><span>{!query.get('volume') || query.get('volume') === 'undefined' ? 'Not Defined' : query.get('volume') > 1 ? `${query.get('volume')} pages` : `${query.get('volume')} page` }</span></div>
                       </div>
                   </div>
                   <div className="col-12 col-sm-6">
                       <div className="mb-2">
                           <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Gender</span></div>
-                          <div><span>{query_values.get('gender')}</span></div>
+                          <div><span>{query.get('gender') ? query.get('gender') : 'Not Defined'}</span></div>
                       </div>
                       <div className="mb-2">
                           <div><span className="text-dark-emphasis text-capitalize" style={{fontSize: '12px'}}>Editor</span></div>
-                          <div><span className='text-capitalize'>{query_values.get('editor') ? query_values.get('editor') : 'not defined'}</span></div>
+                          <div><span className='text-capitalize'>{(!query.get('editor')) || (query.get('editor') === 'undefined') ? 'Not Defined' : query.get('editor')}</span></div>
                       </div>
                       <div className="mb-2">
                           <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Language</span></div>
-                          <div><span>{query_values.get('language')}</span></div>
+                          <div><span>{query.get('language') ? query.get('language') : 'Not Defined'}</span></div>
                       </div>
                       <div className="mb-2">
                           <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Url</span></div>
-                          <div><span className='text-lowercase'>{query_values.get('url') ? query_values.get('url') : 'Not Defined'}</span></div>
+                          <div><span className={`text-${!query.get('url') || query.get('url') === 'undefined' ? 'capitalize' : 'lowercase'}`}>
+                            {(!query.get('url')) || (query.get('url') === 'undefined') ? 'Not defined' : query.get('url')}</span></div>
                       </div>
                   </div>
                   <div className="col-12">
                       <div className="mb-2">
                           <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Resume</span></div>
-                          <div><span className='text-capitalize'>{query_values.get('resume')}</span></div>
+                          <div><span className='text-capitalize'>{query.get('resume') ? query.get('resume') : 'Not Defined'}</span></div>
                       </div>
                   </div>
                   <div className="col">
@@ -123,6 +132,9 @@ export const Resource = () => {
                             <path d="M256 464a208 208 0 1 1 0-416 208 208 0 1 1 0 416zM256 0a256 256 0 1 0 0 512A256 256 0 1 0 256 0zM376.9 294.6c4.5-4.2 7.1-10.1 7.1-16.3c0-12.3-10-22.3-22.3-22.3H304V160c0-17.7-14.3-32-32-32l-32 0c-17.7 0-32 14.3-32 32v96H150.3C138 256 128 266 128 278.3c0 6.2 2.6 12.1 7.1 16.3l107.1 99.9c3.8 3.5 8.7 5.5 13.8 5.5s10.1-2 13.8-5.5l107.1-99.9z"></path>
                             </svg>
                         </button>
+                        <button className="btn btn-body border btn-sm" type="button">
+                            Delete
+                        </button>
                     </div>
                   </div>
               </div>
@@ -130,51 +142,54 @@ export const Resource = () => {
         </div>
         {role && <Form method="post" onSubmit={handleUpdate}>
         <div style={{marginTop: '40px', marginBottom: '20px'}}><h1>Update Resource</h1></div>
-        <div className="row">
-            <div className="col-12 col-md-6">
-                <div className='my-2'>
-                    <Input label='Title' id={'title'} placeholder='Title' value={form.title} onChange={e => setForm({...form, title: e.target.value})} />
-                    {/* {errMsg.title && <div style={{marginTop: '0px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.title.message}</span></div>} */}
+            <div className="row">
+                <div className="col-12 col-md-6">
+                    <div className='my-2'>
+                        <Input label='Title' id={'title'} placeholder='Title' value={form.title} onChange={e => setForm({...form, title: e.target.value})} />
+                        {errMsg.title && <div style={{marginTop: '0px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.title.message}</span></div>}
+                    </div>
+                    <div className='my-2'>
+                        <Input label='Author' id={'author'} placeholder='Author' value={form.author} onChange={e => setForm({...form, author: e.target.value})} />
+                        {errMsg.author && <div style={{marginTop: '0px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.author.message}</span></div>}
+                    </div>
+                    <div className='my-2'>
+                        <Input label='Volume' id={'volume'} placeholder='Volume' type='number' min={1} step={1} value={form.volume} onChange={e => setForm({...form, volume: e.target.value})} />
+                        {errMsg.volume && <div style={{marginTop: '0px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.volume.message}</span></div>}
+                    </div>
+                    <div className='my-2'>
+                        <Selection id={'gender'} label='Gender' items={gender} value={form.gender} onChange={e => setForm({...form, gender: e.target.value})} />
+                        {errMsg.gender && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.gender.message}</span></div>}
+                    </div>
                 </div>
-                <div className='my-2'>
-                    <Input label='Author' id={'author'} placeholder='Author' value={form.author} onChange={e => setForm({...form, author: e.target.value})} />
-                    {/* {errMsg.author && <div style={{marginTop: '0px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.author.message}</span></div>} */}
-                </div>
-                <div className='my-2'>
-                    <Input label='Volume' id={'volume'} placeholder='Volume' type='number' min={1} step={1} value={form.volume} onChange={e => setForm({...form, volume: e.target.value})} />
-                    {/* {errMsg.volume && <div style={{marginTop: '0px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.volume.message}</span></div>} */}
-                </div>
-                <div className='my-2'>
-                    <Selection id={'gender'} label='Gender' items={gender} value={form.gender} onChange={e => setForm({...form, gender: e.target.value})} />
-                    {/* {errMsg.gender && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.gender.message}</span></div>} */}
+                <div className="col-12 col-md-6">
+                    <div className='my-2'>
+                        <Input label='Editor' id={'editor'} placeholder='Editor' value={form.editor} onChange={e => setForm({...form, editor: e.target.value})} />
+                        {errMsg.editor && <div style={{marginTop: '0px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.editor.message}</span></div>}
+                    </div>
+                    <div className='my-2'>
+                        <Selection label='Language' id={'language'} items={language} value={form.language} onChange={e => setForm({...form, language: e.target.value})} />
+                        {errMsg.language && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.language.message}</span></div>}
+                    </div>
+                    <div className='my-2'>
+                        <Input label='Book File' id={'book_file'} placeholder='Book Cover' type='file' value={form.book_cover} onChange={e => setForm({...form, book_cover: e.target.value})} />
+                        {errMsg.book_file && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.book_file.message}</span></div>}
+                    </div>
+                    <div className='my-2'>
+                        <Input label='Url' id={'url'} placeholder='Url' type='url' value={form.url} onChange={e => setForm({...form, url: e.target.value})} />
+                        {errMsg.url && <div style={{marginTop: '0px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.url.message}</span></div>}
+                    </div>
                 </div>
             </div>
-            <div className="col-12 col-md-6">
-                <div className='my-2'>
-                    <Input label='Editor' id={'editor'} placeholder='Editor' value={form.editor} onChange={e => setForm({...form, editor: e.target.value})} />
-                    {/* {errMsg.editor && <div style={{marginTop: '0px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.editor.message}</span></div>} */}
-                </div>
-                <div className='my-2'>
-                    <Selection label='Language' id={'language'} items={language} value={form.language} onChange={e => setForm({...form, language: e.target.value})} />
-                    {/* {errMsg.language && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.language.message}</span></div>} */}
-                </div>
-                <div className='my-2'>
-                    <Input label='Book Cover' id={'cover_book'} placeholder='Book Cover' type='file' value={form.book_cover} onChange={e => setForm({...form, book_cover: e.target.value})} />
-                    {/* {errMsg.cover_book && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.cover_book.message}</span></div>} */}
-                </div>
-                <div className='my-2'>
-                    <Input label='Url' id={'url'} placeholder='Url' type='url' value={form.url} onChange={e => setForm({...form, url: e.target.value})} />
-                    {/* {errMsg.url && <div style={{marginTop: '0px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.url.message}</span></div>} */}
-                </div>
+            <div>
+                <Textarrea id='resume' label='Resume' placeholder='Resume' value={form.resume} onChange={e => setForm({...form, resume: e.target.value})}></Textarrea>
+                {errMsg.resume && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.resume.message}</span></div>}
             </div>
-        </div>
-        <div>
-            <Textarrea id='resume' label='Resume' placeholder='Resume' value={form.resume} onChange={e => setForm({...form, resume: e.target.value})}></Textarrea>
-            {/* {errMsg.resume && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.resume.message}</span></div>} */}
-        </div>
-        <div className="d-flex justify-content-start">
-          <button className="btn btn-primary" type="submit">Update Resource</button>
-        </div>
+            <div className="d-flex justify-content-start">
+                <button disabled={load} className="btn btn-primary" type="submit">
+                    Update Resource
+                    {load && <span style={{marginLeft: '5px'}} class="spinner-border spinner-border-sm" role="status"></span>}
+                </button>
+            </div>
         </Form>}
         <div style={{marginTop: '30px', marginBottom: '30px'}}>
             <div>

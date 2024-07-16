@@ -28,19 +28,19 @@ module.exports = {
         const form_resource = req.body
         const resourceId = req.params.id
         const libraryId = form_resource.libraryId
-        // const ress = new Resource(req.body)
-        // console.log(ress)
+        const ress = new Resource(req.body)        
         try {
             const resource = await Resource.findOneAndUpdate({
                 _id: resourceId
             }, form_resource, {
                 new: true,
                 runValidators: true
-            })
-            
-            res.status(200).send(await Resource.find({})
-            .where("libraryId", libraryId)
-        )} catch (error) {
+            })          
+            const data = await Resource.findById(resourceId)  
+            console.log(data)
+            res.status(200).send(await Resource.findById(resourceId))
+            // .where("libraryId", libraryId)
+        } catch (error) {
             res.status(200).send(error)
         }
     },
