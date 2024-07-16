@@ -39,6 +39,6 @@ module.exports = {
         libraryId: req.body.params.libraryId
       }))
     } catch (error) { }
-    console.log("deleted...")
+    console.log("The follower is unfollow...")
   }
 }

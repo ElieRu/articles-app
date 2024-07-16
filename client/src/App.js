@@ -50,9 +50,8 @@ function App() {
               <Route path="resources" element={<Resources />}></Route>
               <Route path="followers" element={<Followers />}></Route>
               <Route path="about" element={<AboutLibrary />}></Route>
+              <Route path="description" element={<Resource/>} />
             </Route>
-
-            <Route path="libraries/:id/resource" element={<Resource/>}></Route>
 
             <Route path="about" element={
               <React.Suspense fallback="loading...">

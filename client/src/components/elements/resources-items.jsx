@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import SearchWithDropdown from '../inputs/search-article'
 import { DeleteResource } from './modal-delete-resource'
-import { Link, NavLink, Outlet, useParams } from 'react-router-dom'
+import { Link, NavLink, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom'
 
 export const ResourcesItems = ({role, resources, onFilter, selection, onDelete, onUpdate}) => {
     const resources_genders = [
@@ -18,6 +18,10 @@ export const ResourcesItems = ({role, resources, onFilter, selection, onDelete, 
     const handleDelete = (id) => {
         setRresourceId(id)
     }
+
+    const location = useLocation();
+    const url = location.pathname;
+    // alert(typeof(url));
 
     return (<>
         <SearchWithDropdown types={resources_genders} search={search} onChange={e => setSearch(e.target.value)} onFilter={onFilter} >
@@ -70,9 +74,9 @@ export const ResourcesItems = ({role, resources, onFilter, selection, onDelete, 
                         </div>
                         <div className="col border-0">
                             <div className="border rounded border-0" style={{height: '200px',overflow: 'hidden'}}>
-                                <Link to={`/libraries/${libraryId}/resource?resourceId=${resource._id}&title=${resource.title}&author=${resource.author}&volume=${resource.volume}&gender=${resource.gender}&editor=${resource.editor}&language=${resource.language}&url=${resource.url}&resume=${resource.resume}`}>
-                                    <img src="../../assets/img/default-cover.webp" width="100%" height="100%" style={{cursor: 'pointer'}} />
-                                </Link>
+                                <NavLink to={`/libraries/${libraryId}/description?resourceId=${resource._id}&title=${resource.title}&author=${resource.author}&volume=${resource.volume}&gender=${resource.gender}&editor=${resource.editor}&language=${resource.language}&url=${resource.url}&resume=${resource.resume}`}>
+                                    <img src="/assets/img/default-cover.webp" width="100%" height="100%" style={{cursor: 'pointer'}} />
+                                </NavLink>
                             </div>
                                 {/* data-bs-target="#modal-overview-resource" data-bs-toggle="modal" */}
                         </div>

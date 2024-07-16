@@ -1,9 +1,18 @@
 import Form from "./form";
 import Input from "../inputs/input";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useState } from "react";
 
-export default function UserFormUpdate () {
+export default function UserFormUpdate ({follower}) {
     const { user, isLoading} = useAuth0();
+
+    const [form, setForm] = useState({
+        picture: user?.picture,
+        family_name: user?.family_name,
+        given_name: user?.given_name,
+        email: user?.email,
+        nickname: user?.nickname,
+    })
     
     return <div className="d-flex flex-column">
                 <div className="d-flex justify-content-center">
