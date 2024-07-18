@@ -2,9 +2,9 @@ import React from 'react'
 
 export const AboutLibrary = () => {
   return (
-    <div>
-      Managment
-      <div>update and delete a library collaction...</div>
+    <div className='d-flex justify-content-between'>
+      <div>left</div>
+      <div>right</div>
     </div>
   )
 }

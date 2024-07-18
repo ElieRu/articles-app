@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 
 
-export default function LibrariesItems({btnFollow, updateItems, library}) {
+export default function LibrariesItems({btnFollow, deleteId, updateItems, library}) {
     const { isAuthenticated, user } = useAuth0();
     const [follower, setFollower] = useState({
         libraryId: "",
@@ -24,8 +24,8 @@ export default function LibrariesItems({btnFollow, updateItems, library}) {
         })
     }, [user]);
 
-    const [reflesh, setReflesh] = useState(false)
-    
+    const [reflesh, setReflesh] = useState(false);
+
     const { loginWithRedirect } = useAuth0();
     const redirectLogin = () => {
         loginWithRedirect()
@@ -46,11 +46,15 @@ export default function LibrariesItems({btnFollow, updateItems, library}) {
         })
     }
 
+    const getLibraryId = (id) => {
+        deleteId(id)
+    }
+
     return <div className="col-12 col-md-6 col-lg-4">
         <div className="border rounded p-2">
             <div className="row gy-2 flex-column">
                 <div className="col">
-                    <div className="row">
+                    <div className="row align-items-center">
                         <div className="col-8">
                             <div className="d-flex align-items-center">
                                 <Link to={`/libraries/${library._id}`} style={{marginRight: '10px'}}>
@@ -65,6 +69,17 @@ export default function LibrariesItems({btnFollow, updateItems, library}) {
                             <button disabled={library.following || reflesh ? true : false} onClick={isAuthenticated ? () => newFollow(library._id) : () => redirectLogin() } className="btn btn-primary link-body-emphasis border-white-subtle border-light-subtle bg-transparent btn-sm" type="button">
                                 <span className="d-flex align-items-center">{library.following ? 'Following' : 'Follow'}{reflesh && <span style={{marginLeft: '5px'}} className="spinner-border spinner-border-sm" role="status"></span>}</span>
                             </button>
+                        </div>}
+                        {!btnFollow && <div className="col-4 d-flex justify-content-end">
+                            <div class="dropdown">
+                                <button class="btn btn-primary btn-sm link-body-emphasis bg-transparent border-0" aria-expanded="false" data-bs-toggle="dropdown" type="button" style={{paddingRight: '10px',paddingLeft: '10px'}}><svg xmlns="http://www.w3.org/2000/svg" viewBox="-192 0 512 512" width="1em" height="1em" fill="currentColor">
+                                    <path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path>
+                                </svg></button>
+                                <div class="dropdown-menu" style={{overflow: 'hidden'}}>
+                                    <a class="dropdown-item" style={{cursor: 'pointer'}} data-bs-target="#create-library" data-bs-toggle="modal">Update</a>
+                                    <a class="dropdown-item" style={{cursor: 'pointer'}} onClick={() => getLibraryId(library._id)} data-bs-target="#modal-delete-library" data-bs-toggle="modal">Delete</a>
+                                </div>
+                            </div>
                         </div>}
                     </div>
                 </div>

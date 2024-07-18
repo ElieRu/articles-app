@@ -68,6 +68,11 @@ export const Resource = () => {
     })
   }
 
+  const submit = (e) => {
+    e.preventDefault()
+    alert("commented...")
+  }
+
   return (
     <div>
         <div className="row" style={{overflow: 'hidden'}}>
@@ -194,6 +199,15 @@ export const Resource = () => {
         <div style={{marginTop: '30px', marginBottom: '30px'}}>
             <div>
                 <h1>All comments</h1>
+                <div className='border rounded'>
+                    <Form onSubmit={submit}>
+                        <div className='d-flex p-3'>
+                            <textarea style={{resize: 'none',height: '120px'}} className='form-control border-0 shadow-none' placeholder='Your Comment'></textarea>
+                            <button className='btn btn-primary' role='submit'>Submit</button>
+                        </div>
+                    </Form>
+                    {errMsg.resume && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.resume.message}</span></div>}
+                </div>
             </div>
         </div>
     </div>

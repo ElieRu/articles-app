@@ -31,7 +31,7 @@ export default function DropdownUserInfos () {
       />
       <div>
         <div><span style={{fontSize: '13px'}}>{isAuthenticated ? user.name : 'Not connected' }</span></div>
-        {isAuthenticated && <div style={{marginTop: '-10px'}}><span style={{fontSize: '11px'}}>Library</span></div> }
+        {isAuthenticated && <div style={{marginTop: '-10px'}}><span className="text-primary" style={{fontSize: '11px'}}>Connected</span></div> }
       </div>
     </a>
     <div style={{overflow: 'hidden'}} class="dropdown-menu shadow text-small"

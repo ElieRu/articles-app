@@ -10,7 +10,7 @@ router.get('/libraries/:id', libraryControler.getId)
 router.get('/role', libraryControler.getRole)
 router.post('/libraries', libraryControler.create)
 // router.put('/:id', libraryControler.update)
-// router.delete('/:id', libraryControler.delete)
+router.delete('/libraries/:id', libraryControler.delete)
 
 
 module.exports = router;

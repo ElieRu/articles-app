@@ -10,7 +10,7 @@ export const ResourcesItems = ({role, resources, onFilter, selection, onDelete, 
         {label: "Non-Fiction", value: "Non-Fiction"},
         {label: "Romance", value: "Romance"},
         {label: "Mystery", value: "Mystery"},
-    ]
+    ];
     const [search, setSearch] = useState('')
     const libraryId = useParams().id
     
