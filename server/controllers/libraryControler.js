@@ -87,12 +87,16 @@ module.exports = {
         }
     },
     delete: async (req, res, next) => {
-        const id = req.params.id;
+        const {id} = req.params;
+        const {userId} = req.query;
 
         try {
-            const articles = await Article.deleteOne({ _id: id })
-            if (articles) res.status(201).send( await Article.find({}) );
-            if (!articles) res.status(400).send({ dataDeleted: false });
+            const libraries = await Library.deleteOne({ _id: id })
+            res.status(200).send( await Library.find({
+                userId: userId
+            }) 
+        );
+            // if (!libraries) res.status(400).send({ dataDeleted: false });
         } catch (err) {
             res.status(400).send({ dataDeleted: false });
         }        

@@ -33,13 +33,6 @@ export const Followers = () => {
     <div>
       {followers.length == 0 && <EmptyItems src={'/assets/img/empty.png'}></EmptyItems>}
       {followers.length > 0 && <FollowersItems followers={followers} updateItems={setFollowers} role={role} />}
-        {/* Followers
-        <ul>
-          <li>loading...</li>
-          <li>Empty lists</li>
-          <li>Lists, Pagination and Search</li>
-          <li>Link to user profile</li>
-        </ul> */}
     </div>
   )
 }
