@@ -7,11 +7,23 @@ const CommentSchema = new mongoose.Schema({
         max: 100,
         required: true
     },
-    user_id: {
+    userId: {
         type: String,
         required: true
-    }
-}, { Timestamp: true });
+    },
+    userPicture: {
+        type: String,
+        required: true
+    },
+    userName: {
+        type: String,
+        required: true
+    },
+    resourceId: {
+        type: mongoose.Types.ObjectId,
+        required: true
+    },
+}, { timestamps: true });
 
 const Comment = mongoose.model('Comment', CommentSchema);
 module.exports  = Comment;
