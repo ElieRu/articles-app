@@ -71,15 +71,41 @@ export const Resource = () => {
    const [comment, setComment] = useState({
         content: ""
     })
-    
-  const submit = (e) => {
-    e.preventDefault()
-    comment.userId = user?.sub;
-    axios.post(`http://localhost:9000/comments`, comment)
-    .then((res) => {
-        alert('commented');
-    });
-  }
+
+    const [comments, setComments] = useState([]);
+    useEffect(() => {
+        axios.get(`http://localhost:9000/comments`, {
+            params: {
+                resourceId: query.get('resourceId')
+            }
+        }).then((res) => {
+            setComments(res.data);
+        })
+    }, [])
+
+    const [validation, setValidation] = useState(''); 
+    const submit = (e) => {
+        e.preventDefault()
+        comment.userId = user?.sub;
+        comment.userPicture = user?.picture;
+        comment.userName = user?.name;
+        comment.resourceId = query.get('resourceId');
+        axios.post(`http://localhost:9000/comments`, comment)
+        .then((res) => {
+            if (res.data.errors) {
+                setValidation('border-danger');
+            } else {
+                setComments(res.data);
+                setValidation('');
+                setComment({
+                    comment,
+                    content: ""
+                });
+                console.log(comment);
+                // })
+            }
+        })
+    }
 
   return (
     <div>
@@ -205,19 +231,39 @@ export const Resource = () => {
             </div>
         </Form>}
         <div style={{marginTop: '30px', marginBottom: '30px'}}>
-            <div>
-                <h1>All comments</h1>
-                <div className='border rounded'>
-                    <Form onSubmit={submit}>
-                        <div className='d-flex p-3'>
-                            <textarea onChange={e => {setComment({content: e.target.value})}} style={{resize: 'none',height: '120px'}} className='form-control border-0 shadow-none' placeholder='Your Comment'></textarea>
-                            <div className='d-flex flex-column justify-content-between'>
-                                <button disabled={isLoading} className='btn btn-primary' role='submit'>Comment</button>
-                                {/* <button className='btn btn-body border'>Like</button> */}
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <div className={`border rounded ${validation}`}>
+                        <Form onSubmit={submit}>
+                            <div className='d-flex p-3'>
+                                <textarea onChange={e => {setComment({content: e.target.value})}} style={{resize: 'none',height: '120px'}} className='form-control border-0 shadow-none' placeholder='Your Comment'></textarea>
+                                <div className='d-flex flex-column justify-content-between'>
+                                    <button disabled={isLoading} className='btn btn-primary' role='submit'>Send</button>
+                                </div>
                             </div>
+                        </Form>
+                        {errMsg.resume && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.resume.message}</span></div>}
+                    </div>
+                    <div style={{marginTop: '20px', marginBottom: '20px'}}>
+                        <h5>{comments.length} comment{comments.length>1 && 's'}</h5>
+                        <div>
+                            {comments.map((comment, i) => <div className='border rounded p-2 d-flex' style={{marginBottom: '15px'}}>
+                                <div>
+                                    <img className='rounded' src={comment.userPicture} style={{width: '40px', height: '40px'}} />
+                                </div>
+                                <div style={{marginLeft: '15px', width: '100%'}}>
+                                    <div style={{fontSize: '13px'}} className='d-flex justify-content-between text-body-tertiary'>
+                                        <span>{comment.userName}</span>
+                                        <span>{comment.createdAt}</span>
+                                    </div>
+                                    <span>{comment.content.length>150 ? comment.content.slice(0,150)+'...' : comment.content}</span>
+                                </div>
+                            </div>)}
                         </div>
-                    </Form>
-                    {errMsg.resume && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.resume.message}</span></div>}
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    Other resources...
                 </div>
             </div>
         </div>
