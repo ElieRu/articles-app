@@ -24,7 +24,7 @@ export const Resource = () => {
   ]
 
   const {id} = useParams()
-  const {user} = useAuth0()
+  const {isLoading, user} = useAuth0()
   const [role, setRole] = useState(false)
   const [query] = useSearchParams()
   
@@ -67,10 +67,18 @@ export const Resource = () => {
         
     })
   }
-
+  
+   const [comment, setComment] = useState({
+        content: ""
+    })
+    
   const submit = (e) => {
     e.preventDefault()
-    alert("commented...")
+    comment.userId = user?.sub;
+    axios.post(`http://localhost:9000/comments`, comment)
+    .then((res) => {
+        alert('commented');
+    });
   }
 
   return (
@@ -202,8 +210,11 @@ export const Resource = () => {
                 <div className='border rounded'>
                     <Form onSubmit={submit}>
                         <div className='d-flex p-3'>
-                            <textarea style={{resize: 'none',height: '120px'}} className='form-control border-0 shadow-none' placeholder='Your Comment'></textarea>
-                            <button className='btn btn-primary' role='submit'>Submit</button>
+                            <textarea onChange={e => {setComment({content: e.target.value})}} style={{resize: 'none',height: '120px'}} className='form-control border-0 shadow-none' placeholder='Your Comment'></textarea>
+                            <div className='d-flex flex-column justify-content-between'>
+                                <button disabled={isLoading} className='btn btn-primary' role='submit'>Comment</button>
+                                {/* <button className='btn btn-body border'>Like</button> */}
+                            </div>
                         </div>
                     </Form>
                     {errMsg.resume && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.resume.message}</span></div>}
