@@ -38,6 +38,7 @@ var articleRoutes = require('./routes/articleRoutes');
 var libraryRoutes = require('./routes/libraryRoutes');
 var resourcesRoutes = require('./routes/resourcesRoutes');
 var followerRoutes = require('./routes/followerRoutes');
+var commentRoutes = require('./routes/commentRoutes');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -59,6 +60,7 @@ app.use('/articles', articleRoutes);
 app.use('/', resourcesRoutes);
 app.use('/', libraryRoutes);
 app.use('/followers', followerRoutes);
+app.use('/comments', commentRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
