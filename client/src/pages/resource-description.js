@@ -74,20 +74,28 @@ export const Resource = () => {
     
   const submit = (e) => {
     e.preventDefault()
-    comment.userId = user?.sub;
-    axios.post(`http://localhost:9000/comments`, comment)
-    .then((res) => {
-        alert('commented');
-    });
+    // comment.userId = user?.sub;
+    // comment.userPicture = user?.picture;
+    // comment.userName = user?.name;
+    // comment.resourceId = query.get('resourceId');
+    alert("comment")
+    // axios.post(`http://localhost:9000/comments`, comment)
+    // .then((res) => {
+    //     alert('commented');
+    // });
   }
 
   return (
     <div>
         <div className="row" style={{overflow: 'hidden'}}>
-          <div className="col-12 col-md-4">
+          <div className="col-12 col-md-4" style={{position: 'relative'}}>
               <div className="border rounded border-0" style={{overflow: 'hidden',height: '400px'}}>
                     <img src="/assets/img/default-cover.webp" width="100%" height="100%" />
                 </div>
+                <button class="btn btn-primary d-flex justify-content-center align-items-center" type="button" style={{padding: '0px',width: '40px',height: '40px',  position: 'absolute', top: '10px', right: '20px'}}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em" height="1em" fill="currentColor" style={{fontSize: '15px'}}>
+                        <path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>
+                    </svg>
+                </button>
           </div>
           <div className="col-12 col-md-8">
               <div className="row">
@@ -133,22 +141,6 @@ export const Resource = () => {
                           <div><span className="text-dark-emphasis" style={{fontSize: '12px'}}>Resume</span></div>
                           <div><span className='text-capitalize'>{query.get('resume') ? query.get('resume') : 'Not Defined'}</span></div>
                       </div>
-                  </div>
-                  <div className="col">
-                      <div>
-                        <button className='btn btn-body btn-sm border'>Like</button>
-                        <button className="btn btn-primary btn-sm" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -64 640 640" width="1em" height="1em" fill="currentColor">
-                            <path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"></path>
-                              </svg>
-                        </button>
-                        <button className="btn btn-primary btn-sm" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em" height="1em" fill="currentColor">
-                            <path d="M256 464a208 208 0 1 1 0-416 208 208 0 1 1 0 416zM256 0a256 256 0 1 0 0 512A256 256 0 1 0 256 0zM376.9 294.6c4.5-4.2 7.1-10.1 7.1-16.3c0-12.3-10-22.3-22.3-22.3H304V160c0-17.7-14.3-32-32-32l-32 0c-17.7 0-32 14.3-32 32v96H150.3C138 256 128 266 128 278.3c0 6.2 2.6 12.1 7.1 16.3l107.1 99.9c3.8 3.5 8.7 5.5 13.8 5.5s10.1-2 13.8-5.5l107.1-99.9z"></path>
-                            </svg>
-                        </button>
-                        <button className="btn btn-body border btn-sm" type="button">
-                            Delete
-                        </button>
-                    </div>
                   </div>
               </div>
           </div>
@@ -206,18 +198,30 @@ export const Resource = () => {
         </Form>}
         <div style={{marginTop: '30px', marginBottom: '30px'}}>
             <div>
-                <h1>All comments</h1>
-                <div className='border rounded'>
-                    <Form onSubmit={submit}>
-                        <div className='d-flex p-3'>
-                            <textarea onChange={e => {setComment({content: e.target.value})}} style={{resize: 'none',height: '120px'}} className='form-control border-0 shadow-none' placeholder='Your Comment'></textarea>
-                            <div className='d-flex flex-column justify-content-between'>
-                                <button disabled={isLoading} className='btn btn-primary' role='submit'>Comment</button>
-                                {/* <button className='btn btn-body border'>Like</button> */}
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <div className='border rounded'>
+                        <Form onSubmit={submit}>
+                            <div className='d-flex p-3'>
+                                <textarea onChange={e => {setComment({content: e.target.value})}} style={{resize: 'none',height: '120px'}} className='form-control border-0 shadow-none' placeholder='Your Comment'></textarea>
+                                <div className='d-flex flex-column justify-content-between'>
+                                    <button disabled={isLoading} role='submit' className="btn btn-primary d-flex justify-content-center align-items-center" type="button" style={{padding: '0px',width: '40px',height: '40px'}}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em" height="1em" fill="currentColor" style={{fontSize: '15px'}}>
+                                            <path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </Form>
-                    {errMsg.resume && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.resume.message}</span></div>}
+                        </Form>
+                        {errMsg.resume && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.resume.message}</span></div>}
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    Other resources...
+                </div>
+            </div>
+                <div style={{margin: '20px 0px'}}>
+                    <h3>5 comments</h3>
                 </div>
             </div>
         </div>
