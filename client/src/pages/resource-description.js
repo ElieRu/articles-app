@@ -71,19 +71,36 @@ export const Resource = () => {
    const [comment, setComment] = useState({
         content: ""
     })
+
+    const [comments, setComments] = useState([]);
+    const [err, setErr] = useState('');
     
-  const submit = (e) => {
-    e.preventDefault()
-    // comment.userId = user?.sub;
-    // comment.userPicture = user?.picture;
-    // comment.userName = user?.name;
-    // comment.resourceId = query.get('resourceId');
-    alert("comment")
-    // axios.post(`http://localhost:9000/comments`, comment)
-    // .then((res) => {
-    //     alert('commented');
-    // });
-  }
+    axios.get(`http://localhost:9000/comments`, {
+        params: {
+            libraryId: id,
+            resourceId: query.get('resourceId')
+        }
+    }).then((res) => {
+        console.log(res.data)
+    });
+    
+    const submit = (e) => {
+        e.preventDefault()
+        comment.userId = user?.sub;
+        comment.userPicture = user?.picture;
+        comment.userName = user?.name;
+        comment.libraryId = id;
+        comment.resourceId = query.get('resourceId');
+        axios.post(`http://localhost:9000/comments`, comment).then((res) => {
+            if (res.data.errors) {
+                setErr('danger')
+            } else {
+                setErr('')           
+                setComments(res.data)
+            }
+        }
+    );
+    }
 
   return (
     <div>
@@ -200,12 +217,12 @@ export const Resource = () => {
             <div>
             <div class="row">
                 <div class="col-12 col-md-8">
-                    <div className='border rounded'>
-                        <Form onSubmit={submit}>
+                    <div className={`border rounded border-${err}`}>
+                        <Form method="post" onSubmit={submit}>
                             <div className='d-flex p-3'>
                                 <textarea onChange={e => {setComment({content: e.target.value})}} style={{resize: 'none',height: '120px'}} className='form-control border-0 shadow-none' placeholder='Your Comment'></textarea>
                                 <div className='d-flex flex-column justify-content-between'>
-                                    <button disabled={isLoading} role='submit' className="btn btn-primary d-flex justify-content-center align-items-center" type="button" style={{padding: '0px',width: '40px',height: '40px'}}>
+                                    <button disabled={isLoading} className="btn btn-primary d-flex justify-content-center align-items-center" type="submit" style={{padding: '0px',width: '40px',height: '40px'}}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em" height="1em" fill="currentColor" style={{fontSize: '15px'}}>
                                             <path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"></path>
                                         </svg>
@@ -221,7 +238,7 @@ export const Resource = () => {
                 </div>
             </div>
                 <div style={{margin: '20px 0px'}}>
-                    <h3>5 comments</h3>
+                    <h3>{comments.length} comment{comments.length>1 && 's'}</h3>
                 </div>
             </div>
         </div>
