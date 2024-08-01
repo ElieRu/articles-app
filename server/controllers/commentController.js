@@ -4,7 +4,7 @@ const Comment = require("../models/Comment")
 module.exports = {
   get: async(req, res, next) => {
     const query = req.query;
-    console.log(query);
+    // console.log(query);
     try {
       // const comments = Comment.find({
       //   libraryId: query.libraryId

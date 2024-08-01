@@ -24,7 +24,7 @@ export const Resource = () => {
   ]
 
   const {id} = useParams()
-  const {isLoading, user} = useAuth0()
+  const {isLoading, isAuthenticated, user} = useAuth0()
   const [role, setRole] = useState(false)
   const [query] = useSearchParams()
   
@@ -86,16 +86,28 @@ export const Resource = () => {
     
     const submit = (e) => {
         e.preventDefault()
-        comment.userId = user?.sub;
-        comment.userPicture = user?.picture;
-        comment.userName = user?.name;
+        console.log(comment)
+        if (!isAuthenticated) {
+            comment.userId = 'null'
+            comment.userPicture = "/assets/img/unkown-user.png"
+            comment.userName = "user?.name"
+        } else {
+            comment.userId = user?.sub;
+            comment.userPicture = user?.picture;
+            comment.userName = user?.name;
+        }
         comment.libraryId = id;
-        comment.resourceId = query.get('resourceId');
+        comment.resourceId = query.get('resourceId');        
         axios.post(`http://localhost:9000/comments`, comment).then((res) => {
             if (res.data.errors) {
                 setErr('danger')
             } else {
-                setErr('')           
+                setErr('')
+                setComment({
+                    content: ""
+                })
+                comment.libraryId = id;
+                console.log(comment)
                 setComments(res.data)
             }
         }
@@ -220,7 +232,7 @@ export const Resource = () => {
                     <div className={`border rounded border-${err}`}>
                         <Form method="post" onSubmit={submit}>
                             <div className='d-flex p-3'>
-                                <textarea onChange={e => {setComment({content: e.target.value})}} style={{resize: 'none',height: '120px'}} className='form-control border-0 shadow-none' placeholder='Your Comment'></textarea>
+                                <textarea value={comment.content} onChange={e => {setComment({content: e.target.value})}} style={{resize: 'none',height: '120px'}} className='form-control border-0 shadow-none' placeholder='Your Comment'></textarea>
                                 <div className='d-flex flex-column justify-content-between'>
                                     <button disabled={isLoading} className="btn btn-primary d-flex justify-content-center align-items-center" type="submit" style={{padding: '0px',width: '40px',height: '40px'}}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em" height="1em" fill="currentColor" style={{fontSize: '15px'}}>
