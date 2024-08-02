@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const CommentSchema = new mongoose.Schema({
     content: {
         type: String,
-        min: 10,
+        min: 4,
         max: 100,
         required: true
     },
@@ -11,6 +11,10 @@ const CommentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    libraryId: {
+        type: mongoose.Types.ObjectId,
+        required: true
+    }
     userPicture: {
         type: String,
         required: true

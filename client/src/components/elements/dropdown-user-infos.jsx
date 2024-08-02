@@ -10,11 +10,11 @@ export default function DropdownUserInfos () {
   // Must delete the duplication of this function...
   const [libraries, setLibraries] = useState([])
   useEffect(() => {
-      axios.get(`http://localhost:9000/libraries`, {
-        params: {userId: user?.sub}
-      }).then((res) => {
-        setLibraries(res.data)
-      })
+    axios.get(`http://localhost:9000/libraries`, {
+      params: {userId: user?.sub}
+    }).then((res) => {
+      setLibraries(res.data)
+    })
   }, [user]);
 
     return <div class="dropdown d-none d-md-block">
