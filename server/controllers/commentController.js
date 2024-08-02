@@ -3,31 +3,29 @@ const Comment = require("../models/Comment")
 
 module.exports = {
   get: async(req, res, next) => {
-    const query = req.query;
-    // console.log(query);
+    const { resourceId } = req.query;
     try {
-      // const comments = Comment.find({
-      //   libraryId: query.libraryId
-      // });
-      // console.log(comments);
-      // res.status(200).send(comments);
+      const resources = await Comment.find({
+        resourceId: resourceId
+      }).limit(5)
+      res.status(200).send(resources)
     } catch (error) {
-      
+      console.log('error')
     }
   },
   create: async(req, res, next) => {
-    const data = req.body;
-    console.log(data);
+    const myComment = new Comment(req.body);
+    const {resourceId} = req.body
+    
     try {
-      const form_data = new Comment(data);
-      const data_saved = await form_data.save();
+      const saved = await myComment.save();
       res.status(200).send(
         await Comment.find({
-          resourceId: data.resourceId
+          'resourceId': resourceId
         })
       )
     } catch (error) {
-      res.status(200).send(error)
+      res.status(201).send(error)
     }
   }
 }

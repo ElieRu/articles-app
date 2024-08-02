@@ -112,7 +112,7 @@ export const Resource = () => {
             }
         }
     );
-    }
+ }
 
   return (
     <div>
@@ -244,13 +244,26 @@ export const Resource = () => {
                         </Form>
                         {errMsg.resume && <div style={{marginTop: '-10px'}}><span className='text-danger' style={{marginLeft: '10px', fontSize: "12px"}}>{errMsg.resume.message}</span></div>}
                     </div>
+                    <div style={{marginTop: '20px', marginBottom: '20px'}}>
+                        <h5>{comments.length} comment{comments.length>1 && 's'}</h5>
+                        <div>
+                            {comments.map((comment, i) => <div className='border rounded p-2 d-flex' style={{marginBottom: '15px'}}>
+                                <div>
+                                    <img className='rounded' src={comment.userPicture} style={{width: '40px', height: '40px'}} />
+                                </div>
+                                <div style={{marginLeft: '15px', width: '100%'}}>
+                                    <div style={{fontSize: '13px'}} className='d-flex justify-content-between text-body-tertiary'>
+                                        <span>{comment.userName}</span>
+                                        <span>{comment.createdAt}</span>
+                                    </div>
+                                    <span>{comment.content.length>150 ? comment.content.slice(0,150)+'...' : comment.content}</span>
+                                </div>
+                            </div>)}
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12 col-md-4">
                     Other resources...
-                </div>
-            </div>
-                <div style={{margin: '20px 0px'}}>
-                    <h3>{comments.length} comment{comments.length>1 && 's'}</h3>
                 </div>
             </div>
         </div>

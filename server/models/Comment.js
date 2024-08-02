@@ -7,24 +7,26 @@ const CommentSchema = new mongoose.Schema({
         max: 100,
         required: true
     },
-    userPicture: {
-        type: String
-    },
-    userName: {
-        type: String
-    },
     userId: {
         type: String,
         required: true
     },
     libraryId: {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Types.ObjectId,
+        required: true
+    }
+    userPicture: {
+        type: String,
+        required: true
+    },
+    userName: {
+        type: String,
         required: true
     },
     resourceId: {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Types.ObjectId,
         required: true
-    }
+    },
 }, { timestamps: true });
 
 const Comment = mongoose.model('Comment', CommentSchema);

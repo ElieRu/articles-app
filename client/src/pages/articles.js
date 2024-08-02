@@ -18,7 +18,11 @@ export const Articles = () => {
     const navigate = useNavigate()
     const [articles, setArticles] = useState([]);
     let [article, setArticle] = useState('')
-    let [form, setForm] = useState({ title: '', type: '', description: '' })
+    let [form, setForm] = useState({ 
+        title: '', 
+        type: '', 
+        description: '' 
+    })
 
     let items = [
         {label: 'Select a type', value: ''}, 
