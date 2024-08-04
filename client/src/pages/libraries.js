@@ -88,12 +88,6 @@ const Libraries = () => {
                     ? library
                     : library.type.includes(select);
                 }).map((library, i) => (<LibrariesItems updateItems={updateItems} btnFollow={true} library={library} key={i}></LibrariesItems>))}
-                {/* {libraries.length && <div className='mt-5 d-flex justify-content-center'>
-                  <Link onClick={nextPage} className='btn btn-primary'>
-                    <span>See more</span>
-                    <span style={{marginLeft: '10px', display: load}} class="spinner-border spinner-border-sm" role="status"></span>
-                  </Link>
-                </div>} */}
             </div>
           </div> }
           {showEmpt && <EmptyItems src={'/assets/img/empty-library.png'} msg={"You don't have any library."} >

@@ -7,7 +7,7 @@ module.exports = {
     try {
       const resources = await Comment.find({
         resourceId: resourceId
-      }).limit(5)
+      }).limit(10)
       res.status(200).send(resources)
     } catch (error) {
       console.log('error')
@@ -22,7 +22,7 @@ module.exports = {
       res.status(200).send(
         await Comment.find({
           'resourceId': resourceId
-        })
+        }).limit(10)
       )
     } catch (error) {
       res.status(201).send(error)
