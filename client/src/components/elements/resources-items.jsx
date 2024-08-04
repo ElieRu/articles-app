@@ -37,9 +37,9 @@ export const ResourcesItems = ({role, resources, onFilter, selection, onDelete, 
                     ? resource
                     : resource.title.toLowerCase().includes(search);
             }).filter((resource) => {
-                return selection.toLowerCase() === ''
+                return selection === ''
                     ? resource
-                    : resource.gender.toLowerCase().includes(selection)
+                    : resource.gender.includes(selection)
             }).map((resource, i) => <div className="col-6 col-md-4 col-lg-3" key={i}>
                 <div className="border rounded p-2">
                     <div className="row gy-2 flex-column">

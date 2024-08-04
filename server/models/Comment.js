@@ -14,7 +14,7 @@ const CommentSchema = new mongoose.Schema({
     libraryId: {
         type: mongoose.Types.ObjectId,
         required: true
-    }
+    },
     userPicture: {
         type: String,
         required: true
