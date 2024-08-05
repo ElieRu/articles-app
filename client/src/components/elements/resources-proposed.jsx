@@ -2,17 +2,17 @@ import axios from 'axios';
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-export const ResourcesProposed = ({libraryId}) => {
+export const ResourcesProposed = ({resourceId}) => {
 
     useEffect(() => {
-        axios.get(`http://localhost:9000/resources`, {
+        axios.get(`http://localhost:9000/resources-proposed`, {
             params: {
-                libraryId: libraryId
+                resourceId: resourceId
             }
         }).then((res) => {
             console.log(res.data)
         })
-    }, [libraryId]);
+    }, [resourceId]);
 
   return (
     <div className='row'>

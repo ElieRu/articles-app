@@ -268,7 +268,7 @@ export const Resource = () => {
                 </div>
                 <div class="col-12 col-md-4">
                     <h5>Other resources</h5>
-                    <ResourcesProposed libraryId={id} />
+                    <ResourcesProposed resourceId={query.get('resourceId')} />
                 </div>
             </div>
         </div>
