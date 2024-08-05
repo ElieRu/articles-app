@@ -1,5 +1,6 @@
 
 const Resource = require("../models/Resource")
+const mongoose = require('mongoose');
 
 module.exports = {
     get: async (req, res, next) => {
@@ -53,5 +54,53 @@ module.exports = {
         } catch (error) {
             
         }
+    },
+    resources_proposed: async (req, res, next) => {
+        const { resourceId } = req.query
+
+        // try {
+            // const newId = new ObjectId('66a8faf95c91ba64adb57efa');
+        // } catch (error) {
+            
+        // }
+
+        const agg = [
+            {
+                '$lookup': {
+                    'from': 'libraries', 
+                    'localField': 'libraryId', 
+                    'foreignField': '_id', 
+                    'as': 'library'
+                }
+            }, {
+                '$project': {
+                    'author': 0, 
+                    'language': 0, 
+                    'resume': 0, 
+                    'libraryId': 0, 
+                    '__v': 0, 
+                    'userId': 0
+                }
+            }, {
+            '$match': {
+                'library': {
+                    '$exists': true, 
+                    '$ne': []
+                }
+            }
+            }, {
+            '$match': {
+                '_id': {
+                    '$ne': mongoose.Types.ObjectId('66a8faf95c91ba64adb57efa')
+                }
+            }
+        }
+    ];
+  
+    const result = await Resource.aggregate(agg);
+    // console.log(newId)
+    console.log(result);
+
+    // await client.close();
     }
 }

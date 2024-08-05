@@ -7,6 +7,7 @@ const resourcesController = require("../controllers/resourcesController")
 
 router.get('/resources', resourcesController.get);
 // router.get('/:id', resourcesController.getId);
+router.get('/resources-proposed', resourcesController.resources_proposed);
 router.post('/resources', resourcesController.create);
 router.put('/resources/:id', resourcesController.update);
 router.delete('/resources/:id', resourcesController.delete);
