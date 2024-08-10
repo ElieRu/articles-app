@@ -51,7 +51,6 @@ export const Resources = () => {
         {!role && <button style={{marginTop: '10px'}} className='btn btn-body border' onClick={() => goBack(-1)}>Return back</button>}
       </EmptyItems>}
       <ModalResource switchBtn={switchBtn} formUpdate={formUpdate} updateItems={(resources) => setResources(resources)} />
-      {/* {resources.length > 0 && <DeleteResource/>} */}
       {resources.length > 0 && <ResourcesItems selection={selection} onFilter={onFilter} onUpdate={onUpdate} role={role} resources={resources} onDelete={(resources) => setResources(resources)} />}      {/* <DeleteResource /> */}
     </div>
   )
